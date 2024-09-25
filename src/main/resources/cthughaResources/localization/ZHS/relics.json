@@ -1,0 +1,44 @@
+{
+  "Cthugha:HuoTiHuoYan": {
+    "NAME": "活体火焰",
+    "FLAVOR": "一团燃烧着的物质，形状千变万化。",
+    "DESCRIPTIONS": [
+      "#y灼伤 造成的伤害增加 #b3 。你每次受到的 #y灼伤 伤害由随机敌人承担。"
+    ]
+  },
+  "Cthugha:LieSiTaShuJian": {
+    "NAME": "聂斯塔书简",
+    "FLAVOR": "“黄金之塔将化作火焰之柱，您的伟力将净化芸芸众生。”",
+    "DESCRIPTIONS": [
+      "所有牌视为 #y灼伤牌 ，你不能再触发 #y瞬燃8 和 #y瞬燃9 。"
+    ]
+  },
+  "Cthugha:ShengLingLieYan": {
+    "NAME": "生灵烈焰",
+    "FLAVOR": "那流向天际的巨大而不定的形体与同样巨大的飞掠而过的活焰之云。",
+    "DESCRIPTIONS": [
+      "替换 #r活体火焰 。 #y灼伤 造成的伤害增加 #b8 。你每次受到的 #y灼伤 伤害效果改为随机使敌人失去等量生命和最大生命。"
+    ]
+  },
+  "Cthugha:LongXin": {
+    "NAME": "龙心",
+    "FLAVOR": "庚仓鸣有，阳载日春。衣绶月九，火流月七。",
+    "DESCRIPTIONS": [
+      "如果你在回合中剩余能量，在下回合开始时获得 [E] [E] 。"
+    ]
+  },
+  "Cthugha:YongRanShi": {
+    "NAME": "永燃石",
+    "FLAVOR": "纯粹伊希尔能量浓缩而成的固体……？",
+    "DESCRIPTIONS": [
+      "这个牌组中的牌包括 #y灼伤 ， #y炸弹 ， #y断魂斩 ，"
+    ]
+  },
+  "Cthugha:HuoZhong": {
+    "NAME": "火种",
+    "FLAVOR": "祂持着这火种降到地上，并带给了人类。",
+    "DESCRIPTIONS": [
+      "在每场战斗开始时的抽牌中或你的回合结束时，手牌中每有3张 #y灼伤 ，抽1张牌。"
+    ]
+  }
+}

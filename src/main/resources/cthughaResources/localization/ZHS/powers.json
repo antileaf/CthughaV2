@@ -1,0 +1,168 @@
+{
+  "Cthugha:RiShiPower": {
+    "NAME": "日蚀",
+    "DESCRIPTIONS": [
+      "本回合结束时手牌中每有一张 #y灼伤 ，获得 #b",
+      " 点 #y格挡 。"
+    ]
+  },
+  "Cthugha:HeiYanPower": {
+    "NAME": "黑焰",
+    "DESCRIPTIONS": [
+      "受黑焰影响的生物失去 #b",
+      " 点最大生命，并会在他们的回合开始时失去黑焰值 #b",
+      "% 的生命和最大生命。"
+    ]
+  },
+  "Cthugha:HeiYanDaoRenPower": {
+    "NAME": "黑焰刀刃",
+    "DESCRIPTIONS": [
+      "每有一次攻击造成未被格挡的伤害，就给予 #b",
+      " 层黑焰。"
+    ]
+  },
+  "Cthugha:BeiLuoShiMenXieDingPower": {
+    "NAME": "北落师门协定",
+    "DESCRIPTIONS": [
+      "每当你打出一张 #y爆炎 牌时，如果未触发 #y爆炎 ，生成 #b",
+      " 个 #y炎之精 ，获得 [E] 。"
+    ]
+  },
+  "Cthugha:XinShangWuMingHuoPower": {
+    "NAME": "心上无明火",
+    "DESCRIPTIONS": [
+      "在你的回合开始时每有一名意图不是攻击的敌人，你都获得 #b",
+      " 点力量。"
+    ]
+  },
+  "Cthugha:WuYouBuZhuPower": {
+    "NAME": "无幽不烛",
+    "DESCRIPTIONS": [
+      "每当你的攻击或 #y炎之精 造成未被 #y格挡 的伤害时，使敌人失去等量的最大生命。"
+    ]
+  },
+  "Cthugha:ZhuZhaoShuJiPower": {
+    "NAME": "烛照数计",
+    "DESCRIPTIONS": [
+      "你每打出一张牌，就使所有敌人失去 #b",
+      " 点最大生命。"
+    ]
+  },
+  "Cthugha:XuanCaoQiYanPower": {
+    "NAME": "喧嘈嚣焰",
+    "DESCRIPTIONS": [
+      "在你的回合结束时， #y保留 手牌中最多 #b",
+      " 张 #y灼伤 。被 #y保留 的牌不会被 #y炎之精 吸取。"
+    ]
+  },
+  "Cthugha:SiHuiFuRanPower": {
+    "NAME": "死灰复燃",
+    "DESCRIPTIONS": [
+      "每有一张 #y灼伤 被 #y消耗 时，将 #b",
+      " 张 #y灼伤 放入你的弃牌堆。"
+    ]
+  },
+  "Cthugha:XinSuErPower": {
+    "NAME": "心宿二",
+    "DESCRIPTIONS": [
+      "在你的回合开始时，增加 #b",
+      " 张 #y灼伤 到你的手牌。"
+    ]
+  },
+  "Cthugha:CounterOfLossMaxHpPower": {
+    "NAME": "失去最大生命",
+    "DESCRIPTIONS": [
+      "已失去 #b",
+      " 点最大生命。"
+    ]
+  },
+  "Cthugha:LuXinRongJiePower": {
+    "NAME": "炉心融解",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合后进入 #y残阳 。每当你抽到一张 #y灼伤 ，将其 #y消耗 ，然后抽 #b1 张牌，生效所需回合数减少 #b1 。"
+    ]
+  },
+  "Cthugha:CanYangPower": {
+    "NAME": "残阳",
+    "DESCRIPTIONS": [
+      "获得此效果和每回合开始时，进入 #y神格 ，抽牌直到将手牌抽满。"
+    ]
+  },
+  "Cthugha:FlightPower": {
+    "NAME": "飞行",
+    "DESCRIPTIONS": [
+      "将所收到的攻击伤害降低 #b50% 。如果在一回合内被攻击伤害 #b",
+      " 次，就会取消。"
+    ]
+  },
+  "Cthugha:XuanShiXingTaiPower": {
+    "NAME": "悬世形态",
+    "DESCRIPTIONS": [
+      "在你的回合结束时，失去 #b",
+      " 点 #y力量 。"
+    ]
+  },
+  "Cthugha:TaoHuoShiYanPower": {
+    "NAME": "蹈火誓言",
+    "DESCRIPTIONS": [
+      "在战斗中临时增加的 #y灼伤 将被升级。"
+    ]
+  },
+  "Cthugha:ShengMingFanHuanPower": {
+    "NAME": "生命返还",
+    "DESCRIPTIONS": [
+      "当这名敌人失去最大生命时，你获得 #b",
+      " 点 #y临时生命 。"
+    ]
+  },
+  "Cthugha:HuoZhuoLianZiPower": {
+    "NAME": "火濯莲子",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合内可以任意触发 #y止燎 效果。"
+    ]
+  },
+  "Cthugha:XingYunPower": {
+    "NAME": "星陨",
+    "DESCRIPTIONS": [
+      "本回合每当一个 #y炎之精 被移除时，随机对敌人造成 #b",
+      " 点伤害。"
+    ]
+  },
+  "Cthugha:LossYanZhiJingPower": {
+    "NAME": "失去炎之精",
+    "DESCRIPTIONS": [
+      "在你的回合结束时，失去 #b",
+      " 个 #y炎之精 。"
+    ]
+  },
+  "Cthugha:XianYiPower": {
+    "NAME": "鲜衣",
+    "DESCRIPTIONS": [
+      "如果本回合结束时没有打出过 #y鲜衣 以外的牌，获得 #b",
+      " 层 #y无实体 。"
+    ]
+  },
+  "Cthugha:FenJiPower": {
+    "NAME": "焚寂",
+    "DESCRIPTIONS": [
+      "本次战斗中灼伤造成的伤害增加 #b",
+      " ，你不能再触发除此以外的 #y爆炎 效果。"
+    ]
+  },
+  "Cthugha:TianYouErRiPower": {
+    "NAME": "天有二日",
+    "DESCRIPTIONS": [
+      "每当你打出一张 #y瞬燃 牌时，重置其 #y瞬燃 次数。"
+    ]
+  },
+  "Cthugha:LieXingSuiXuanPower": {
+    "NAME": "列星随旋",
+    "DESCRIPTIONS": [
+      "每当你 #y生成炎之精 栏位中的：第一个时，抽 #b",
+      " 张牌；最后一个时，获得 [E] 。"
+    ]
+  }
+  
+}
