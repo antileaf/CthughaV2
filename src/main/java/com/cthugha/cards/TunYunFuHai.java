@@ -28,55 +28,67 @@ public class TunYunFuHai extends CustomCard {
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
-    private int rawCost = COST;
+    private int rawCost;
 
     public TunYunFuHai() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
-        this.damage = this.baseDamage = 5;
+        this.rawCost = this.cost;
+
+        this.damage = this.baseDamage = 0;
+        this.magicNumber = this.baseMagicNumber = 5;
         this.block = this.baseBlock = 15;
-        this.magicNumber = this.baseMagicNumber = 0;
+    }
+
+    private int getBurnCount() {
+        return (int) AbstractDungeon.player.hand.group.stream()
+                .filter(ModHelper::IsBurn)
+                .count();
+    }
+
+    @Override
+    public void applyPowers() {
+        int originalBaseDamage = this.baseDamage;
+
+        int count = this.getBurnCount();
+        this.baseDamage += this.magicNumber * count;
+        super.applyPowers();
+
+        this.baseDamage = originalBaseDamage;
+        this.isDamageModified = this.damage != this.baseDamage;
+
+        int curCost = this.rawCost - count;
+        if (curCost < 0)
+            curCost = 0;
+
+        this.upgradeBaseCost(curCost);
+    }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        int originalBaseDamage = this.baseDamage;
+
+        this.baseDamage += this.magicNumber * this.getBurnCount();
+        super.calculateCardDamage(mo);
+
+        this.baseDamage = originalBaseDamage;
+        this.isDamageModified = this.damage != this.baseDamage;
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage)));
+        this.addToBot(new GainBlockAction(p, this.block));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
-            this.upgradeDamage(1);
+            this.upgradeMagicNumber(1);
             this.upgradeBlock(7);
-            rawCost = this.cost;
+//            this.rawCost = this.cost;
+            this.initializeDescription();
         }
     }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        for (int i = 0; i < this.magicNumber; i++) {
-            this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage)));
-        }
-        this.addToBot(new GainBlockAction(p, this.block));
-    }
-
-    public void applyPowers() {
-        super.applyPowers();
-        this.calcAndSetCost(this);
-    }
-
-    private void calcAndSetCost(TunYunFuHai _inst) {
-        int count = 0;
-        for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (ModHelper.IsBurn(card)) {
-                count++;
-            }
-        }
-        int curCost = _inst.rawCost - count;
-        if (curCost < 0) {
-            curCost = 0;
-        }
-        _inst.upgradeBaseCost(curCost);
-        _inst.magicNumber = count;
-    }
-
 }

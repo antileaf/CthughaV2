@@ -26,27 +26,27 @@ public class HuoZhuoLianZi extends AbstractCthughaCard {
     private static final CardType TYPE = CardType.SKILL;
     private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
-    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
+    private static final CardTarget TARGET = CardTarget.SELF;
 
     public HuoZhuoLianZi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.block = this.baseBlock = 20;
         this.shunRan = this.baseShunRan = 2;
+
+        this.canZhiLiao = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ZhiLiaoAction(this, new AnonymousAction(() -> {
-            this.addToBot(new GainBlockAction(p, block));
-        })));
+        this.addToBot(new ZhiLiaoAction(this, new GainBlockAction(p, block)));
     }
 
     @Override
     public void onShunRan(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
-                    new HuoZhuoLianZiPower(AbstractDungeon.player, 1)));
+                    new HuoZhuoLianZiPower(AbstractDungeon.player, 1), 1));
         }
     }
 

@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import basemod.abstracts.CustomCard;
 
-public class MingDingZhiSi extends CustomCard {
+public class MingDingZhiSi extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(MingDingZhiSi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);

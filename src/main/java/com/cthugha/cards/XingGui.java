@@ -1,9 +1,8 @@
 package com.cthugha.cards;
 
-import com.cthugha.actions.EachYanZhiJingDamageAction;
-import com.cthugha.actions.YanBaoAction;
+import com.cthugha.actions.ForEachYanZhiJingAction;
+import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.orbs.YanZhiJing;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -15,9 +14,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
-public class XingGui extends CustomCard {
+public class XingGui extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(XingGui.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -34,30 +31,32 @@ public class XingGui extends CustomCard {
     public XingGui() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
-        this.damage = this.baseDamage = 40;
-        this.tags.add(CustomTags.Yan_Bao);
+        this.damage = this.baseDamage = 10;
+        this.secondaryDamage = this.baseSecondaryDamage = 40;
+
+        this.canBaoYan = true;
+//        this.tags.add(CustomTags.BaoYan);
     }
 
     @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
-        }
+    public int getExtraYanZhiJing() {
+        return this.upgraded ? 1 : 0;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (this.upgraded) {
+        if (this.upgraded)
             this.addToBot(new ChannelAction(new YanZhiJing()));
-        }
 
-        this.addToBot(new YanBaoAction(this, new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+        this.addToBot(new BaoYanAction(this, new DamageAction(m,
+                new DamageInfo(p, this.secondaryDamage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY)));
 
-        this.addToBot(new EachYanZhiJingDamageAction(p, m, 10, true));
+        this.addToBot(new ForEachYanZhiJingAction(count -> {
+            for (int i = 0; i < count; i++)
+                this.addToTop(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                        AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        }, true));
 
         // int size = AbstractDungeon.player.orbs.size();
         // for (int i = 0; i < size; i++) {
@@ -72,4 +71,12 @@ public class XingGui extends CustomCard {
         // }
     }
 
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
+        }
+    }
 }

@@ -4,8 +4,11 @@ package com.cthugha.cards;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.OnObtainCard;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -20,7 +23,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 
 import basemod.abstracts.CustomCard;
 
-public class YiChiRuXi extends CustomCard {
+public class YiChiRuXi extends AbstractCthughaCard implements OnObtainCard {
 
     public static final String ID = ModHelper.MakePath(YiChiRuXi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -36,61 +39,53 @@ public class YiChiRuXi extends CustomCard {
 
     public YiChiRuXi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        
-        // // 测试卡图
-        // Texture img = ImageMaster.loadImage("cthughaResources/img/joke_card/一赤如烍.png");
-        // TextureAtlas.AtlasRegion imgRegion = new TextureAtlas.AtlasRegion(img, 0, 0, img.getWidth(), img.getHeight());
-        // this.jokePortrait = imgRegion;
 
         this.magicNumber = this.baseMagicNumber = 3;
-    }
-
-    @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
-            this.upgradeMagicNumber(2);
-        }
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     }
 
-    // // TODO 这里功能没有生效，效果是：该卡牌加入卡组时触发
-    // public void onChoseThisOption() {
-    // System.out.println("==================!!!!!!!!!!!!!!!!");
-    // AbstractCard card = AbstractDungeon.player.masterDeck.findCardById("Burn");
-    // CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-    // tmp.addToTop(card);
-    // deleteCards(tmp.group);
-    // }
+    @Override
+    public void onObtainCard() {
+        ArrayList<AbstractCard> burns = AbstractDungeon.player.masterDeck.group.stream()
+                .filter(c -> c instanceof Burn)
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
+        ArrayList<AbstractCard> cardsToRemove = new ArrayList<>();
+        for (int i = 0; i < this.magicNumber; i++) {
+            if (burns.isEmpty())
+                break;
+
+            int index = AbstractDungeon.cardRng.random(burns.size() - 1);
+            burns.get(index).stopGlowing();
+            cardsToRemove.add(burns.get(index));
+        }
+
+        float displayCount = 0.0F;
+		for (AbstractCard card : cardsToRemove) {
+			card.untip();
+			card.unhover();
+			AbstractDungeon.topLevelEffects
+					.add(new PurgeCardEffect(card, Settings.WIDTH / 3.0F + displayCount, Settings.HEIGHT / 2.0F));
+			displayCount += Settings.WIDTH / 6.0F;
+			AbstractDungeon.player.masterDeck.removeCard(card);
+		}
+    }
+
+    @Override
     public void triggerWhenDrawn() {
         addToTop(new MakeTempCardInHandAction(new Burn(), this.magicNumber));
         addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
     }
 
-    public void deleteCards(ArrayList<AbstractCard> group) {
-        float displayCount = 0.0F;
-        for (Iterator<AbstractCard> i = group.iterator(); i.hasNext();) {
-            AbstractCard card = i.next();
-            card.untip();
-            card.unhover();
-            AbstractDungeon.topLevelEffects
-                    .add(new PurgeCardEffect(card, Settings.WIDTH / 3.0F + displayCount, Settings.HEIGHT / 2.0F));
-            displayCount += Settings.WIDTH / 6.0F;
-            AbstractDungeon.player.masterDeck.removeCard(card);
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+            this.upgradeMagicNumber(2);
+            this.initializeDescription();
         }
-        // (AbstractDungeon.getCurrRoom()).phase = AbstractRoom.RoomPhase.COMPLETE;
-        // AbstractDungeon.gridSelectScreen.selectedCards.clear();
     }
-
-    // public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-    // return false;
-    // }
-
 }

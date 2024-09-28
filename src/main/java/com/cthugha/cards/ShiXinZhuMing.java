@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class ShiXinZhuMing extends CustomCard {
+public class ShiXinZhuMing extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(ShiXinZhuMing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -30,6 +30,8 @@ public class ShiXinZhuMing extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.magicNumber = this.baseMagicNumber = 8;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 2;
+
         this.exhaust = true;
     }
 
@@ -37,22 +39,16 @@ public class ShiXinZhuMing extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
             this.upgradeMagicNumber(3);
+            this.upgradeSecondaryMagicNumber(1);
+            this.initializeDescription();
         }
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int layer = 2;
-        if (this.upgraded) {
-            layer = 3;
-        }
-
         this.addToBot(new DecreaseMonsterMaxHealthAction(m, this.magicNumber));
-        this.addToBot(new ApplyPowerAction(m, p, new ShengMingFanHuanPower(m, layer), layer));
+        this.addToBot(new ApplyPowerAction(m, p, new ShengMingFanHuanPower(m,
+                this.secondaryMagicNumber), this.secondaryMagicNumber));
     }
-
 }

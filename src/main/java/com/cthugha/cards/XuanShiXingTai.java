@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class XuanShiXingTai extends CustomCard {
+public class XuanShiXingTai extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(XuanShiXingTai.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -29,7 +29,8 @@ public class XuanShiXingTai extends CustomCard {
     public XuanShiXingTai() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
-        this.magicNumber = this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber = 2;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 1;
     }
 
     @Override
@@ -38,17 +39,15 @@ public class XuanShiXingTai extends CustomCard {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
-
-            this.upgradeMagicNumber(1);
         }
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ApplyPowerAction(p, p, new FlightPower(p, this.magicNumber), this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p,
+                new FlightPower(p, this.magicNumber), this.magicNumber));
 
-        this.addToBot(new ApplyPowerAction(p, p, new XuanShiXingTaiPower(p, 1), 1));
-        
+        this.addToBot(new ApplyPowerAction(p, p,
+                new XuanShiXingTaiPower(p, this.secondaryMagicNumber), this.secondaryMagicNumber));
     }
-
 }

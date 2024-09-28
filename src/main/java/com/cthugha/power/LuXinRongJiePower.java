@@ -42,8 +42,8 @@ public class LuXinRongJiePower extends AbstractPower {
         }
 
         if (this.amount == 0) {
-            this.addToBot(new ApplyPowerAction(owner, owner, new CanYangPower(owner)));
             this.addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+            this.addToBot(new ApplyPowerAction(owner, owner, new CanYangPower(owner)));
         }
     }
 
@@ -59,8 +59,8 @@ public class LuXinRongJiePower extends AbstractPower {
         }
 
         if (this.amount == 0) {
-            this.addToBot(new ApplyPowerAction(owner, owner, new CanYangPower(owner)));
             this.addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+            this.addToBot(new ApplyPowerAction(owner, owner, new CanYangPower(owner)));
         }
     }
 

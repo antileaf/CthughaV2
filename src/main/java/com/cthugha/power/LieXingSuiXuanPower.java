@@ -26,7 +26,7 @@ public class LieXingSuiXuanPower extends AbstractPower {
     }
 
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
     }
 
     public void onChannel(AbstractOrb orb) {

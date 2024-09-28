@@ -24,8 +24,7 @@
   "Cthugha:BeiLuoShiMenXieDingPower": {
     "NAME": "北落师门协定",
     "DESCRIPTIONS": [
-      "每当你打出一张 #y爆炎 牌时，如果未触发 #y爆炎 ，生成 #b",
-      " 个 #y炎之精 ，获得 [E] 。"
+      "每当你打出一张未触发 #y爆炎 的 #y爆炎 牌时，生成 #b%d 个 #y炎之精 ，获得 [E] 。"
     ]
   },
   "Cthugha:XinShangWuMingHuoPower": {
@@ -62,11 +61,10 @@
       " 张 #y灼伤 放入你的弃牌堆。"
     ]
   },
-  "Cthugha:XinSuErPower": {
+  "Cthugha:XinXiuErPower": {
     "NAME": "心宿二",
     "DESCRIPTIONS": [
-      "在你的回合开始时，增加 #b",
-      " 张 #y灼伤 到你的手牌。"
+      "在你的回合开始时，获得 #b%d 张 #y灼伤 。"
     ]
   },
   "Cthugha:CounterOfLossMaxHpPower": {
@@ -103,7 +101,7 @@
       " 点 #y力量 。"
     ]
   },
-  "Cthugha:TaoHuoShiYanPower": {
+  "Cthugha:DaoHuoShiYanPower": {
     "NAME": "蹈火誓言",
     "DESCRIPTIONS": [
       "在战斗中临时增加的 #y灼伤 将被升级。"
@@ -130,7 +128,7 @@
       " 点伤害。"
     ]
   },
-  "Cthugha:LossYanZhiJingPower": {
+  "Cthugha:LoseYanZhiJingPower": {
     "NAME": "失去炎之精",
     "DESCRIPTIONS": [
       "在你的回合结束时，失去 #b",
@@ -160,8 +158,7 @@
   "Cthugha:LieXingSuiXuanPower": {
     "NAME": "列星随旋",
     "DESCRIPTIONS": [
-      "每当你 #y生成炎之精 栏位中的：第一个时，抽 #b",
-      " 张牌；最后一个时，获得 [E] 。"
+      "每当生成 #y炎之精 栏位中 NL 首位：抽 #b%d 张牌； NL 末位：获得 [E] 。"
     ]
   }
   

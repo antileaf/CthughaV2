@@ -1,5 +1,6 @@
 package com.cthugha.cards;
 
+import basemod.AutoAdd;
 import com.cthugha.actions.YanBaoAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.enums.CustomTags;
@@ -16,7 +17,8 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 import basemod.abstracts.CustomCard;
 
-public class ZiBao extends CustomCard {
+@AutoAdd.Ignore
+public class ZiBao extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(ZiBao.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -34,7 +36,9 @@ public class ZiBao extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 40;
-        this.tags.add(CustomTags.Yan_Bao);
+
+//        this.tags.add(CustomTags.BaoYan);
+        this.canBaoYan = true; // TODO: Implement HP cost
     }
 
     @Override

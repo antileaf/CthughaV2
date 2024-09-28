@@ -1,5 +1,6 @@
 package com.cthugha.actions;
 
+import com.cthugha.helpers.ZhiLiaoHelper;
 import com.cthugha.power.HuoZhuoLianZiPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -8,34 +9,25 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.EntanglePower;
 
 public class ZhiLiaoAction extends AbstractGameAction {
-    private AbstractGameAction action;
-    private AbstractCard card;
+    private final AbstractCard card;
+    private final Runnable followUp;
+//    private AbstractGameAction action;
+
+    public ZhiLiaoAction(AbstractCard card, Runnable followUp) {
+        this.card = card;
+        this.followUp = followUp;
+    }
 
     public ZhiLiaoAction(AbstractCard card, AbstractGameAction action) {
-        this.card = card;
-        this.action = action;
+        this(card, () -> AbstractDungeon.actionManager.addToTop(action));
     }
 
     public void update() {
-        boolean attacked = false;
-        if (AbstractDungeon.player.hasPower(HuoZhuoLianZiPower.POWER_ID)) {
-
-        } else {
-            for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
-                if (c == this.card) {
-                    continue;
-                }
-                if (c.type == AbstractCard.CardType.ATTACK) {
-                    attacked = true;
-                    break;
-                }
-            }
-        }
-        if (!attacked) {
-            this.addToBot(this.action);
+        if (!ZhiLiaoHelper.canTriggerZhiLiao(card)) {
+            this.followUp.run();
 
             if (!AbstractDungeon.player.hasPower(HuoZhuoLianZiPower.POWER_ID)) {
-                this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
+                this.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
                         new EntanglePower(AbstractDungeon.player), 0));
             }
         }

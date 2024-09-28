@@ -1,6 +1,7 @@
 package com.cthugha.cards;
 
 import com.cthugha.actions.YanBaoAction;
+import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
@@ -20,8 +21,7 @@ public class BaoLie extends AbstractCthughaCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    private static final String IMG_PATH = "cthughaResources/img/card/076.png";
+    private static final String IMG_PATH = "cthughaResources/img/card/爆裂.png";
 
     private static final int COST = 0;
     private static final CardType TYPE = CardType.SKILL;
@@ -35,12 +35,15 @@ public class BaoLie extends AbstractCthughaCard {
         this.damage = this.baseDamage = 20;
         this.shunRan = this.baseShunRan = 2;
         this.magicNumber = this.baseMagicNumber = 1;
-        this.tags.add(CustomTags.Yan_Bao);
+
+        this.canBaoYan = true;
+//        this.tags.add(CustomTags.BaoYan);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new YanBaoAction(this, new DamageAction(m, new DamageInfo(p, this.damage), AbstractGameAction.AttackEffect.BLUNT_HEAVY)));
+        this.addToBot(new BaoYanAction(this, new DamageAction(m, new DamageInfo(p, this.damage),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY)));
     }
 
     @Override

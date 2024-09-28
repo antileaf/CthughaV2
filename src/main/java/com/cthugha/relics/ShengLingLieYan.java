@@ -16,6 +16,8 @@ public class ShengLingLieYan extends CustomRelic {
     // 点击音效
     private static final LandingSound LANDING_SOUND = LandingSound.FLAT;
 
+    public static final int BONUS = 8;
+
     public ShengLingLieYan() {
         super(ID, ImageMaster.loadImage(IMG_PATH), RELIC_TIER, LANDING_SOUND);
     }

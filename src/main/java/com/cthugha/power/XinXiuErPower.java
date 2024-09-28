@@ -9,11 +9,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class XinSuErPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(XinSuErPower.class.getSimpleName());
+public class XinXiuErPower extends AbstractPower {
+    public static final String POWER_ID = ModHelper.MakePath(XinXiuErPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    public XinSuErPower(AbstractCreature owner, int amount) {
+    public XinXiuErPower(AbstractCreature owner, int amount) {
         this.ID = POWER_ID;
         this.name = powerStrings.NAME;
         this.owner = owner;
@@ -23,7 +23,7 @@ public class XinSuErPower extends AbstractPower {
     }
 
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
     }
 
     public void atStartOfTurnPostDraw() {

@@ -31,6 +31,7 @@ public class ChangMing extends AbstractCthughaCard {
 
         this.magicNumber = this.baseMagicNumber = 3;
         this.shunRan = this.baseShunRan = 0;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 1;
     }
 
     @Override
@@ -51,8 +52,8 @@ public class ChangMing extends AbstractCthughaCard {
         if (level >= this.shunRan) {
             this.addToBot(new DrawCardAction(this.magicNumber, new AnonymousAction(() -> {
                 DrawCardAction.drawnCards.forEach(c -> {
-                    if (c.costForTurn >= 0)
-                        c.costForTurn += 1;
+                    if (c.costForTurn >= 0 && this.secondaryMagicNumber > 0)
+                        c.costForTurn += this.secondaryMagicNumber;
                 });
             })));
         }

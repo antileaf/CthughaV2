@@ -1,6 +1,7 @@
 package com.cthugha.cards;
 
 import com.cthugha.actions.YanBaoAction;
+import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
@@ -16,7 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class FenJi extends CustomCard {
+public class FenJi extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(FenJi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -32,27 +33,26 @@ public class FenJi extends CustomCard {
 
     public FenJi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        this.magicNumber = this.baseMagicNumber = 3;
+        this.magicNumber = this.baseMagicNumber = 5;
 
-        this.tags.add(CustomTags.Yan_Bao);
+//        this.tags.add(CustomTags.BaoYan);
+        this.canBaoYan = true;
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.upgradeMagicNumber(3);
             this.initializeDescription();
-
-            // this.upgradeBaseCost(0);
-            this.upgradeMagicNumber(2);
         }
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new ChannelAction(new YanZhiJing()));
 
-        this.addToBot(new YanBaoAction(this, new ApplyPowerAction(p, p, new FenJiPower(p, this.magicNumber), this.magicNumber)));
+        this.addToBot(new BaoYanAction(this,
+                new ApplyPowerAction(p, p, new FenJiPower(p, this.magicNumber), this.magicNumber)));
     }
 
 }

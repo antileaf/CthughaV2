@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+@Deprecated
 public class YanBaoAction extends AbstractGameAction {
 
     private AbstractGameAction action;

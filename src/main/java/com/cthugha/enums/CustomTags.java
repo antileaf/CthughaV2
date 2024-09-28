@@ -4,7 +4,10 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class CustomTags {
-	@SpireEnum public static AbstractCard.CardTags Yan_Bao;
+	@Deprecated
+	@SpireEnum public static AbstractCard.CardTags BaoYan;
+
+	@Deprecated
 	@SpireEnum public static AbstractCard.CardTags Yan_Bao_Triggered;
 
 	@Deprecated

@@ -29,6 +29,7 @@ public class HuoYanDouPeng extends CustomCard {
     public HuoYanDouPeng() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
+        this.magicNumber = this.baseMagicNumber = 2;
         this.block = this.baseBlock = 5;
     }
 
@@ -39,6 +40,7 @@ public class HuoYanDouPeng extends CustomCard {
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
 
+            this.upgradeMagicNumber(1);
             this.upgradeBlock(3);
         }
     }

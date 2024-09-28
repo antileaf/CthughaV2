@@ -9,11 +9,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class LossYanZhiJingPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(LossYanZhiJingPower.class.getSimpleName());
+public class LoseYanZhiJingPower extends AbstractPower {
+    public static final String POWER_ID = ModHelper.MakePath(LoseYanZhiJingPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    public LossYanZhiJingPower(AbstractCreature owner, int amount) {
+    public LoseYanZhiJingPower(AbstractCreature owner, int amount) {
         this.ID = POWER_ID;
         this.name = powerStrings.NAME;
         this.owner = owner;

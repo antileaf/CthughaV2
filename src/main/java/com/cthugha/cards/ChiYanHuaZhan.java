@@ -5,6 +5,7 @@ import com.cthugha.helpers.ModHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,7 +17,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 
 import basemod.abstracts.CustomCard;
 
-public class ChiYanHuaZhan extends CustomCard {
+public class ChiYanHuaZhan extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(ChiYanHuaZhan.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -35,8 +36,9 @@ public class ChiYanHuaZhan extends CustomCard {
 
         this.damage = this.baseDamage = 7;
         this.magicNumber = this.baseMagicNumber = 2;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 2;
 
-        AbstractCard card = HuoYanHuXi.getAttckBurn();
+        AbstractCard card = ModHelper.getAttackBurn();
         card.upgrade();
         this.cardsToPreview = card;
     }
@@ -63,26 +65,15 @@ public class ChiYanHuaZhan extends CustomCard {
             } else {
                 power.amount = this.magicNumber;
             }
-        } else if (power == null) {
+        } else {
             this.addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber)));
         }
 
-        this.addToBot(new AbstractGameAction() {
-            public void update() {
-                for (int i = 0; i < 2; i++) {
-                    // // 超出手牌上限
-                    // if (p.hand.size() >= 10) {
-                    //     break;
-                    // }
-
-                    AbstractCard tmp = HuoYanHuXi.getAttckBurn();
-                    tmp.upgrade();
-                    p.hand.addToTop(tmp);
-                    p.hand.refreshHandLayout();
-                }
-                this.isDone = true;
-            }
-        });
+        for (int i = 0; i < this.secondaryMagicNumber; i++) {
+            AbstractCard tmp = ModHelper.getAttackBurn();
+            tmp.upgrade();
+            this.addToBot(new MakeTempCardInHandAction(tmp));
+        }
     }
 
 }

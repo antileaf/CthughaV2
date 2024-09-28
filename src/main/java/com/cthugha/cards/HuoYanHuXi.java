@@ -1,10 +1,13 @@
 package com.cthugha.cards;
 
+import basemod.BaseMod;
+import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
+import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.status.Burn;
@@ -29,17 +32,13 @@ public class HuoYanHuXi extends AbstractCthughaCard {
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.NONE;
 
-    public static final Texture BurnAttack = ImageMaster.loadImage("cthughaResources/img/card/灼伤_p.png");
-    public static final TextureAtlas.AtlasRegion BurnAttackReigon = new TextureAtlas.AtlasRegion(BurnAttack, 0, 0,
-            BurnAttack.getWidth(), BurnAttack.getHeight());
-
-    public static final TextureAtlas cardAtlas = new TextureAtlas(Gdx.files.internal("cards/cards.atlas"));
-    public static final TextureAtlas.AtlasRegion BurnReigon = cardAtlas.findRegion("status/burn");
-
     public HuoYanHuXi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.shunRan = this.baseShunRan = 0;
+
+        MultiCardPreview.add(this, ModHelper.getAttackBurn(), ModHelper.getAttackBurn());
+        MultiCardPreview.multiCardPreview.get(this).get(1).upgrade();
     }
 
     @Override
@@ -52,40 +51,9 @@ public class HuoYanHuXi extends AbstractCthughaCard {
                 if (cardGroup.type == CardGroup.CardGroupType.HAND)
                     c.superFlash();
 
-                changeBurn(c);
+                ModHelper.changeBurn(c);
             }
         }
-    }
-
-    public static void changeBurn(AbstractCard c) {
-        if (c.type == CardType.STATUS) {
-            c.type = CardType.ATTACK;
-            c.target = CardTarget.ENEMY;
-
-            c.baseDamage = c.baseMagicNumber;
-            c.rawDescription = "造成 !D! 点伤害。";
-            c.initializeDescription();
-            // c.applyPowers();
-
-            c.jokePortrait = c.portrait = BurnAttackReigon;
-        } else if (c.type == CardType.ATTACK) {
-            c.type = CardType.STATUS;
-            c.target = CardTarget.NONE;
-
-            c.rawDescription = CardCrawlGame.languagePack.getCardStrings("Burn").DESCRIPTION;
-            if (c.upgraded) {
-                c.rawDescription = CardCrawlGame.languagePack.getCardStrings("Burn").UPGRADE_DESCRIPTION;
-            }
-            c.initializeDescription();
-
-            c.jokePortrait = c.portrait = BurnReigon;
-        }
-    }
-
-    public static AbstractCard getAttckBurn() {
-        AbstractCard tmp = new Burn();
-        HuoYanHuXi.changeBurn(tmp);
-        return tmp;
     }
 
     @Override

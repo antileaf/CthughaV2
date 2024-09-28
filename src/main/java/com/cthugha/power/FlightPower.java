@@ -23,6 +23,7 @@ public class FlightPower extends AbstractPower {
         this.amount = amount;
         this.updateDescription();
         this.loadRegion("flight");
+        this.type = PowerType.BUFF;
 
         this.storedAmount = amount;
     }

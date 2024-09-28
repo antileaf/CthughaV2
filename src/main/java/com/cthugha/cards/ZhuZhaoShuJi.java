@@ -21,6 +21,7 @@ public class ZhuZhaoShuJi extends CustomCard {
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     private static final String IMG_PATH = "cthughaResources/img/card/烛照数计.png";
+
     private static final int COST = 1;
     private static final CardType TYPE = CardType.POWER;
     private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
@@ -30,6 +31,7 @@ public class ZhuZhaoShuJi extends CustomCard {
     public ZhuZhaoShuJi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
+        this.magicNumber = this.baseMagicNumber = 3;
         this.isEthereal = true;
     }
 
@@ -37,19 +39,14 @@ public class ZhuZhaoShuJi extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
+            this.isEthereal = false;
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
-
-            this.isEthereal = false;
         }
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (this.upgraded) {
-            this.addToBot(new ChannelAction(new YanZhiJing()));
-        }
-        this.addToBot(new ApplyPowerAction(p, p, new ZhuZhaoShuJiPower(p, 2)));
+        this.addToBot(new ApplyPowerAction(p, p, new ZhuZhaoShuJiPower(p, this.magicNumber)));
     }
-
 }

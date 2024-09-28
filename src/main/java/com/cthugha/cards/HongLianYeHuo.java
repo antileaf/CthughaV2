@@ -1,6 +1,7 @@
 package com.cthugha.cards;
 
 import com.cthugha.actions.ZhiLiaoAction;
+import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -12,11 +13,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 import basemod.abstracts.CustomCard;
 
-public class HongLianYeHuo extends CustomCard {
+public class HongLianYeHuo extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(HongLianYeHuo.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -34,43 +36,39 @@ public class HongLianYeHuo extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 14;
-        this.magicNumber = this.baseMagicNumber = 3;
+        this.magicNumber = this.baseMagicNumber = 2;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 1;
+
+        this.canZhiLiao = true;
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new ZhiLiaoAction(this, () -> {
+            this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn)));
+
+            if (m.hasPower(StrengthPower.POWER_ID)) {
+                AbstractPower strength = m.getPower(StrengthPower.POWER_ID);
+                if (strength.amount >= this.secondaryMagicNumber) {
+                    this.addToBot(new AnonymousAction(() -> {
+                        if (!m.hasPower(ArtifactPower.POWER_ID))
+                            this.addToTop(new ApplyPowerAction(p, p,
+                                    new StrengthPower(p, this.magicNumber), this.magicNumber));
+
+                        this.addToTop(new ApplyPowerAction(m, p,
+                                new StrengthPower(m, -this.magicNumber), -this.magicNumber));
+                    }));
+                }
+            }
+        }));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
             this.upgradeDamage(4);
-            this.upgradeMagicNumber(-2);
+            this.initializeDescription();
         }
     }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        // this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage,
-        // this.damageTypeForTurn),
-        // AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        // this.addToBot(new GainEnergyAction(1));
-        // this.addToBot(new DrawCardAction(p, this.magicNumber));
-
-        this.addToBot(new ZhiLiaoAction(this, new AbstractGameAction() {
-            public void update() {
-                this.addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn)));
-
-                if (m.hasPower(StrengthPower.POWER_ID)) {
-                    AbstractPower strengthPower = m.getPower(StrengthPower.POWER_ID);
-                    if (strengthPower.amount >= magicNumber) {
-                        this.addToBot(new ApplyPowerAction(m, p, new StrengthPower(m, -3), -3));
-                    }
-                }
-                this.isDone = true;
-            }
-        }));
-
-    }
-
 }

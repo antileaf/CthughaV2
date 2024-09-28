@@ -20,13 +20,11 @@ public class DrawSpecificCardAction extends AbstractGameAction {
     @Override
     public void update() {
         for (int i = 0; i < this.amount; i++) {
-            AbstractCard specifiedCard = null;
-            for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
-                if (this.cardFilter.test(c)) {
-                    specifiedCard = c;
-                    break;
-                }
-            }
+            AbstractCard specifiedCard = AbstractDungeon.player.drawPile.group.stream()
+                    .filter(this.cardFilter)
+                    .findFirst()
+                    .orElse(null);
+
             if (specifiedCard != null) {
                 AbstractDungeon.player.drawPile.removeCard(specifiedCard); // TODO：不确定是不是应该先移除，待观察
                 AbstractDungeon.player.drawPile.addToTop(specifiedCard);

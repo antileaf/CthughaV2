@@ -3,6 +3,7 @@ package com.cthugha.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.common.BetterSelectCardsInHandAction;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
@@ -20,6 +21,10 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import java.util.ArrayList;
 
 public abstract class AbstractCthughaCard extends CustomCard implements RightClickableCard {
+	public boolean canBaoYan = false;
+	public boolean triggeredBaoYanLastTime = false;
+	public boolean canZhiLiao = false;
+
 	public int baseShunRan = -1;
 	public int shunRan = -1;
 	public boolean upgradedShunRan = false;
@@ -42,6 +47,11 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 	public boolean upgradedSecondaryDamage = false;
 	public boolean isSecondaryDamageModified = false;
 
+	public int secondaryBlock = -1;
+	public int baseSecondaryBlock = -1;
+	public boolean upgradedSecondaryBlock = false;
+	public boolean isSecondaryBlockModified = false;
+
 	public AbstractCthughaCard(
 			String id,
 			String name,
@@ -57,6 +67,34 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 
 		FlavorText.AbstractCardFlavorFields.boxColor.set(this, Color.SCARLET);
 	}
+
+	public int getExtraYanZhiJing() {
+		return 0;
+	}
+
+	public void updateBgImg() {
+		if (this.triggeredShunRanThisTurn)
+			this.textureBackgroundSmallImg = "cthughaResources/img/512/card_bw.png";
+		else
+			this.textureBackgroundSmallImg = null;
+	}
+
+//	@Override
+//	public void triggerOnGlowCheck() {
+//		super.triggerOnGlowCheck();
+//	}
+
+//	@Override
+//	public Texture getBackgroundSmallTexture() {
+//		if (this.shunRan != -1) {
+//			if (this.triggeredShunRanThisTurn)
+//				this.textureBackgroundSmallImg = "cthughaResources/img/512/card_bw.png";
+//			else
+//				this.textureBackgroundSmallImg = null;
+//		}
+//
+//		return super.getBackgroundSmallTexture();
+//	}
 
 	@Override
 	public void applyPowers() {
@@ -77,6 +115,26 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 			this.baseDamage = originalBaseDamage;
 			this.isDamageModified = originalDamageModified;
 			this.multiDamage = originalMultiDamage;
+		}
+	}
+
+	@Override
+	public void applyPowersToBlock() { // 还好没有同时有 secondary block 和 secondary damage 的
+		super.applyPowersToBlock();
+
+		if (this.baseSecondaryBlock != -1) {
+			int originalBlock = this.block;
+			int originalBaseBlock = this.baseBlock;
+			boolean originalBlockModified = this.isBlockModified;
+
+			this.baseBlock = this.baseSecondaryBlock;
+			super.applyPowersToBlock();
+			this.isSecondaryBlockModified = this.secondaryBlock != this.baseSecondaryBlock;
+			this.secondaryBlock = this.block;
+
+			this.block = originalBlock;
+			this.baseBlock = originalBaseBlock;
+			this.isBlockModified = originalBlockModified;
 		}
 	}
 
@@ -117,6 +175,9 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 
 		this.secondaryDamage = this.baseSecondaryDamage;
 		this.isSecondaryDamageModified = false;
+
+		this.secondaryBlock = this.baseSecondaryBlock;
+		this.isSecondaryBlockModified = false;
 	}
 
 	@Override
@@ -141,6 +202,11 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		if (this.upgradedSecondaryDamage) {
 			this.secondaryDamage = this.baseSecondaryDamage;
 			this.isSecondaryDamageModified = true;
+		}
+
+		if (this.upgradedSecondaryBlock) {
+			this.secondaryBlock = this.baseSecondaryBlock;
+			this.isSecondaryBlockModified = true;
 		}
 	}
 
@@ -168,6 +234,12 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		this.upgradedSecondaryDamage = true;
 	}
 
+	public void upgradeSecondaryBlock(int amount) {
+		this.baseSecondaryBlock += amount;
+		this.secondaryBlock = this.baseSecondaryBlock;
+		this.upgradedSecondaryBlock = true;
+	}
+
 	public ArrayList<Integer> availableShunRanLevels() {
 		ArrayList<Integer> levels = new ArrayList<>();
 		if (this.shunRan != -1) {
@@ -182,6 +254,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 	@Override
 	public void atTurnStart() {
 		this.triggeredShunRanThisTurn = false;
+		this.updateBgImg();
 	}
 
 	@Override
@@ -195,6 +268,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		card.baseSecondaryShunRan = this.baseSecondaryShunRan;
 
 		card.triggeredShunRanThisTurn = this.triggeredShunRanThisTurn;
+		card.updateBgImg();
 
 		card.secondaryMagicNumber = this.secondaryMagicNumber;
 		card.baseSecondaryMagicNumber = this.baseSecondaryMagicNumber;
@@ -247,6 +321,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 							AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(c, false));
 							this.addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
 							this.triggeredShunRanThisTurn = true;
+							this.updateBgImg();
 							return;
 						}
 
@@ -263,6 +338,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		));
 
 		this.triggeredShunRanThisTurn = true;
+		this.updateBgImg();
 	}
 
 	public void onShunRan(int level) {}

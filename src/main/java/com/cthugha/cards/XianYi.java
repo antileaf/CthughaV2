@@ -55,21 +55,23 @@ public class XianYi extends AbstractCthughaCard {
                     this.addToTop(new DrawCardAction(AbstractDungeon.player, toDraw));
         }));
 
-        this.addToBot(new ZhiLiaoAction(this, new AnonymousAction(() -> {
-                this.addToBot(new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, this.magicNumber)));
-        })));
+        this.addToBot(new ZhiLiaoAction(this, new ApplyPowerAction(p, p,
+                new IntangiblePlayerPower(p, this.magicNumber))));
     }
 
     @Override
     public void onShunRan(int level) {
-        if (this.shunRan == -1)
+        if (this.shunRan == -1) {
             Cthugha_Core.logger.info("XianYi: shunRan is -1");
+            return;
+        }
 
         if (level >= this.shunRan) {
             this.addToBot(new AnonymousAction(() -> {
-                    int toDraw = BaseMod.MAX_HAND_SIZE - AbstractDungeon.player.hand.size();
-                    if (toDraw > 0)
-                        this.addToTop(new DrawCardAction(AbstractDungeon.player, toDraw));
+                int toDraw = BaseMod.MAX_HAND_SIZE - AbstractDungeon.player.hand.size();
+                if (toDraw > 0)
+                    this.addToTop(new DrawCardAction(AbstractDungeon.player, toDraw));
+
             }));
 
             this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,

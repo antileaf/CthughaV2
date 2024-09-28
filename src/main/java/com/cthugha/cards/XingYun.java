@@ -1,24 +1,20 @@
 package com.cthugha.cards;
 
-import com.cthugha.actions.YanBaoAction;
+import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.orbs.YanZhiJing;
-import com.cthugha.power.LossYanZhiJingPower;
+import com.cthugha.power.LoseYanZhiJingPower;
 import com.cthugha.power.XingYunPower;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.defect.RemoveNextOrbAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
-public class XingYun extends CustomCard {
+public class XingYun extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(XingYun.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -36,35 +32,39 @@ public class XingYun extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.magicNumber = this.baseMagicNumber = 1;
-        this.tags.add(CustomTags.Yan_Bao);
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 2;
+
+//        this.tags.add(CustomTags.BaoYan);
+        this.canBaoYan = true;
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new ApplyPowerAction(p, p, new XingYunPower(p, 4), 4));
+
+        this.addToBot(new BaoYanAction(this, () -> {
+            for (int i = 0; i < this.secondaryMagicNumber; i++)
+                this.addToTop(new RemoveNextOrbAction());
+        }));
+
+        for (int i = 0; i < this.magicNumber; i++)
+            this.addToBot(new ChannelAction(new YanZhiJing()));
+
+        this.addToBot(new ApplyPowerAction(p, p, new LoseYanZhiJingPower(p, this.magicNumber), this.magicNumber));
+//
+//        ArrayList<AbstractOrb> orbs = new ArrayList<>();
+//        for (int i = 0; i < this.magicNumber; i++) {
+//            YanZhiJing orb = new YanZhiJing();
+//            this.addToBot(new ChannelAction(orb));
+//        }
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
             this.upgradeMagicNumber(1);
+            this.initializeDescription();
         }
-    }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ApplyPowerAction(p, p, new LossYanZhiJingPower(p, this.magicNumber), this.magicNumber));
-        this.addToBot(new ApplyPowerAction(p, p, new XingYunPower(p, 4), 4));
-
-        this.addToBot(new YanBaoAction(this, new AbstractGameAction() {
-            public void update() {
-                AbstractDungeon.player.removeNextOrb();
-                AbstractDungeon.player.removeNextOrb();
-                this.isDone = true;
-            }
-        }));
-        for (int i = 0; i < this.magicNumber; i++) {
-            this.addToBot(new ChannelAction(new YanZhiJing()));
-        }
-
     }
 }

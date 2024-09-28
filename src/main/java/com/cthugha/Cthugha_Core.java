@@ -2,10 +2,13 @@ package com.cthugha;
 
 import java.nio.charset.StandardCharsets;
 
-import com.cthugha.variable.SecondaryDamageVariable;
-import com.cthugha.variable.SecondaryMagicNumberVariable;
-import com.cthugha.variable.SecondaryShunRanVariable;
-import com.cthugha.variable.ShunRanVariable;
+import basemod.helpers.CardBorderGlowManager;
+import basemod.interfaces.*;
+import com.cthugha.glow.BaoYanGlowInfo;
+import com.cthugha.glow.ZhiLiaoGlowInfo;
+import com.cthugha.helpers.BaoYanHelper;
+import com.cthugha.helpers.EnergyHelper;
+import com.cthugha.variable.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,19 +33,22 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
-import basemod.interfaces.EditCardsSubscriber;
-import basemod.interfaces.EditCharactersSubscriber;
-import basemod.interfaces.EditKeywordsSubscriber;
-import basemod.interfaces.EditRelicsSubscriber;
-import basemod.interfaces.EditStringsSubscriber;
-import basemod.interfaces.OnStartBattleSubscriber;
+import org.clapper.util.classutil.NotClassFilter;
 
 import static com.megacrit.cardcrawl.core.Settings.language;
 
 @SpireInitializer
-public class Cthugha_Core
-        implements EditCardsSubscriber, EditCharactersSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
-        EditKeywordsSubscriber, OnStartBattleSubscriber {
+public class Cthugha_Core implements
+        EditCardsSubscriber,
+        EditCharactersSubscriber,
+        EditRelicsSubscriber,
+        EditStringsSubscriber,
+        EditKeywordsSubscriber,
+        OnStartBattleSubscriber,
+        PostInitializeSubscriber,
+        PostBattleSubscriber,
+        PostEnergyRechargeSubscriber
+{
 
     public static final Logger logger = LogManager.getLogger(Cthugha_Core.class.getName());
 
@@ -52,19 +58,19 @@ public class Cthugha_Core
     private static final String MY_CHARACTER_PORTRAIT = "cthughaResources/img/anime-fandoms-Black-Bullet-1620248_2.png";
 
     // 攻击牌的背景（小尺寸）
-    private static final String BG_ATTACK_512 = "cthughaResources/img/512/bg_attack_512.png";
+    private static final String BG_ATTACK_512 = "cthughaResources/img/512/card.png";
     // 能力牌的背景（小尺寸）
-    private static final String BG_POWER_512 = "cthughaResources/img/512/bg_power_512.png";
+    private static final String BG_POWER_512 = "cthughaResources/img/512/power.png";
     // 技能牌的背景（小尺寸）
-    private static final String BG_SKILL_512 = "cthughaResources/img/512/bg_skill_512.png";
+    private static final String BG_SKILL_512 = "cthughaResources/img/512/card.png";
     // 在卡牌和遗物描述中的能量图标
     private static final String SMALL_ORB = "cthughaResources/img/char/small_orb.png";
     // 攻击牌的背景（大尺寸）
-    private static final String BG_ATTACK_1024 = "cthughaResources/img/1024/bg_attack.png";
+    private static final String BG_ATTACK_1024 = "cthughaResources/img/1024/card.png";
     // 能力牌的背景（大尺寸）
-    private static final String BG_POWER_1024 = "cthughaResources/img/1024/bg_power.png";
+    private static final String BG_POWER_1024 = "cthughaResources/img/1024/power.png";
     // 技能牌的背景（大尺寸）
-    private static final String BG_SKILL_1024 = "cthughaResources/img/1024/bg_skill.png";
+    private static final String BG_SKILL_1024 = "cthughaResources/img/1024/card.png";
     // 在卡牌预览界面的能量图标
     private static final String BIG_ORB = "cthughaResources/img/char/card_orb.png";
     // 小尺寸的能量图标（战斗中，牌堆预览）
@@ -88,8 +94,16 @@ public class Cthugha_Core
 
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(new Cthugha("123"), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT,
+        BaseMod.addCharacter(new Cthugha("qwq"), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT,
                 MyPlayerClassEnum.MY_PLAYER_CLASS);
+    }
+
+    private void loadVariables() {
+        BaseMod.addDynamicVariable(new ShunRanVariable());
+        BaseMod.addDynamicVariable(new SecondaryShunRanVariable());
+        BaseMod.addDynamicVariable(new SecondaryMagicNumberVariable());
+        BaseMod.addDynamicVariable(new SecondaryDamageVariable());
+        BaseMod.addDynamicVariable(new SecondaryBlockVariable());
     }
 
     @Override
@@ -120,9 +134,9 @@ public class Cthugha_Core
     public void receiveEditStrings() {
         String lang;
         if (Settings.language == Settings.GameLanguage.ZHS) {
-            lang = "ZHS"; // 如果语言设置为简体中文，则加载ZHS文件夹的资源
+            lang = "ZHS";
         } else {
-            lang = "ENG"; // 如果没有相应语言的版本，默认加载英语
+            lang = "ENG";
         }
         BaseMod.loadCustomStringsFile(CardStrings.class, "cthughaResources/localization/" + lang + "/cards.json");
         BaseMod.loadCustomStringsFile(RelicStrings.class, "cthughaResources/localization/" + lang + "/relics.json");
@@ -163,12 +177,22 @@ public class Cthugha_Core
     @Override
     public void receiveOnBattleStart(AbstractRoom room) {
         StaticHelper.resetvaluesAtBattleStart();
+        BaoYanHelper.initPreBattle();
     }
 
-    private void loadVariables() {
-        BaseMod.addDynamicVariable(new ShunRanVariable());
-        BaseMod.addDynamicVariable(new SecondaryShunRanVariable());
-        BaseMod.addDynamicVariable(new SecondaryMagicNumberVariable());
-        BaseMod.addDynamicVariable(new SecondaryDamageVariable());
+    @Override
+    public void receivePostBattle(AbstractRoom room) {
+        BaoYanHelper.clearPostBattle();
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        CardBorderGlowManager.addGlowInfo(new BaoYanGlowInfo());
+        CardBorderGlowManager.addGlowInfo(new ZhiLiaoGlowInfo());
+    }
+
+    @Override
+    public void receivePostEnergyRecharge() {
+        EnergyHelper.resetValuesPostEnergyRecharge();
     }
 }

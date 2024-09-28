@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.WeakPower;
 
+@Deprecated
 public class EachYanZhiJingWeakAction extends AbstractGameAction {
 
     private int count;

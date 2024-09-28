@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class XingLuoShu extends CustomCard {
+public class XingLuoShu extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(XingLuoShu.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -34,8 +34,9 @@ public class XingLuoShu extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 7;
-        this.tags.add(CustomTags.Yan_Bao);
 
+//        this.tags.add(CustomTags.BaoYan);
+        this.canBaoYan = true;
     }
 
     @Override

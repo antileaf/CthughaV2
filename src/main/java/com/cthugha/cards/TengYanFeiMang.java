@@ -21,8 +21,8 @@ public class TengYanFeiMang extends CustomCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     private static final String IMG_PATH = "cthughaResources/img/card/109.png";
+
     private static final int COST = 1;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
@@ -33,29 +33,34 @@ public class TengYanFeiMang extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 1;
+        this.magicNumber = this.baseMagicNumber = -999; // Specially handled, cause -1 is also valid
     }
 
     @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+    public void applyPowers() {
+        boolean hasNotUpdatedDesc = this.magicNumber == -999;
+        this.magicNumber = this.baseMagicNumber = Math.max((int) AbstractDungeon.player.drawPile.group.stream()
+                .filter(ModHelper::IsBurnCard)
+                .count() - 1, 0);
 
-            this.upgradeDamage(1);
-        }
+        super.applyPowers();
+        if (hasNotUpdatedDesc && this.magicNumber != -999)
+            this.initializeDescription();
+    }
+
+    @Override
+    public void initializeDescription() {
+        this.rawDescription = String.format(cardStrings.DESCRIPTION,
+                ModHelper.isInBattle() && this.magicNumber != -999 ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
+
+        super.initializeDescription();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int count = 0;
-        int size = AbstractDungeon.player.drawPile.group.size();
-        for (int i = 0; i < size; i++) {
-            AbstractCard card = AbstractDungeon.player.drawPile.group.get(i);
-            if (ModHelper.IsBurnCard(card)) {
-                count++;
-            }
-        }
+        int count = (int) AbstractDungeon.player.drawPile.group.stream()
+                .filter(ModHelper::IsBurnCard)
+                .count();
 
         for (int i = 0; i < count - 1; i++) {
             this.addToBot(new DrawCardAction(p, 1));
@@ -64,4 +69,12 @@ public class TengYanFeiMang extends CustomCard {
         }
     }
 
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+            this.upgradeDamage(1);
+            this.initializeDescription();
+        }
+    }
 }

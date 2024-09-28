@@ -1,6 +1,7 @@
 package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.orbs.YanZhiJing;
@@ -27,18 +28,22 @@ public class BeiLuoShiMenXieDingPower extends AbstractPower {
     }
 
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
     }
 
-    public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-        this.flash();
-        if (card.hasTag(CustomTags.Yan_Bao) && !card.hasTag(CustomTags.Yan_Bao_Triggered)) {
-            for (int i = 0; i < this.amount; i ++) {
+    public void onAfterUseCard(AbstractCard c, UseCardAction action) {
+        if (!(c instanceof AbstractCthughaCard))
+            return;
+
+        AbstractCthughaCard card = (AbstractCthughaCard) c;
+        if (card.canBaoYan && !card.triggeredBaoYanLastTime) {
+            this.flash();
+
+            for (int i = 0; i < this.amount; i++)
                 this.addToBot(new ChannelAction(new YanZhiJing()));
-            }
+
             this.addToBot(new GainEnergyAction(1));
         }
-
     }
 
 }

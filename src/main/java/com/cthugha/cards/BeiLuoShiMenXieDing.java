@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class BeiLuoShiMenXieDing extends CustomCard {
+public class BeiLuoShiMenXieDing extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(BeiLuoShiMenXieDing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -30,19 +30,16 @@ public class BeiLuoShiMenXieDing extends CustomCard {
     }
 
     @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
-            this.upgradeBaseCost(1);
-        }
-    }
-
-    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new ApplyPowerAction(p, p, new BeiLuoShiMenXieDingPower(p, 1)));
     }
 
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+            this.upgradeBaseCost(1);
+            this.initializeDescription();
+        }
+    }
 }

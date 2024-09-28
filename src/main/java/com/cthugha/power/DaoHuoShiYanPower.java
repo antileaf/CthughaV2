@@ -7,11 +7,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class TaoHuoShiYanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(TaoHuoShiYanPower.class.getSimpleName());
+public class DaoHuoShiYanPower extends AbstractPower {
+    public static final String POWER_ID = ModHelper.MakePath(DaoHuoShiYanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    public TaoHuoShiYanPower(AbstractCreature owner) {
+    public DaoHuoShiYanPower(AbstractCreature owner) {
         this.ID = POWER_ID;
         this.name = powerStrings.NAME;
         this.owner = owner;
@@ -23,5 +23,4 @@ public class TaoHuoShiYanPower extends AbstractPower {
     public void updateDescription() {
         this.description = powerStrings.DESCRIPTIONS[0];
     }
-
 }

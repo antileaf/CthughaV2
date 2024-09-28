@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class WuYouBuZhu extends CustomCard {
+public class WuYouBuZhu extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(WuYouBuZhu.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -29,6 +29,8 @@ public class WuYouBuZhu extends CustomCard {
 
     public WuYouBuZhu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+
+        this.magicNumber = this.baseMagicNumber = 2;
     }
 
     @Override
@@ -43,8 +45,10 @@ public class WuYouBuZhu extends CustomCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.upgraded) {
-            this.addToBot(new ChannelAction(new YanZhiJing()));
+            for (int i = 0; i < this.magicNumber; i++)
+                this.addToBot(new ChannelAction(new YanZhiJing()));
         }
+
         this.addToBot(new ApplyPowerAction(p, p, new WuYouBuZhuPower(p)));
     }
 

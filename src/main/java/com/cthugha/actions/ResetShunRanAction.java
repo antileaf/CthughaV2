@@ -18,8 +18,10 @@ public class ResetShunRanAction extends AbstractGameAction {
 //            c.tags.remove(CustomTags.Shun_Ran_Triggered);
 //        }
 //        else
-        if (c instanceof AbstractCthughaCard)
+        if (c instanceof AbstractCthughaCard) {
             ((AbstractCthughaCard) c).triggeredShunRanThisTurn = false;
+            ((AbstractCthughaCard) c).updateBgImg();
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.cthugha.cards.derivations;
 
 import com.cthugha.actions.DrawSpecificCardAction;
+import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -14,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class ZhuoShangDaJi extends CustomCard {
+public class ZhuoShangDaJi extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(ZhuoShangDaJi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -33,6 +34,8 @@ public class ZhuoShangDaJi extends CustomCard {
 
         this.damage = this.baseDamage = 3;
         this.magicNumber = this.baseMagicNumber = 2;
+        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 1;
+
         this.tags.add(AbstractCard.CardTags.STRIKE);
         this.tags.add(CustomTags.Burn_Card);
     }
@@ -41,10 +44,9 @@ public class ZhuoShangDaJi extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
             this.upgradeMagicNumber(1);
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 
@@ -55,7 +57,6 @@ public class ZhuoShangDaJi extends CustomCard {
                     AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         }
 
-        this.addToBot(new DrawSpecificCardAction(card -> ModHelper.IsStrikeCard(card), 1));
+        this.addToBot(new DrawSpecificCardAction(ModHelper::IsStrikeCard, this.secondaryMagicNumber));
     }
-
 }

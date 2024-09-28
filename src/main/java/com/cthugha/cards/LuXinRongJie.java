@@ -29,6 +29,8 @@ public class LuXinRongJie extends CustomCard {
     public LuXinRongJie() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
+        this.magicNumber = this.baseMagicNumber = 15;
+
         this.keywords.add(GameDictionary.ENLIGHTENMENT.NAMES[0].toLowerCase());
     }
 
@@ -45,7 +47,6 @@ public class LuXinRongJie extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ApplyPowerAction(p, p, new LuXinRongJiePower(p, 15), 0));
+        this.addToBot(new ApplyPowerAction(p, p, new LuXinRongJiePower(p, this.magicNumber), 0));
     }
-
 }

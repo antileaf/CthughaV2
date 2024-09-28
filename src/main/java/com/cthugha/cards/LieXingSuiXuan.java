@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
 
-public class LieXingSuiXuan extends CustomCard {
+public class LieXingSuiXuan extends AbstractCthughaCard {
 
     public static final String ID = ModHelper.MakePath(LieXingSuiXuan.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -27,22 +27,23 @@ public class LieXingSuiXuan extends CustomCard {
 
     public LieXingSuiXuan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+
+        this.magicNumber = this.baseMagicNumber = 1;
+    }
+
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new ApplyPowerAction(p, p,
+                new LieXingSuiXuanPower(p, this.magicNumber), this.magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-
             this.upgradeBaseCost(0);
+            this.initializeDescription();
         }
     }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ApplyPowerAction(p, p, new LieXingSuiXuanPower(p, 1)));
-    }
-
 }

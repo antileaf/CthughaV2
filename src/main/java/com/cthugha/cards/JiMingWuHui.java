@@ -34,17 +34,21 @@ public class JiMingWuHui extends AbstractCthughaCard {
 
     @Override
     public void applyPowers() {
+        boolean hasNotUpdatedDesc = this.block == -1;
         this.baseBlock = this.magicNumber + (int) AbstractDungeon.player.exhaustPile.group.stream()
                 .filter(ModHelper::IsBurnCard)
                 .count();
 
         super.applyPowers();
+
+        if (hasNotUpdatedDesc && this.block != -1)
+            this.initializeDescription();
     }
 
     @Override
     public void initializeDescription() {
         this.rawDescription = String.format(cardStrings.DESCRIPTION,
-                ModHelper.isInBattle() ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
+                ModHelper.isInBattle() && this.block != -1 ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
 
         super.initializeDescription();
     }

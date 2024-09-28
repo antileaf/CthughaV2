@@ -13,7 +13,7 @@ import java.util.HashMap;
 // Welcome to the utilities package. This package is for small utilities that make our life easier.
 // You honestly don't need to bother with this unless you want to know how we're loading the textures.
 
-
+@Deprecated
 public class TextureLoader {
     private static HashMap<String, Texture> textures = new HashMap<String, Texture>();
     public static final Logger logger = LogManager.getLogger(TextureLoader.class.getName());
@@ -28,7 +28,7 @@ public class TextureLoader {
             try {
                 loadTexture(textureString);
             } catch (GdxRuntimeException e) {
-                logger.error("Could not find texture: " + textureString);
+                logger.error("Could not find texture: {}", textureString);
                 return getTexture("lihuowangResources/images/ui/missing_texture.png");
             }
         }
@@ -40,7 +40,7 @@ public class TextureLoader {
      *
      * @param textureString - String path to the texture you want to load relative to resources,
      *                      Example: "img/ui/missingtexture.png"
-     * @throws GdxRuntimeException
+     * @throws GdxRuntimeException - qwq
      */
     private static void loadTexture(final String textureString) throws GdxRuntimeException {
         logger.info("DefaultMod | Loading Texture: " + textureString);

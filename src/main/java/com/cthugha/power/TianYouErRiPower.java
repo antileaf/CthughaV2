@@ -34,8 +34,10 @@ public class TianYouErRiPower extends AbstractPower {
 //        if (card instanceof AbstractShunRanCard) {
 //            card.tags.remove(CustomTags.Shun_Ran_Triggered);
 //        }
-        if (card instanceof AbstractCthughaCard)
+        if (card instanceof AbstractCthughaCard) {
             ((AbstractCthughaCard) card).triggeredShunRanThisTurn = false;
+            ((AbstractCthughaCard) card).updateBgImg();
+        }
     }
 
 }
