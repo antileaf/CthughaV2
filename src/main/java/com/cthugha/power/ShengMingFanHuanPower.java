@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ShengMingFanHuanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(ShengMingFanHuanPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(ShengMingFanHuanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public ShengMingFanHuanPower(AbstractCreature owner, int amount) {

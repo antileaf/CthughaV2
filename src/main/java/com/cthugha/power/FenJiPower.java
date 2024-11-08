@@ -2,13 +2,15 @@ package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.helpers.ModHelper;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FenJiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(FenJiPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(FenJiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public FenJiPower(AbstractCreature owner, int amount) {
@@ -20,7 +22,13 @@ public class FenJiPower extends AbstractPower {
         this.img = new Texture("cthughaResources/img/power/220_32.png");
     }
 
+    @Override
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
+    }
+
+    @Override
+    public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
+        return ModHelper.isBurn(card) ? damage + this.amount : damage;
     }
 }

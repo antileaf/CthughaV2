@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-// 造成破坏护甲的伤害
+@Deprecated
 public class BreakBlockDamageAction extends AbstractGameAction {
     private AbstractMonster m;
     private DamageInfo damageInfo;

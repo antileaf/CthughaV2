@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LieXingSuiXuanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(LieXingSuiXuanPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(LieXingSuiXuanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public LieXingSuiXuanPower(AbstractCreature owner, int amount) {

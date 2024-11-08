@@ -23,7 +23,7 @@ public class ZhiLiaoAction extends AbstractGameAction {
     }
 
     public void update() {
-        if (!ZhiLiaoHelper.canTriggerZhiLiao(card)) {
+        if (ZhiLiaoHelper.canTriggerZhiLiao(this.card)) {
             this.followUp.run();
 
             if (!AbstractDungeon.player.hasPower(HuoZhuoLianZiPower.POWER_ID)) {

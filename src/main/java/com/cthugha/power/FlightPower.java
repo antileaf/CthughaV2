@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FlightPower extends AbstractPower {
 
-    public static final String POWER_ID = ModHelper.MakePath(FlightPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(FlightPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     private int storedAmount;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class LanguageHelper {
 	public static UIStrings shunRanUIStrings = CardCrawlGame.languagePack.getUIString(
-			ModHelper.MakePath("ShunRan"));
+			ModHelper.makeID("ShunRan"));
 
 	public static String getShunRanString(ArrayList<Integer> levels) {
 		return String.format(shunRanUIStrings.TEXT[0],

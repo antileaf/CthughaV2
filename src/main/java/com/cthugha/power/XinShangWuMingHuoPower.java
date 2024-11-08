@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class XinShangWuMingHuoPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(XinShangWuMingHuoPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(XinShangWuMingHuoPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public XinShangWuMingHuoPower(AbstractCreature owner, int amount) {

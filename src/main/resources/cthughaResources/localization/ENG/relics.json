@@ -1,0 +1,44 @@
+{
+  "Cthugha:HuoTiHuoYan": {
+    "NAME": "Living Flame",
+    "FLAVOR": "A mass of burning matter, constantly shifting in shape.",
+    "DESCRIPTIONS": [
+      "The damage of #yBurn increases #b3. The effect of #yBurn is changed to \"Deal damage to random enemy\"."
+    ]
+  },
+  "Cthugha:LieSiTaShuJian": {
+    "NAME": "Letters of Nestar",
+    "FLAVOR": "\"The Tower of Gold shall become the Pillar of Fire. Let mankind be cleansed by your power.\"",
+    "DESCRIPTIONS": [
+      "所有牌视为 #y灼伤牌 ，你不能再触发 #y瞬燃8 和 #y瞬燃9 。"
+    ]
+  },
+  "Cthugha:ShengLingLieYan": {
+    "NAME": "Vitality Flame",
+    "FLAVOR": "That massive, shifting form rising to the heavens, accompanied by an equally enormous cloud of living flames sweeping across the sky.",
+    "DESCRIPTIONS": [
+      "Replaces #rLiving #rFlame. The damage of #yBurn increases #b8. The effect of #yBurn is changed to \"Random enemy lose HP and max HP\"."
+    ]
+  },
+  "Cthugha:LongXin": {
+    "NAME": "Heart of Tarrasque",
+    "FLAVOR": "Heat fades in July, clothes donned in September. Spiring brings warmth, and orioles sing.",
+    "DESCRIPTIONS": [
+      "If you have energy remain at the end of your turn, gain [E] [E] at the start of your next turn."
+    ]
+  },
+  "Cthugha:YongRanShi": {
+    "NAME": "Ever-Burning Stone",
+    "FLAVOR": "A solid formed from pure, concentrated Ithal energy?",
+    "DESCRIPTIONS": [
+      "这个牌组中的牌包括 #y灼伤 ， #y炸弹 ， #y断魂斩 ，"
+    ]
+  },
+  "Cthugha:HuoZhong": {
+    "NAME": "Ember",
+    "FLAVOR": "He descended to the earth with this ember and gifted it to humanity.",
+    "DESCRIPTIONS": [
+      "在每场战斗开始时的抽牌中或你的回合结束时，手牌中每有3张 #y灼伤 ，抽1张牌。"
+    ]
+  }
+}

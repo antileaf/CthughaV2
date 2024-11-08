@@ -16,7 +16,7 @@ import basemod.abstracts.CustomCard;
 
 public class PoMieZhiZhi extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(PoMieZhiZhi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(PoMieZhiZhi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +24,7 @@ public class PoMieZhiZhi extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/破灭之枝.png";
     private static final int COST = 2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.SELF;
 

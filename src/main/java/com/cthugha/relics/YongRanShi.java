@@ -9,7 +9,7 @@ import basemod.abstracts.CustomRelic;
 
 public class YongRanShi extends CustomRelic {
   // 遗物ID
-  public static final String ID = ModHelper.MakePath(ShengLingLieYan.class.getSimpleName());
+  public static final String ID = ModHelper.makeID(ShengLingLieYan.class.getSimpleName());
   // 图片路径
   private static final String IMG_PATH = "cthughaResources/img/relics/生灵烈焰.png";
   // 遗物类型

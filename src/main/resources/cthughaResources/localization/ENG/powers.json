@@ -1,0 +1,162 @@
+{
+  "Cthugha:RiShiPower": {
+    "NAME": "Eclipse",
+    "DESCRIPTIONS": [
+      "In the remaining time of this turn, whenever your #bBurn deals damage, gain #b%d block."
+    ]
+  },
+  "Cthugha:HeiYanPower": {
+    "NAME": "BlackFlame",
+    "DESCRIPTIONS": [
+      "BlackFlamed creatures lose #b%d max HP, and lose HP and max HP equals to #b%d%% of the value of #yBlackFlame ( #b%d ) at the start of their turn."
+    ]
+  },
+  "Cthugha:HeiYanDaoRenPower": {
+    "NAME": "黑焰刀刃",
+    "DESCRIPTIONS": [
+      "每有一次攻击造成未被格挡的伤害，就给予 #b",
+      " 层黑焰。"
+    ]
+  },
+  "Cthugha:BeiLuoShiMenXieDingPower": {
+    "NAME": "The Fomalhaut Convention",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yBlaze card without triggering #yBlaze, channel #b%d #yFireVampire and gain [E]."
+    ]
+  },
+  "Cthugha:XinShangWuMingHuoPower": {
+    "NAME": "心上无明火",
+    "DESCRIPTIONS": [
+      "在你的回合开始时每有一名意图不是攻击的敌人，你都获得 #b",
+      " 点力量。"
+    ]
+  },
+  "Cthugha:WuYouBuZhuPower": {
+    "NAME": "Illuminated Darkness",
+    "DESCRIPTIONS": [
+      "When your #yAttack or #yFireVampire deals unblocked damage, the enemy lose equal max HP."
+    ]
+  },
+  "Cthugha:ZhuZhaoShuJiPower": {
+    "NAME": "Illuminated Insight",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, all enemies lose #b",
+      " max HP."
+    ]
+  },
+  "Cthugha:XuanCaoQiYanPower": {
+    "NAME": "Arrogant Flame",
+    "DESCRIPTIONS": [
+      "At the end of your turn, #yRetain at most #b",
+      " #yBurn. #yRetained cards will not be absorbed by #yFireVampire."
+    ]
+  },
+  "Cthugha:SiHuiFuRanPower": {
+    "NAME": "死灰复燃",
+    "DESCRIPTIONS": [
+      "When a #yBurn is Exhausted, add #b",
+      " #yBurn into your discard pile."
+    ]
+  },
+  "Cthugha:XinXiuErPower": {
+    "NAME": "Antares",
+    "DESCRIPTIONS": [
+      "At the start of your turn, add #b%d #yBurn into your hand."
+    ]
+  },
+  "Cthugha:CounterOfLossMaxHpPower": {
+    "NAME": "MaxHPLoss",
+    "DESCRIPTIONS": [
+      "Lost #b",
+      " max HP."
+    ]
+  },
+  "Cthugha:LuXinRongJiePower": {
+    "NAME": "Meltdown",
+    "DESCRIPTIONS": [
+      "Enter #ySun-in-Rags after #b",
+      " turns. Whenever a #yBurn is drawn, #rExhaust it, draw #b1 card and reduce the turn countdown by #b1."
+    ]
+  },
+  "Cthugha:CanYangPower": {
+    "NAME": "Sun-in-Rags",
+    "DESCRIPTIONS": [
+      "Enter #yDivinity and draw cards until your hand is full. This effect will also be triggered at the beginning of your turn."
+    ]
+  },
+  "Cthugha:FlightPower": {
+    "NAME": "Flight",
+    "DESCRIPTIONS": [
+      "Receives #b50% less attack damage. Losing this power if dealt #b",
+      " times of unblocked attack damage."
+    ]
+  },
+  "Cthugha:XuanShiXingTaiPower": {
+    "NAME": "Suspended Form",
+    "DESCRIPTIONS": [
+      "At the end of your turn, lose #b",
+      " #yStrength."
+    ]
+  },
+  "Cthugha:DaoHuoShiYanPower": {
+    "NAME": "Oath of Firewalking",
+    "DESCRIPTIONS": [
+      "Whenever a #yBurn is created, it is #yUpgraded."
+    ]
+  },
+  "Cthugha:ShengMingFanHuanPower": {
+    "NAME": "HP Return",
+    "DESCRIPTIONS": [
+      "When losing max HP, you gain #b",
+      " #ytemporary_hp."
+    ]
+  },
+  "Cthugha:HuoZhuoLianZiPower": {
+    "NAME": "Fire-Purified Lotus",
+    "DESCRIPTIONS": [
+      "You can trigger #yextinguish without limit in #b",
+      " turns."
+    ]
+  },
+  "Cthugha:XingYunPower": {
+    "NAME": "Star Fall",
+    "DESCRIPTIONS": [
+      "At this turn, if a #yFireVampire is removed, deal #b",
+      " damage to a random enemy."
+    ]
+  },
+  "Cthugha:LoseYanZhiJingPower": {
+    "NAME": "Lose FireVampire",
+    "DESCRIPTIONS": [
+      "At the end of your turn, lose #b",
+      " #yFireVampire."
+    ]
+  },
+  "Cthugha:XianYiPower": {
+    "NAME": "Splendid Attire",
+    "DESCRIPTIONS": [
+      "如果本回合结束时没有打出过 #y鲜衣 以外的牌，获得 #b",
+      " 层 #y无实体 。"
+    ]
+  },
+  "Cthugha:FenJiPower": {
+    "NAME": "Cremate Silence",
+    "DESCRIPTIONS": [
+      "The damage of #yBurn increases #b",
+      " , you cannot trigger any other #yBlaze."
+    ]
+  },
+  "Cthugha:TianYouErRiPower": {
+    "NAME": "Twin Sun",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yFlare card, reset its #yFlare."
+    ]
+  },
+  "Cthugha:LieXingSuiXuanPower": {
+    "NAME": "Stars in Orbit",
+    "DESCRIPTIONS": [
+      "Whenever you channel #yFireVampire in the first slot: Draw #b%d cards. NL Whenever you channel #yFireVampire in the last slot: Gain [E] . "
+    ]
+  }
+  
+}

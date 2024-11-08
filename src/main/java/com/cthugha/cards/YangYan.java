@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class YangYan extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(YangYan.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(YangYan.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -23,7 +23,7 @@ public class YangYan extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/108.png";
     private static final int COST = 1;
     private static final CardType TYPE = CardType.ATTACK;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
@@ -31,6 +31,8 @@ public class YangYan extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 5;
+        this.secondaryDamage = this.baseSecondaryDamage = 5;
+        this.isMultiSecondaryDamage = true;
         this.shunRan = this.baseShunRan = 0;
     }
 
@@ -39,6 +41,7 @@ public class YangYan extends AbstractCthughaCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(3);
+            this.upgradeSecondaryDamage(3);
             this.initializeDescription();
         }
     }
@@ -50,11 +53,10 @@ public class YangYan extends AbstractCthughaCard {
 
     @Override
     public void onShunRan(int level) {
-        if (this.multiDamage == null)
+        if (level >= this.shunRan) {
             this.calculateCardDamage(null);
 
-        if (level >= this.shunRan) {
-            this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiDamage,
+            this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiSecondaryDamage,
                     DamageType.NORMAL, AttackEffect.FIRE));
         }
     }

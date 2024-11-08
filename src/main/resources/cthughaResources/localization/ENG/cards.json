@@ -1,0 +1,397 @@
+{
+    "Cthugha:Burn": {
+        "NAME": "(Burn)",
+        "DESCRIPTION": "Deal !D! damage.",
+        "EXTENDED_DESCRIPTION": [
+            "Unplayable. NL At the end of your turn, deal !M! damage to a random enemy.",
+            "Unplayable. NL At the end of your turn, a random enemy lose !M! HP and max HP."
+        ]
+    },
+
+    "Cthugha:HuoYanHuaSheng": {
+        "NAME": "Flame Birth",
+        "DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Draw !M! card. NL cthugha:Blaze: Draw !cthughaM2! cards.",
+        "UPGRADE_DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Draw !M! cards. NL cthugha:Blaze: Draw !cthughaM2! cards."
+    },
+    "Cthugha:ZongHuo": {
+        "NAME": "Arson",
+        "DESCRIPTION": "Add !M! *Burn into your hand.",
+        "UPGRADE_DESCRIPTION": "Add !M! *Burn into your hand."
+    },
+    "Cthugha:RiShi": {
+        "NAME": "Eclipse",
+        "DESCRIPTION": "Deal !D! damage. NL In the remaining time of this turn, whenever your Burn deals damage, gain !M! Block."
+    },
+    "Cthugha:TengYanFeiMang": {
+        "NAME": "Soaring Light",
+        "DESCRIPTION": "Draw 1 card and deal !D! damage. Repeat the number of cthugha:Burn_Cards in your draw pile - 1 times.",
+        "EXTENDED_DESCRIPTION": [" ( !M! )"]
+    },
+    "Cthugha:HuoYanDouPeng": {
+        "NAME": "Fire Cloak",
+        "DESCRIPTION": "Add !M! *Burn into your hand. NL Gain !B! Block.",
+        "UPGRADE_DESCRIPTION": "Add !M! *Burn into your hand. NL Gain !B! Block."
+    },
+    "Cthugha:FengHuo": {
+        "NAME": "Beacon",
+        "DESCRIPTION": "Deal !D! damage. NL Gain [E] . NL Draw !M! cards. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Gain [E] . NL Draw !M! cards. NL Exhaust."
+    },
+    "Cthugha:HeiYanXuanWo": {
+        "NAME": "Black Flame Tornado",
+        "DESCRIPTION": "Deal !D! damage !M! times. NL Apply !cthughaM2! cthugha:Black_Flame.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage !M! times. NL Apply !cthughaM2! cthugha:Black_Flame."
+    },
+    "Cthugha:TaiYangHeiZi": {
+        "NAME": "太阳耀斑",
+        "DESCRIPTION": "造成 !D! 点伤害。你每有一个 cthugha:炎之精 ，再依次造成+1点伤害。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。你每有一个 cthugha:炎之精 ，再依次造成+1点伤害。"
+    },
+    "Cthugha:YanZhuoShangJueShuaiDaJiChu": {
+        "NAME": "焰灼伤绝摔打击触",
+        "DESCRIPTION": "造成 !D! 点伤害 !M! 次。从抽牌堆中抽1张 打击 牌。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。从抽牌堆中抽1张 打击 牌。"
+    },
+    "Cthugha:SiDaJiQieFenZhuoShangHuai": {
+        "NAME": "撕打击切焚灼伤坏",
+        "DESCRIPTION": "造成 !D! 点伤害 !M! 次。从抽牌堆中抽1张 打击 牌。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。从抽牌堆中抽1张 打击 牌。"
+    },
+    "Cthugha:HuoXingJia": {
+        "NAME": "Stake",
+        "DESCRIPTION": "Deal !D! damage and apply !M! Vulnerable to the target and a random other enemy.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage and apply !M! Vulnerable to the target and a random other enemy."
+    },
+    "Cthugha:XingGui": {
+        "NAME": "Star Beam",
+        "DESCRIPTION": "cthugha:Blaze: Deal !cthughaD2! damage. NL ----------------- NL Remove all cthugha:Fire_Vampire, each one deal !D! damage.",
+        "UPGRADE_DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL cthugha:Blaze: Deal !cthughaD2! damage. NL ----------------- NL Remove all cthugha:Fire_Vampire, each one deal !D! damage."
+    },
+    "Cthugha:StarSpear": {
+        "NAME": "Star Spear",
+        "DESCRIPTION": "Deal !D! damage. NL cthugha:Channel 2 cthugha:Fire_Vampire. NL cthugha:Blaze: Deal 2 additional times.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL cthugha:Channel 2 cthugha:Fire_Vampire. NL cthugha:Blaze: Deal 2 additional times."
+    },
+    "Cthugha:DuanZaoHuoYan": {
+        "NAME": "Forging Fire",
+        "DESCRIPTION": "Gain 1 Fire Potion. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Gain 1 Fire Potion. NL Exhaust."
+    },
+    "Cthugha:HeiYanDaoRen": {
+        "NAME": "黑焰刀刃",
+        "DESCRIPTION": "每有一次攻击造成未被 格挡 的伤害，就给予 !M! 层 cthugha:黑焰 。",
+        "UPGRADE_DESCRIPTION": "每有一次攻击造成未被 格挡 的伤害，就给予 !M! 层 cthugha:黑焰 。"
+    },
+    "Cthugha:YiChiRuXi": {
+        "NAME": "Pure Red",
+        "DESCRIPTION": "Upon pickup, remove !M! *Burn from your deck. NL When drawn, add !M! *Burn into your hand and Exhaust."
+    },
+    "Cthugha:BeiLuoShiMenXieDing": {
+        "NAME": "Fomalhaut Convention",
+        "DESCRIPTION": "Whenever you play a cthugha:Blaze card without triggering cthugha:Blaze, gain [E] and cthugha:channel 1 cthugha:Fire_Vampire."
+    },
+    "Cthugha:XinShangWuMingHuo": {
+        "NAME": "心上无明火",
+        "DESCRIPTION": "在你的回合开始时每有一名意图不是攻击的敌人，你都获得 !M! 点 力量 。",
+        "UPGRADE_DESCRIPTION": "在你的回合开始时每有一名意图不是攻击的敌人，你都获得 !M! 点 力量 。"
+    },
+    "Cthugha:LengHanHuiYan": {
+        "NAME": "冷寒灰焰",
+        "DESCRIPTION": "给予1层 cthugha:缓慢 。 NL 消耗 。",
+        "UPGRADE_DESCRIPTION": "给予所有敌人1层 cthugha:缓慢 。 NL 消耗 。"
+    },
+    "Cthugha:LiaoRanLuHuo": {
+        "NAME": "Solitary Envy",
+        "DESCRIPTION": "Reduce its cost by 1 for each enemy. NL The enemy lose 36 max HP.",
+        "UPGRADE_DESCRIPTION": "Reduce its cost by 1 for each enemy. NL The enemy lose 36 max HP."
+    },
+    "Cthugha:ZhiKao": {
+        "NAME": "炙烤",
+        "DESCRIPTION": "造成 !D! 点伤害。 斩杀 时，恢复 !M! 点生命。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 斩杀 时，恢复 !M! 点生命。"
+    },
+    "Cthugha:WuYouBuZhu": {
+        "NAME": "Illuminated Dark",
+        "DESCRIPTION": "When your Attack or cthugha:Fire_Vampire deals unblocked damage, the enemy lose equal max HP.",
+        "UPGRADE_DESCRIPTION": "cthugha:Channel !M! cthugha:Fire_Vampire. NL When your Attack or cthugha:Fire_Vampire deals unblocked damage, the enemy lose equal max HP."
+    },
+    "Cthugha:ZhuoXinZhiHun": {
+        "NAME": "Grilling Soul",
+        "DESCRIPTION": "Deal !D! damage !M! times. Each unblocked damage makes enemy lose 2 max HP.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage !M! times. Each unblocked damage makes enemy lose 2 max HP."
+    },
+    "Cthugha:ChiRiZhuYun": {
+        "NAME": "Commanding Sun",
+        "DESCRIPTION": "Deal !D! damage the number of cthugha:Burn_Cards in your hand + 3 times. If this card deals unblocked damage, make enemy's max HP equal to current HP.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage the number of cthugha:Burn_Cards in your hand + 3 times. If this card deals unblocked damage, make enemy's max HP equal to current HP."
+    },
+    "Cthugha:CanYangWuYing": {
+        "NAME": "残阳无影",
+        "DESCRIPTION": "造成 !D! 点伤害。 NL 如果未被 格挡 的伤害大于等于敌人最大生命的60%（boss为30%）或杀死了敌人，获得 !M! 层 cthugha:缓冲 。 NL 消耗 。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 如果未被 格挡 的伤害大于等于敌人最大生命的60%（boss为30%）或杀死了敌人，获得 !M! 层 cthugha:缓冲 。 NL 消耗 。"
+    },
+    "Cthugha:ZhuZhaoShuJi": {
+        "NAME": "Illuminated Insight",
+        "DESCRIPTION": "Ethereal. NL Whenever you play a card, all enemies lose !M! max HP.",
+        "UPGRADE_DESCRIPTION": "Whenever you play a card, all enemies lose !M! max HP."
+    },
+    "Cthugha:TunYunFuHai": {
+        "NAME": "Veiling Seas",
+        "DESCRIPTION": "Deal !D! damage. NL Gain !B! Block. NL Each *Burn in your hand reduces 1 [E] and increases !M! damage for this card."
+    },
+    "Cthugha:PoMieZhiZhi": {
+        "NAME": "Damage-twig",
+        "DESCRIPTION": "Exhaust all Status and Curse cards, add an equal amount of *Burn into your hand.",
+        "UPGRADE_DESCRIPTION": "Innate. NL Exhaust all Status and Curse cards, add an equal amount of *Burn into your hand."
+    },
+    "Cthugha:XuanCaoXiaoYan": {
+        "NAME": "Arrogant Flame",
+        "DESCRIPTION": "At the end of your turn, Retain at most !M! *Burn in your hand. NL Retained *Burn will not be absorbed by cthugha:Fire_Vampire.",
+        "UPGRADE_DESCRIPTION": "At the end of your turn, Retain at most !M! *Burn in your hand. NL Retained *Burn will not be absorbed by cthugha:Fire_Vampire."
+    },
+    "Cthugha:QinLueRuHuo": {
+        "NAME": "Raiding like Fire",
+        "DESCRIPTION": "Deal !D! damage. Deals !M! additional damage for ALL your cthugha:Burn_Card.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. Deals !M! additional damage for ALL your cthugha:Burn_Card."
+    },
+    "Cthugha:YingHuoLiHuo": {
+        "NAME": "Wandering Flame",
+        "DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Apply !M! Weak to ALL enemies. NL cthugha:Blaze: Exhaust all *Burn, draw an equal amount of cards."
+    },
+    "Cthugha:HuoZangBi": {
+        "NAME": "Cremation Wall",
+        "DESCRIPTION": "Gain !B! Block. NL cthugha:Flare !shunRan! : Gain !B! Block, add !M! *Burn into your discard pile."
+    },
+    "Cthugha:BaoLie": {
+        "NAME": "Burst",
+        "DESCRIPTION": "Draw 1 card next turn. NL cthugha:Blaze: Deal !D! damage. NL cthugha:Flare !shunRan! : cthugha:channel !M! cthugha:Fire_Vampire."
+    },
+    "Cthugha:BaoRan": {
+        "NAME": "Detonation",
+        "DESCRIPTION": "Gain [E]. NL cthugha:Flare !shunRan! : Gain [E].",
+        "UPGRADE_DESCRIPTION": "Gain [E]. NL cthugha:Flare !shunRan! :Gain [E] [E] ."
+    },
+    "Cthugha:ChunHuo": {
+        "NAME": "Leo",
+        "DESCRIPTION": "When drawn, draw !cthughaM2! cthugha:Burn_Cards from your draw pile. NL Draw !cthughaM2! cards. NL cthugha:Flare !shunRan! : Draw !M! cards."
+    },
+    "Cthugha:ChiShengGuangYan": {
+        "NAME": "Blazing Radiance",
+        "DESCRIPTION": "Add !M! *Burn into your hand. NL Reset all cthugha:Flare.",
+        "UPGRADE_DESCRIPTION": "Add !M! *Burn into your hand. NL Reset all cthugha:Flare."
+    },
+    "Cthugha:JiMingWuHui": {
+        "NAME": "Clear and Bright",
+        "DESCRIPTION": "Gain Block equals to !M! + the number of Exhausted cthugha:Burn_Cards. NL cthugha:Flare !shunRan! : Play this card.",
+        "EXTENDED_DESCRIPTION": [" ( !B! ) "]
+    },
+    "Cthugha:ZhongKuJianPo": {
+        "NAME": "Tormented Suffering",
+        "DESCRIPTION": "Add 1 *Burn into your hand. NL Each cthugha:Burn_Card in your hand, apply 2 Vulnerable, 2 Weak and 10 Poison in order.",
+        "UPGRADE_DESCRIPTION": "Add 1 *Burn into your hand. NL Each cthugha:Burn_Card in your hand, apply 2 Vulnerable, 2 Weak and 10 Poison in order."
+    },
+    "Cthugha:SiHuiFuRan": {
+        "NAME": "Resurgence",
+        "DESCRIPTION": "When a *Burn is Exhausted, add a *Burn into your discard pile.",
+        "UPGRADE_DESCRIPTION": "When a *Burn is Exhausted, add a *Burn into your discard pile."
+    },
+    "Cthugha:XinXiuEr": {
+        "NAME": "Antares",
+        "DESCRIPTION": "At the start of your turn, add !M! *Burn into your hand.",
+        "UPGRADE_DESCRIPTION": "Add !M! *Burn into your hand. NL At the start of your turn, add !M! *Burn into your hand."
+    },
+    "Cthugha:ZiBao": {
+        "NAME": "Self Explosion",
+        "DESCRIPTION": "Lose 10 HP. NL Deal !D! damage to ALL enemies. NL cthugha:Blaze: Deal !D! damage to ALL enemies.",
+        "UPGRADE_DESCRIPTION": "Lose 10 HP. NL Deal !D! damage to ALL enemies. NL cthugha:Blaze: Deal !D! damage to ALL enemies."
+    },
+    "Cthugha:HeiYanYiShi": {
+        "NAME": "Black Flame Ritual",
+        "DESCRIPTION": "Apply !M! cthugha:Black_Flame to ALL enemies. NL cthugha:Flare !shunRan! : Apply !cthughaM2! cthugha:Black_Flame to ALL enemies."
+    },
+    "Cthugha:JiaoShengDuoMu": {
+        "NAME": "A Splendour",
+        "DESCRIPTION": "If the target enemy's max HP is no more than your HP, kill it. NL Otherwise, Heal your HP equals to !M! % of its lost max HP. NL Exhaust."
+    },
+    "Cthugha:QiSeGuBai": {
+        "NAME": "Solitary White",
+        "DESCRIPTION": "Choose 1 *Burn or *Defend in your hand, remove a same name card from your deck. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Choose 1 *Burn or *Defend in your hand, remove a same name card from your deck. NL Exhaust."
+    },
+    "Cthugha:LuXinRongJie": {
+        "NAME": "Meltdown",
+        "DESCRIPTION": "After !M! turns, enter cthugha:Sun-in-Rags. NL Whenever a *Burn is drawn, Exhaust it, draw 1 card and reduce the turn countdown by 1.",
+        "UPGRADE_DESCRIPTION": "Innate. After !M! turns, enter cthugha:Sun-in-Rags. NL Whenever a *Burn is drawn, Exhaust it, draw 1 card and reduce the turn countdown by 1."
+    },
+    "Cthugha:XuanShiXingTai": {
+        "NAME": "Suspended Form",
+        "DESCRIPTION": "NL Gain !M! cthugha:Flight. NL At the end of your turn, lose !cthughaM2! Strength."
+    },
+    "Cthugha:YanWu": {
+        "NAME": "Swaying Blaze",
+        "DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Each cthugha:Fire_Vampire absorb a unexhausted *Burn from your pile. NL Trigger the passive effect of ALL cthugha:Fire_Vampire. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Each cthugha:Fire_Vampire absorb a unexhausted *Burn from your pile. NL Trigger the passive effect of ALL cthugha:Fire_Vampire."
+    },
+    "Cthugha:MingDingZhiSi": {
+        "NAME": "Divine Death",
+        "DESCRIPTION": "Double the settlement effect of cthugha:Black_Flame this combat. NL Draw 1 card. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Triple the settlement effect of cthugha:Black_Flame this combat. NL Draw 1 card. NL Exhaust."
+    },
+    "Cthugha:HeLuSiZhiYan": {
+        "NAME": "Eye of Horus",
+        "DESCRIPTION": "Scry !M!. Place the discarded card into your hand, and put 1 *Burn in its original position.",
+        "UPGRADE_DESCRIPTION": "Scry !M!. Place the discarded card into your hand, and put 1 *Burn in its original position."
+    },
+    "Cthugha:DaoHuoShiYan": {
+        "NAME": "Oath of Firewalking",
+        "DESCRIPTION": "Upgrade all *Burn. NL Whenever a *Burn is created during combat, Upgrade it. NL Draw !M! cards. Exhaust."
+    },
+    "Cthugha:MieShiZhiYanLaiWaTing": {
+        "NAME": "Lævateinn",
+        "DESCRIPTION": "Add *Burn until your hand is full. NL cthugha:Flare !shunRan! : Deal !D! damage to a random enemy. NL cthugha:Flare !shunRan2! : Deal !cthughaD2! damage to ALL enemies."
+    },
+    "Cthugha:YangYan": {
+        "NAME": "Dazzling Sunlight",
+        "DESCRIPTION": "Deal !D! damage. NL cthugha:Flare !shunRan! : Deal !cthughaD2! damage to ALL enemies."
+    },
+    "Cthugha:HuoYanHuXi": {
+        "NAME": "Fire Breath",
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Add 1 *Burn+ into your hand, switch your *Burn between Status and Attack.",
+        "UPGRADE_DESCRIPTION": " Retain. NL cthugha:Flare !shunRan! : Add 1 *Burn+ into your hand, switch your *Burn between Status and Attack."
+    },
+    "Cthugha:ShiXinZhuMing": {
+        "NAME": "Corroding Life",
+        "DESCRIPTION": "Enemy lose !M! max HP. Whenever the enemy lose max HP, you gain !cthughaM2! temporary_hp. Exhaust.",
+        "UPGRADE_DESCRIPTION": "Enemy lose !M! max HP. Whenever the enemy lose max HP, you gain !cthughaM2! temporary_hp. Exhaust."
+    },
+    "Cthugha:XinJinHuoChuan": {
+        "NAME": "Passing the Torch",
+        "DESCRIPTION": "cthugha:Firelink 3. NL At the end of your turn, the triggered Burn will trigger its cthugha:firelink. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "cthugha:Firelink 3. NL At the end of your turn, the triggered Burn will trigger its cthugha:firelink. NL Exhaust."
+    },
+    "Cthugha:HuoZhuoLianZi": {
+        "NAME": "Fire-Purified Lotus",
+        "DESCRIPTION": "cthugha:Extinguish : Gain !B! Temporary HP. NL cthugha:Flare !shunRan! : You can trigger cthugha:extinguish in this turn without limit."
+    },
+    "Cthugha:HongLianYeHuo": {
+        "NAME": "Crimson Lotus Flame",
+        "DESCRIPTION": "cthugha:Extinguish : Deal !D! damage, if the enemy's Strength is no less than !cthughaM2!, steal !M! Strength."
+    },
+    "Cthugha:DianJiangChun_ZiYangHanShi": {
+        "NAME": "Cold Food",
+        "DESCRIPTION": "Discard X cards. NL Gain X [E] . Draw X cards. NL For every 2 cthugha:Burn_Cards discarded, gain !M! [E] and draw !M! cards additionally. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Discard X cards. NL Gain X [E] . Draw X cards. NL For every 2 cthugha:Burn_Cards discarded, gain !M! [E] and draw !M! cards additionally. NL Exhaust."
+    },
+    "Cthugha:DianJiangChun_QingJiXiShang": {
+        "NAME": "Rejoicing Feast",
+        "DESCRIPTION": "Draw !M! cards. Each card type drawn triggers the following effects in sequence: Gain 3 Block; Gain 1 Strength; Gain [E] ; Double all effect.",
+        "UPGRADE_DESCRIPTION": "Draw !M! cards. Each card type drawn triggers the following effects in sequence: Gain 3 Block; Gain 1 Strength; Gain [E] ; Double all effect; Double all effect again."
+    },
+    "Cthugha:DianJiangChun_JuanJinChouYun": {
+        "NAME": "Banishing Gloom",
+        "DESCRIPTION": "Discard at most !M! cards. NL Add equal *Burn into your hand. NL Draw equal cards next turn.",
+        "UPGRADE_DESCRIPTION": "Discard at most !M! cards. NL Add equal *Burn into your hand. NL Draw equal cards next turn."
+    },
+    "Cthugha:TianGuangChuLiang": {
+        "NAME": "Dawn Light",
+        "DESCRIPTION": "Innate. NL Add 3 *Burn into your hand. NL Exhaust. NL Ethereal.",
+        "UPGRADE_DESCRIPTION": "Innate. NL Add 3 *Burn into your hand. NL Exhaust. NL Retain."
+    },
+    "Cthugha:XingYun": {
+        "NAME": "Star Fall",
+        "DESCRIPTION": "At this turn, if a cthugha:Fire_Vampire is removed, deal 4 damage to a random enemy. NL cthugha:Blaze: Remove 2 cthugha:Fire_Vampire. NL ----------------- NL cthugha:Channel !M! temporary cthugha:Fire_Vampire.",
+        "UPGRADE_DESCRIPTION": "At this turn, if a cthugha:Fire_Vampire is removed, deal 4 damage to a random enemy. NL cthugha:Blaze: Remove 2 cthugha:Fire_Vampire. NL ----------------- NL cthugha:Channel !M! temporary cthugha:Fire_Vampire."
+    },
+    "Cthugha:LiuXingBao": {
+        "NAME": "Meteor Swarm",
+        "DESCRIPTION": "Can only be played if no [E] spent in this turn. NL cthugha:Blaze: Triple its damage. NL ----------------- NL Deal !D! damage X times to ALL enemies. NL cthugha:Channel X cthugha:Fire_Vampire.",
+        "UPGRADE_DESCRIPTION": "Can only be played if no [E] spent in this turn. NL cthugha:Blaze: Triple its damage. NL ----------------- NL Deal !D! damage X+1 times to ALL enemies. NL cthugha:Channel X+1 cthugha:Fire_Vampire.",
+        "EXTENDED_DESCRIPTION": ["I have already spend [E] in this turn!"]
+    },
+    "Cthugha:Gou": {
+        "NAME": "Bonfire",
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Gain !M! Vigor. NL ----------------- NL Deal !D! damage to a random enemy !cthughaM2! times.",
+        "UPGRADE_DESCRIPTION": "cthugha:Flare !shunRan! : Gain !M! Vigor. NL Deal !D! damage to a random enemy !cthughaM2! times. NL cthugha:Flare !shunRan2! : Deal !D! damage to a random enemy !cthughaM2! times."
+    },
+    "Cthugha:ChongRanLieHuo": {
+        "NAME": "Reignite Fire",
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Deal !D! damage to a random enemy. NL cthugha:Flare !shunRan2! : Reset all cthugha:Flare, this card's damage + !M! this combat."
+    },
+    "Cthugha:XingYouGuangNi": {
+        "NAME": "Starlit Shadows",
+        "DESCRIPTION": "cthugha:Blaze: Gain !cthughaB2! Temporary HP. NL ------------- NL Remove all cthugha:Fire_Vampire, gain !B! Block for each cthugha:Fire_Vampire removed."
+    },
+    "Cthugha:XianYi": {
+        "NAME": "Splendid Attire",
+        "DESCRIPTION": "Draw until your hand is full. cthugha:Extinguish : Gain !M! Intangible. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Draw until your hand is full. cthugha:Extinguish : Gain !M! Intangible. NL cthugha:Flare !shunRan! : Draw until your hand is full, Gain !M! Intangible. NL Exhaust."
+    },
+    "Cthugha:JuYan": {
+        "NAME": "Flame Gather",
+        "DESCRIPTION": "Lose 1 cthugha:Fire_Vampire slot. The requirements of cthugha:Blaze decreases 1."
+    },
+    "Cthugha:FenJi": {
+        "NAME": "Cremate Silence",
+        "DESCRIPTION": " cthugha:Channel 1 cthugha:Fire_Vampire. NL cthugha:Blaze: The damage of *Burn increases !M! this combat, you cannot trigger any other cthugha:Blaze this combat."
+    },
+    "Cthugha:FuZhuoShangHuan": {
+        "NAME": "Burn Once More",
+        "DESCRIPTION": "Deal !D! damage. When Exhausted for cthugha:Flare, treated as cthugha:Flare !M!. NL When Exhausted, if the cthugha:Flare value is greater than 2, put a copy with a value 2 less than the original back into your hand.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. When Exhausted for cthugha:Flare, treated as cthugha:Flare !M!. NL When Exhausted, if the cthugha:Flare value is greater than 2, put a copy with a value 2 less than the original back into your hand."
+    },
+    "Cthugha:ChangMing": {
+        "NAME": "Pilot Light",
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Draw !M! cards, the card drawn cost + 1 this turn."
+    },
+    "Cthugha:DaiShiYueLuo": {
+        "NAME": "Moonlit Eclipsed",
+        "DESCRIPTION": "If the sum of cost in your hand (including this card) is no less than !M!, these cards cost 0 this turn. NL Return the cost of this card.",
+        "EXTENDED_DESCRIPTION": ["The sum of cost in my hand has #rNOT reached the requirement."]
+    },
+    "Cthugha:AnHongHeiYan": {
+        "NAME": "Dark Red Flame",
+        "DESCRIPTION": "Add !M! *Burn into your hand. NL Add 1 Exhaustive *Burst into your hand. NL cthugha:Blaze: Add 1 Exhaustive *Burst into your hand."
+    },
+    "Cthugha:ZhuoShangDaJi": {
+        "NAME": "Burn Strike",
+        "DESCRIPTION": "Deal !D! damage !M! times. NL Draw !cthughaM2! Strike from your draw pile."
+    },
+    "Cthugha:JingZhuangZhuoShangJi": {
+        "NAME": "Burn Hardcover",
+        "DESCRIPTION": "Add !M! *Burn *Strike into your hand. NL Exhaust.",
+        "UPGRADE_DESCRIPTION": "Add !M! *Burn *Strike into your hand."
+    },
+    "Cthugha:TianYouErRi": {
+        "NAME": "Twin Sun",
+        "DESCRIPTION": "Whenever you play a cthugha:Flare card, reset its cthugha:Flare."
+    },
+    "Cthugha:LieXingSuiXuan": {
+        "NAME": "Stars in Orbit",
+        "DESCRIPTION": "Whenever you cthugha:Channel cthugha:Fire_Vampire in the first slot: Draw !M! cards. NL Whenever you cthugha:channel cthugha:Fire_Vampire in the last slot: Gain [E] ."
+    },
+    "Cthugha:Defend": {
+        "NAME": "Defend",
+        "DESCRIPTION": "Gain !B! Block.",
+        "UPGRADE_DESCRIPTION": "Gain !B! Block."
+    },
+    "Cthugha:LianYing": {
+        "NAME": "Linked Camps",
+        "DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps cards by !M! this turn. NL cthugha:Flare !shunRan! : Add 1 *Linked *Camps into your hand.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps cards by !M! this turn. NL cthugha:Flare !shunRan! : Add 1 *Linked *Camps+ into your hand.。"
+    },
+    "Cthugha:ZhaoZhuoShangTianQue": {
+        "NAME": "Burn Heaven's Gate",
+        "DESCRIPTION": "Gain !B! Block. NL When Exhausted by cthugha:Flare, play this card from your hanand exhausts the cthugha:Flare card without triggering the cthugha:Flare effect."
+    },
+    "Cthugha:ChiYanHuaZhan": {
+        "NAME": "Blazing Flame Slash",
+        "DESCRIPTION": "Deal !D! damage. NL Gain Strength until you have !M! Strength. NL Add !cthughaM2! *Burn+ whose type is Attack.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Gain Strength until you have !M! Strength. NL Add !cthughaM2! *Burn+ whose type is Attack."
+    },
+
+    "Cthugha:ShiftingStar": {
+        "NAME": "Shifting Star",
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Discard your hand, then draw that many cards.",
+        "UPGRADE_DESCRIPTION": "Innate. NL cthugha:Flare !shunRan! : Discard your hand, then draw that many cards."
+    }
+}

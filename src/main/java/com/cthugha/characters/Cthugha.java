@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.cthugha.cards.ShiftingStar;
+import com.cthugha.cards.StarSpear;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
@@ -11,9 +13,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
-import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.EnergyManager;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.cutscenes.CutscenePanel;
 import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -61,7 +63,7 @@ public class Cthugha extends CustomPlayer {
             -5.0F, 0.0F };
 
     public Cthugha(String name) {
-        super(name, MyPlayerClassEnum.MY_PLAYER_CLASS, null, null,
+        super(name, MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS, null, null,
                 LAYER_SPEED, null, null);
 
         // 初始化你的人物，如果你的人物只有一张图，那么第一个参数填写你人物图片的路径。
@@ -78,7 +80,7 @@ public class Cthugha extends CustomPlayer {
         this.refreshSkin();
 
         // 修复卡牌命定之死在sl情况下会保留翻倍效果的bug。
-        HeiYanPower.factor = HeiYanPower.baseFactor;
+        HeiYanPower.percentage = HeiYanPower.BASE_PERCENTAGE;
     }
 
     public void refreshSkin() {
@@ -104,7 +106,7 @@ public class Cthugha extends CustomPlayer {
     @Override
     public CardColor getCardColor() {
         // return CardColor.RED;
-        return AbstractCardEnum.MOD_NAME_COLOR;
+        return AbstractCardEnum.CTHUGHA_CARD_COLOR;
     }
 
     // 卡牌选择界面选择该牌的颜色
@@ -133,9 +135,21 @@ public class Cthugha extends CustomPlayer {
 
     @Override
     public CharSelectInfo getLoadout() {
+        String name, description;
+        if (Settings.language == Settings.GameLanguage.ZHS ||
+                Settings.language == Settings.GameLanguage.ZHT ||
+                Settings.language == Settings.GameLanguage.JPN) {
+            name = "克图格亚";
+            description = "由炎之精侍奉的被称为火焰之主的旧日支配者。 NL 永燃之焰可焚尽一切，境随心转亦御烛蚀死亡。";
+        }
+        else {
+            name = "Cthugha";
+            description = "An ancient ruler once worshipped by the spirits of flame as the Lord of Fire. NL The eternal flame can burn all, and the realm follows the heart to control the candle to erode death.";
+        }
+
         return new CharSelectInfo(
-                "克图格亚", // 人物名字
-                "由炎之精侍奉的被称为火焰之主的旧日支配者。 NL 永燃之焰可焚尽一切，境随心转亦御烛蚀死亡。", // 人物介绍
+                name, // 人物名字
+                description, // 人物介绍
                 66, // 当前血量
                 66, // 最大血量
                 6, // 初始充能球栏位
@@ -151,13 +165,27 @@ public class Cthugha extends CustomPlayer {
     // 游戏中左上角显示在你的名字之后的人物名称
     @Override
     public String getLocalizedCharacterName() {
-        return "克图格亚";
+        if (Settings.language == Settings.GameLanguage.ZHS ||
+                Settings.language == Settings.GameLanguage.ZHT ||
+                Settings.language == Settings.GameLanguage.JPN) {
+            return "克图格亚";
+        }
+        else {
+            return "Cthugha";
+        }
     }
 
     // 人物名字（出现在游戏左上角）
     @Override
     public String getTitle(PlayerClass arg0) {
-        return "克图格亚";
+        if (Settings.language == Settings.GameLanguage.ZHS ||
+                Settings.language == Settings.GameLanguage.ZHT ||
+                Settings.language == Settings.GameLanguage.JPN) {
+            return "克图格亚";
+        }
+        else {
+            return "Cthugha";
+        }
     }
 
     // 打心脏的颜色，不是很明显
@@ -184,34 +212,31 @@ public class Cthugha extends CustomPlayer {
     // 翻牌事件出现的你的职业牌（一般设为打击）
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new Burn();
+        return new ShiftingStar();
     }
 
     // 初始卡组的ID，可直接写或引用变量
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> arr = new ArrayList<String>();
-        arr.add("Burn");
-        arr.add("Burn");
-        arr.add("Burn");
-        arr.add("Burn");
-        arr.add("Burn");
-        arr.add("Burn");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:Defend");
-        arr.add("Cthugha:HuoYanHuaSheng");
 
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
-        // a.add("Perfected Strike");
+        arr.add("Burn");
+        arr.add("Burn");
+        arr.add("Burn");
+        arr.add("Burn");
+        arr.add("Burn");
+        arr.add("Burn");
+
+        arr.add("Cthugha:Defend");
+        arr.add("Cthugha:Defend");
+        arr.add("Cthugha:Defend");
+        arr.add("Cthugha:Defend");
+        arr.add("Cthugha:Defend");
+        arr.add("Cthugha:Defend");
+
+        arr.add(StarSpear.ID);
+        arr.add(ShiftingStar.ID);
+
         return arr;
     }
 
@@ -236,7 +261,7 @@ public class Cthugha extends CustomPlayer {
 
     public void onVictory() {
         super.onVictory();
-        HeiYanPower.factor = HeiYanPower.baseFactor;
+        HeiYanPower.percentage = HeiYanPower.BASE_PERCENTAGE;
     }
 
     public void useCard(AbstractCard c, AbstractMonster monster, int energyOnUse) {

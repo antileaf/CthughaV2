@@ -1,26 +1,22 @@
 package com.cthugha.cards;
 
-import basemod.BaseMod;
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
-import com.evacipated.cardcrawl.mod.stslib.StSLib;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HuoYanHuXi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(HuoYanHuXi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(HuoYanHuXi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -28,7 +24,7 @@ public class HuoYanHuXi extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/119.png";
     private static final int COST = -2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.NONE;
 
@@ -47,7 +43,7 @@ public class HuoYanHuXi extends AbstractCthughaCard {
 
     private void changeBurnAttackTypeCardsInGroup(CardGroup cardGroup) {
         for (AbstractCard c : cardGroup.group) {
-            if (ModHelper.IsBurn(c)) {
+            if (ModHelper.isBurn(c)) {
                 if (cardGroup.type == CardGroup.CardGroupType.HAND)
                     c.superFlash();
 
@@ -59,15 +55,21 @@ public class HuoYanHuXi extends AbstractCthughaCard {
     @Override
     public void onShunRan(int level) {
         if (level >= this.shunRan) {
-            for (CardGroup group : new CardGroup[] {
-                    AbstractDungeon.player.hand,
-                    AbstractDungeon.player.drawPile,
-                    AbstractDungeon.player.discardPile,
-                    AbstractDungeon.player.exhaustPile })
-                changeBurnAttackTypeCardsInGroup(group);
+            AbstractCard burn = new Burn();
+            burn.upgrade();
+            this.addToBot(new MakeTempCardInHandAction(burn));
 
-            CardCrawlGame.music.fadeOutTempBGM();
-            CardCrawlGame.music.playTempBgmInstantly("Cthugha-USAO.mp3");
+            this.addToBot(new AnonymousAction(() -> {
+                for (CardGroup group : new CardGroup[] {
+                        AbstractDungeon.player.hand,
+                        AbstractDungeon.player.drawPile,
+                        AbstractDungeon.player.discardPile,
+                        AbstractDungeon.player.exhaustPile })
+                    changeBurnAttackTypeCardsInGroup(group);
+
+                CardCrawlGame.music.fadeOutTempBGM();
+                CardCrawlGame.music.playTempBgmInstantly("Cthugha-USAO.mp3");
+            }));
         }
     }
 

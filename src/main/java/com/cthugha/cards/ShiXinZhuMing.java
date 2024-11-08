@@ -3,6 +3,7 @@ package com.cthugha.cards;
 import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
+import com.cthugha.power.HeiYanPower;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,19 +11,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class ShiXinZhuMing extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(ShiXinZhuMing.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(ShiXinZhuMing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    private static final String IMG_PATH = "cthughaResources/img/card/115.png";
-    private static final int COST = 1;
+    private static final String IMG_PATH = "cthughaResources/img/card/Noble Presence.png";
+    private static final int COST = 2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
@@ -36,6 +35,13 @@ public class ShiXinZhuMing extends AbstractCthughaCard {
     }
 
     @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new ApplyPowerAction(m, p, new HeiYanPower(m, this.magicNumber)));
+        this.addToBot(new ApplyPowerAction(m, p, new ShengMingFanHuanPower(m,
+                this.secondaryMagicNumber), this.secondaryMagicNumber));
+    }
+
+    @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
@@ -43,12 +49,5 @@ public class ShiXinZhuMing extends AbstractCthughaCard {
             this.upgradeSecondaryMagicNumber(1);
             this.initializeDescription();
         }
-    }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new DecreaseMonsterMaxHealthAction(m, this.magicNumber));
-        this.addToBot(new ApplyPowerAction(m, p, new ShengMingFanHuanPower(m,
-                this.secondaryMagicNumber), this.secondaryMagicNumber));
     }
 }

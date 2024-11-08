@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ZhuZhaoShuJiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(ZhuZhaoShuJiPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(ZhuZhaoShuJiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public ZhuZhaoShuJiPower(AbstractCreature owner, int amount) {
@@ -30,9 +30,8 @@ public class ZhuZhaoShuJiPower extends AbstractPower {
     }
 
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
-            this.addToBot(new DecreaseMonsterMaxHealthAction(monster, this.amount));
-        }
+        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters)
+            if (!monster.isDeadOrEscaped())
+                this.addToBot(new DecreaseMonsterMaxHealthAction(monster, this.amount));
     }
-
 }

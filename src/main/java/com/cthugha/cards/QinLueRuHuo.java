@@ -15,7 +15,7 @@ import basemod.abstracts.CustomCard;
 
 public class QinLueRuHuo extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(QinLueRuHuo.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(QinLueRuHuo.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -23,7 +23,7 @@ public class QinLueRuHuo extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/140.png";
     private static final int COST = 1;
     private static final CardType TYPE = CardType.ATTACK;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
@@ -51,17 +51,17 @@ public class QinLueRuHuo extends CustomCard {
 
         int count = 0;
         for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }
         for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }
         for (AbstractCard card : AbstractDungeon.player.discardPile.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }
@@ -77,17 +77,17 @@ public class QinLueRuHuo extends CustomCard {
 
         int count = 0;
         for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }
         for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }
         for (AbstractCard card : AbstractDungeon.player.discardPile.group) {
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 count++;
             }
         }

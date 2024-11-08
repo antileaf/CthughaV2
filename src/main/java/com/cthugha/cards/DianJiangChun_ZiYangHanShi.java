@@ -18,7 +18,7 @@ import basemod.abstracts.CustomCard;
 
 public class DianJiangChun_ZiYangHanShi extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(DianJiangChun_ZiYangHanShi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(DianJiangChun_ZiYangHanShi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,7 +26,7 @@ public class DianJiangChun_ZiYangHanShi extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/116.png";
     private static final int COST = -1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 
@@ -80,7 +80,7 @@ public class DianJiangChun_ZiYangHanShi extends CustomCard {
                                 int burnCount = 0;
                                 for (AbstractCard card : abstractCards) {
                                     this.addToBot(new DiscardSpecificCardAction(card));
-                                    if (ModHelper.IsBurnCard(card)) {
+                                    if (ModHelper.isBurnCard(card)) {
                                         burnCount++;
                                     }
                                 }

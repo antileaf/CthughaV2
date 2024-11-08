@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class HeiYanDaoRenPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(HeiYanDaoRenPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(HeiYanDaoRenPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public HeiYanDaoRenPower(AbstractCreature owner, int amount) {

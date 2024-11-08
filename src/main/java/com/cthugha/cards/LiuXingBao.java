@@ -1,31 +1,24 @@
 package com.cthugha.cards;
 
-import com.cthugha.actions.YanBaoAction;
 import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.BaoYanHelper;
 import com.cthugha.helpers.EnergyHelper;
 import com.cthugha.helpers.ModHelper;
-import com.cthugha.helpers.StaticHelper;
 import com.cthugha.orbs.YanZhiJing;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-
-import basemod.abstracts.CustomCard;
 
 public class LiuXingBao extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(LiuXingBao.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(LiuXingBao.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -34,7 +27,7 @@ public class LiuXingBao extends AbstractCthughaCard {
 
     private static final int COST = -1;
     private static final CardType TYPE = CardType.ATTACK;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
@@ -64,28 +57,26 @@ public class LiuXingBao extends AbstractCthughaCard {
 
     @Override
     public void applyPowers() {
+        super.applyPowers();
+
         if (BaoYanHelper.canTriggerBaoYanGlowCheck(this)) {
-            int originalBaseDamage = this.baseDamage;
-            this.baseDamage *= 3;
-            super.applyPowers();
-            this.baseDamage = originalBaseDamage;
+            this.damage *= 3;
             this.isDamageModified = this.damage != this.baseDamage;
         }
-        else
-            super.applyPowers();
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
+        super.calculateCardDamage(mo);
+
         if (BaoYanHelper.canTriggerBaoYanGlowCheck(this)) {
-            int originalBaseDamage = this.baseDamage;
-            this.baseDamage *= 3;
-            super.calculateCardDamage(mo);
-            this.baseDamage = originalBaseDamage;
-            this.isDamageModified = this.damage != this.baseDamage;
+            this.damage *= 3;
+
+            for (int i = 0; i < this.multiDamage.length; i++) {
+                this.multiDamage[i] *= 3;
+                this.isDamageModified = this.multiDamage[i] != this.baseDamage;
+            }
         }
-        else
-            super.calculateCardDamage(mo);
     }
 
     @Override

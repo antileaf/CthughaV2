@@ -13,7 +13,7 @@ import basemod.abstracts.CustomCard;
 
 public class TianYouErRi extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(TianYouErRi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(TianYouErRi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +21,7 @@ public class TianYouErRi extends CustomCard {
 
     private static final int COST = 1;
     private static final CardType TYPE = CardType.POWER;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 

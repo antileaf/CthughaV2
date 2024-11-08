@@ -4,7 +4,6 @@ import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.BaoYanHelper;
 import com.cthugha.helpers.ModHelper;
-import com.cthugha.helpers.StaticHelper;
 import com.megacrit.cardcrawl.actions.defect.DecreaseMaxOrbAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,11 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class JuYan extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(JuYan.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(JuYan.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -25,7 +22,7 @@ public class JuYan extends AbstractCthughaCard {
 
     private static final int COST = 1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = AbstractCard.CardTarget.NONE;
 

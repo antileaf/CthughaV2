@@ -15,10 +15,11 @@ import com.megacrit.cardcrawl.powers.BufferPower;
 import basemod.abstracts.CustomCard;
 import basemod.AutoAdd;
 
+@Deprecated
 @AutoAdd.Ignore
-public class CanYangWuYing extends CustomCard {
+public class CanYangWuYing extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(CanYangWuYing.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(CanYangWuYing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,7 +27,7 @@ public class CanYangWuYing extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/083.png";
     private static final int COST = 3;
     private static final CardType TYPE = CardType.ATTACK;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 

@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LuXinRongJiePower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(LuXinRongJiePower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(LuXinRongJiePower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public LuXinRongJiePower(AbstractCreature owner, int amount) {
@@ -49,7 +49,7 @@ public class LuXinRongJiePower extends AbstractPower {
 
     public void onCardDraw(AbstractCard card) {
         if (this.amount > 0) {
-            if (ModHelper.IsBurn(card)) {
+            if (ModHelper.isBurn(card)) {
                 this.flash();
                 this.addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
                 this.addToBot(new DrawCardAction(1));

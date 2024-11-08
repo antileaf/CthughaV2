@@ -1,9 +1,7 @@
 package com.cthugha.cards;
 
-import com.cthugha.actions.YanBaoAction;
 import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.orbs.YanZhiJing;
 import com.cthugha.power.FenJiPower;
@@ -15,11 +13,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class FenJi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(FenJi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(FenJi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +23,7 @@ public class FenJi extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/134.png";
     private static final int COST = 0;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;
     private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = AbstractCard.CardTarget.NONE;
 

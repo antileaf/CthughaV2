@@ -4,16 +4,16 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.AllEnemyApplyPowerActi
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.power.HeiYanPower;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class HeiYanYiShi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(HeiYanYiShi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(HeiYanYiShi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +21,7 @@ public class HeiYanYiShi extends AbstractCthughaCard {
 
     private static final int COST = 2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
@@ -35,17 +35,19 @@ public class HeiYanYiShi extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new AllEnemyApplyPowerAction(AbstractDungeon.player, this.magicNumber,
-                monster -> new HeiYanPower(monster, this.magicNumber)
-        ));
+        for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters)
+            if (!mo.isDeadOrEscaped())
+                this.addToBot(new ApplyPowerAction(mo, p,
+                        new HeiYanPower(mo, this.magicNumber)));
     }
 
     @Override
     public void onShunRan(int level) {
         if (level >= this.shunRan) {
-            this.addToBot(new AllEnemyApplyPowerAction(AbstractDungeon.player, this.block,
-                    monster -> new HeiYanPower(monster, this.secondaryMagicNumber)
-            ));
+            for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
+                if (!m.isDeadOrEscaped())
+                    this.addToBot(new ApplyPowerAction(m, AbstractDungeon.player,
+                            new HeiYanPower(m, this.secondaryMagicNumber)));
         }
     }
 

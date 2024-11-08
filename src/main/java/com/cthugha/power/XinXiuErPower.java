@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class XinXiuErPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(XinXiuErPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(XinXiuErPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public XinXiuErPower(AbstractCreature owner, int amount) {

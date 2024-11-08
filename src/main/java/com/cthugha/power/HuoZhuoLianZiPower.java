@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.EntanglePower;
 
 public class HuoZhuoLianZiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(HuoZhuoLianZiPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(HuoZhuoLianZiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public HuoZhuoLianZiPower(AbstractCreature owner, int amount) {

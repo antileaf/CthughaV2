@@ -11,9 +11,9 @@ import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 
 public class SkinSelectPatch {
   public static boolean isKaltsitSelected() {
-    return (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.MY_PLAYER_CLASS
-        && ((Boolean) ReflectionHacks.getPrivate(CardCrawlGame.mainMenuScreen.charSelectScreen,
-            CharacterSelectScreen.class, "anySelected")).booleanValue());
+    return (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS
+        && (Boolean) ReflectionHacks.getPrivate(CardCrawlGame.mainMenuScreen.charSelectScreen,
+			CharacterSelectScreen.class, "anySelected"));
   }
 
   @SpirePatch(clz = CharacterSelectScreen.class, method = "update")

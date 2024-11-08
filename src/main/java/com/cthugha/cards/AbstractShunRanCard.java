@@ -58,7 +58,7 @@ public abstract class AbstractShunRanCard extends CustomCard implements RightCli
         boolean HandsHaveBurnCard = false; // 手牌是否有灼伤牌
         for (int i = 0; i < AbstractDungeon.player.hand.group.size(); i++) {
             AbstractCard card = AbstractDungeon.player.hand.group.get(i);
-            if (ModHelper.IsBurnCard(card)) {
+            if (ModHelper.isBurnCard(card)) {
                 HandsHaveBurnCard = true;
                 break;
             }
@@ -72,7 +72,7 @@ public abstract class AbstractShunRanCard extends CustomCard implements RightCli
         // 选择瞬燃
         this.addToBot(
                 new SelectCardsInHandAction(10, uiStrings.TEXT[0], true, true,
-                        card -> ModHelper.IsBurnCard(card),
+                        card -> ModHelper.isBurnCard(card),
                         abstractCards -> {
 
                             int count = abstractCards.size();

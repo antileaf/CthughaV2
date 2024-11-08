@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <SlayTheSpire.version>12-18-2022</SlayTheSpire.version>
         <ModTheSpire.version>3.23.2</ModTheSpire.version>
 <!--        <Steam.path>C:/Program Files (x86)/Steam/steamapps</Steam.path>-->
@@ -19,22 +19,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.megac434rit.cardcrawl</groupId>
+            <groupId>com.megacrit.cardcrawl</groupId>
             <artifactId>slaythespire</artifactId>
             <version>${SlayTheSpire.version}</version>
             <scope>system</scope>
             <systemPath>${Steam.path}/common/SlayTheSpire/desktop-1.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>basemod111</groupId>
-            <artifactId>basemod222</artifactId>
+            <groupId>basemod</groupId>
+            <artifactId>basemod</artifactId>
             <version>5.48.0</version>
             <scope>system</scope>
             <systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.evacip3434ated.cardcrawl</groupId>
-            <artifactId>ModTh343eSpire</artifactId>
+            <groupId>com.evacipated.cardcrawl</groupId>
+            <artifactId>ModTheSpire</artifactId>
             <version>${ModTheSpire.version}</version>
             <scope>system</scope>
             <systemPath>${Steam.path}/workshop/content/646570/1605060445/ModTheSpire.jar</systemPath>

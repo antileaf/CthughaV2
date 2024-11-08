@@ -7,7 +7,7 @@ import basemod.abstracts.CustomRelic;
 
 public class LieSiTaShuJian extends CustomRelic {
     // 遗物ID
-    public static final String ID = ModHelper.MakePath(LieSiTaShuJian.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(LieSiTaShuJian.class.getSimpleName());
     // 图片路径
     private static final String IMG_PATH = "cthughaResources/img/relics/聂斯塔书简.png";
     // 遗物类型

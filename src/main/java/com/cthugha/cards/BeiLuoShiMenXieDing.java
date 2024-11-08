@@ -9,11 +9,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class BeiLuoShiMenXieDing extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(BeiLuoShiMenXieDing.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(BeiLuoShiMenXieDing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +19,7 @@ public class BeiLuoShiMenXieDing extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/北落师门协定.png";
     private static final int COST = 2;
     private static final CardType TYPE = CardType.POWER;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.SELF;
 

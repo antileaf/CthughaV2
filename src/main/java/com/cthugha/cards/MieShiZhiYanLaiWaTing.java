@@ -4,7 +4,6 @@ import basemod.BaseMod;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
@@ -20,14 +19,14 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class MieShiZhiYanLaiWaTing extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(MieShiZhiYanLaiWaTing.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(MieShiZhiYanLaiWaTing.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String IMG_PATH = "cthughaResources/img/card/107.png";
     private static final int COST = 2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.NONE;
 
@@ -38,6 +37,7 @@ public class MieShiZhiYanLaiWaTing extends AbstractCthughaCard {
         this.damage = this.baseDamage = 16;
         this.secondaryShunRan = this.baseSecondaryShunRan = 9;
         this.secondaryDamage = this.baseSecondaryDamage = 132;
+        this.isMultiSecondaryDamage = true;
     }
 
     @Override
@@ -67,8 +67,9 @@ public class MieShiZhiYanLaiWaTing extends AbstractCthughaCard {
         }
 
         if (level >= this.secondaryShunRan) {
-            this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.secondaryDamage, DamageType.NORMAL,
-                    AttackEffect.BLUNT_HEAVY));
+            this.calculateCardDamage(null);
+            this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiSecondaryDamage,
+                    DamageType.NORMAL, AttackEffect.BLUNT_HEAVY));
         }
     }
 }

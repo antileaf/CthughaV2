@@ -9,18 +9,16 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class ZhaoZhuoShangTianQue extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(ZhaoZhuoShangTianQue.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(ZhaoZhuoShangTianQue.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String IMG_PATH = "cthughaResources/img/card/炤灼伤天阙.png";
     private static final int COST = 3;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 
@@ -45,5 +43,5 @@ public class ZhaoZhuoShangTianQue extends AbstractCthughaCard {
         }
     }
 
-    // TODO：这张牌的逻辑是直接写在 AbstractCthughaCard 里的。可能需要重构？
+    // TODO：这张牌的逻辑是直接写在瞬燃的逻辑里的。可能需要重构？
 }

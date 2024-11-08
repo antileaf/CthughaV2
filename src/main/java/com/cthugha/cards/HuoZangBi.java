@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HuoZangBi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(HuoZangBi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(HuoZangBi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +21,7 @@ public class HuoZangBi extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/095.png";
     private static final int COST = 1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 

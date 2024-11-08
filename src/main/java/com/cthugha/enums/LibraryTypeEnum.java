@@ -4,8 +4,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 
 public class LibraryTypeEnum {
-
 	@SpireEnum
-	public static CardLibrary.LibraryType MOD_NAME_COLOR;
+	public static CardLibrary.LibraryType CTHUGHA_CARD_COLOR;
 	
 }

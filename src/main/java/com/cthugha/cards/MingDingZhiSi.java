@@ -11,11 +11,9 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import basemod.abstracts.CustomCard;
-
 public class MingDingZhiSi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(MingDingZhiSi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(MingDingZhiSi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -23,7 +21,7 @@ public class MingDingZhiSi extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/130.png";
     private static final int COST = 1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.NONE;
 
@@ -49,11 +47,11 @@ public class MingDingZhiSi extends AbstractCthughaCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new DrawCardAction(1));
 
-        HeiYanPower.factor *= this.magicNumber;
+        HeiYanPower.percentage *= this.magicNumber;
 
         for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
             for (AbstractPower power : monster.powers) {
-                if (power.ID == HeiYanPower.POWER_ID) {
+                if (power instanceof HeiYanPower) {
                     power.updateDescription();
                 }
             }

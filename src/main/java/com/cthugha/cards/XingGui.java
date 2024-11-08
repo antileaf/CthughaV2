@@ -16,67 +16,55 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class XingGui extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(XingGui.class.getSimpleName());
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    private static final String NAME = cardStrings.NAME;
-    private static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    private static final String IMG_PATH = "cthughaResources/img/card/074.png";
-    private static final int COST = 1;
-    private static final CardType TYPE = CardType.ATTACK;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
-    private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+	public static final String ID = ModHelper.makeID(XingGui.class.getSimpleName());
+	private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+	private static final String NAME = cardStrings.NAME;
+	private static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+	private static final String IMG_PATH = "cthughaResources/img/card/074.png";
+	private static final int COST = 1;
+	private static final CardType TYPE = CardType.ATTACK;
+	private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
+	private static final CardRarity RARITY = CardRarity.COMMON;
+	private static final CardTarget TARGET = CardTarget.ENEMY;
 
-    public XingGui() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+	public XingGui() {
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
-        this.damage = this.baseDamage = 10;
-        this.secondaryDamage = this.baseSecondaryDamage = 40;
+		this.damage = this.baseDamage = 10;
+		this.secondaryDamage = this.baseSecondaryDamage = 40;
 
-        this.canBaoYan = true;
+		this.canBaoYan = true;
 //        this.tags.add(CustomTags.BaoYan);
-    }
+	}
 
-    @Override
-    public int getExtraYanZhiJing() {
-        return this.upgraded ? 1 : 0;
-    }
+	@Override
+	public int getExtraYanZhiJing() {
+		return 1;
+	}
 
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        if (this.upgraded)
-            this.addToBot(new ChannelAction(new YanZhiJing()));
+	@Override
+	public void use(AbstractPlayer p, AbstractMonster m) {
+		this.addToBot(new ChannelAction(new YanZhiJing()));
 
-        this.addToBot(new BaoYanAction(this, new DamageAction(m,
-                new DamageInfo(p, this.secondaryDamage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY)));
+		this.addToBot(new BaoYanAction(this, new DamageAction(m,
+				new DamageInfo(p, this.secondaryDamage, this.damageTypeForTurn),
+				AbstractGameAction.AttackEffect.BLUNT_HEAVY)));
 
-        this.addToBot(new ForEachYanZhiJingAction(count -> {
-            for (int i = 0; i < count; i++)
-                this.addToTop(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                        AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        }, true));
+		this.addToBot(new ForEachYanZhiJingAction(count -> {
+			for (int i = 0; i < count; i++)
+				this.addToTop(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+						AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+		}, true));
+	}
 
-        // int size = AbstractDungeon.player.orbs.size();
-        // for (int i = 0; i < size; i++) {
-        // AbstractOrb orb = AbstractDungeon.player.orbs.get(i);
-        // if (orb.ID == YanZhiJing.ORB_ID) {
-
-        // this.addToBot(new RemoveNextOrbAction());
-        // this.addToBot(new DamageAction(m, new DamageInfo(p, 10,
-        // this.damageTypeForTurn),
-        // AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        // }
-        // }
-    }
-
-    @Override
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-        }
-    }
+	@Override
+	public void upgrade() {
+		if (!this.upgraded) {
+			this.upgradeName();
+			this.upgradeDamage(3);
+			this.upgradeSecondaryDamage(12);
+			this.initializeDescription();
+		}
+	}
 }

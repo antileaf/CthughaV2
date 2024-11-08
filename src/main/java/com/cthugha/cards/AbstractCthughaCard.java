@@ -3,9 +3,9 @@ package com.cthugha.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.common.BetterSelectCardsInHandAction;
+import com.cthugha.actions.common.FlareAction;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.cthugha.cards.interfaces.RightClickableCard;
 import com.cthugha.helpers.LanguageHelper;
@@ -44,6 +44,8 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 
 	public int secondaryDamage = -1;
 	public int baseSecondaryDamage = -1;
+	public int[] multiSecondaryDamage = null;
+	public boolean isMultiSecondaryDamage = false;
 	public boolean upgradedSecondaryDamage = false;
 	public boolean isSecondaryDamageModified = false;
 
@@ -96,6 +98,10 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 //		return super.getBackgroundSmallTexture();
 //	}
 
+	public boolean shining() {
+		return this.shunRan != -1 && !this.triggeredShunRanThisTurn;
+	}
+
 	@Override
 	public void applyPowers() {
 		super.applyPowers();
@@ -103,18 +109,22 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		if (this.secondaryDamage != -1) {
 			int originalDamage = this.damage;
 			int originalBaseDamage = this.baseDamage;
-			boolean originalDamageModified = this.isDamageModified;
+			boolean originalIsMultiDamage = this.isMultiDamage;
 			int[] originalMultiDamage = (this.multiDamage != null ? this.multiDamage.clone() : null);
+			boolean originalDamageModified = this.isDamageModified;
 
 			this.baseDamage = this.baseSecondaryDamage;
+			this.isMultiDamage = this.isMultiSecondaryDamage;
 			super.applyPowers();
-			this.isSecondaryDamageModified = this.secondaryDamage != this.baseSecondaryDamage;
 			this.secondaryDamage = this.damage;
+			this.multiSecondaryDamage = this.multiDamage;
+			this.isSecondaryDamageModified = this.isDamageModified;
 
 			this.damage = originalDamage;
 			this.baseDamage = originalBaseDamage;
-			this.isDamageModified = originalDamageModified;
+			this.isMultiDamage = originalIsMultiDamage;
 			this.multiDamage = originalMultiDamage;
+			this.isDamageModified = originalDamageModified;
 		}
 	}
 
@@ -129,8 +139,8 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 
 			this.baseBlock = this.baseSecondaryBlock;
 			super.applyPowersToBlock();
-			this.isSecondaryBlockModified = this.secondaryBlock != this.baseSecondaryBlock;
 			this.secondaryBlock = this.block;
+			this.isSecondaryBlockModified = this.isBlockModified;
 
 			this.block = originalBlock;
 			this.baseBlock = originalBaseBlock;
@@ -145,18 +155,22 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		if (this.baseSecondaryDamage != -1) {
 			int originalDamage = this.damage;
 			int originalBaseDamage = this.baseDamage;
-			boolean originalDamageModified = this.isDamageModified;
+			boolean originalIsMultiDamage = this.isMultiDamage;
 			int[] originalMultiDamage = (this.multiDamage != null ? this.multiDamage.clone() : null);
+			boolean originalDamageModified = this.isDamageModified;
 
 			this.baseDamage = this.baseSecondaryDamage;
+			this.isMultiDamage = this.isMultiSecondaryDamage;
 			super.calculateCardDamage(mo);
-			this.isSecondaryDamageModified = this.secondaryDamage != this.baseSecondaryDamage;
 			this.secondaryDamage = this.damage;
+			this.multiSecondaryDamage = this.multiDamage;
+			this.isSecondaryDamageModified = this.isDamageModified;
 
 			this.damage = originalDamage;
 			this.baseDamage = originalBaseDamage;
-			this.isDamageModified = originalDamageModified;
+			this.isMultiDamage = originalIsMultiDamage;
 			this.multiDamage = originalMultiDamage;
+			this.isDamageModified = originalDamageModified;
 		}
 	}
 
@@ -276,6 +290,9 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		card.secondaryDamage = this.secondaryDamage;
 		card.baseSecondaryDamage = this.baseSecondaryDamage;
 
+		card.secondaryBlock = this.secondaryBlock;
+		card.baseSecondaryBlock = this.baseSecondaryBlock;
+
 		return card;
 	}
 
@@ -287,55 +304,11 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		if (this.triggeredShunRanThisTurn) {
 			AbstractDungeon.effectList.add(new ThoughtBubble(
 					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY,
-					3.0F, "这张牌在本回合内已经使用过瞬燃了。", true));
+					3.0F, LanguageHelper.shunRanUIStrings.TEXT[1], true));
 			return;
 		}
 
-		if (AbstractDungeon.player.hand.group.stream().noneMatch(ModHelper::IsBurnCard)) {
-			this.calculateCardDamage(null);
-			this.onShunRan(0);
-			return;
-		}
-
-		this.addToBot(new BetterSelectCardsInHandAction(
-				BaseMod.MAX_HAND_SIZE,
-				LanguageHelper.getShunRanString(this.availableShunRanLevels()),
-				true,
-				true,
-				ModHelper::IsBurnCard,
-				chosen -> {
-					int level = chosen.size();
-
-					int fz = chosen.stream()
-							.filter(c -> c instanceof FuZhuoShangHuan)
-							.mapToInt(c -> c.magicNumber)
-							.max()
-							.orElse(-1);
-
-					if (fz != -1)
-						level = fz;
-
-					for (AbstractCard c : chosen)
-						if (c instanceof ZhaoZhuoShangTianQue) {
-							c.costForTurn = 0;
-							AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(c, false));
-							this.addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
-							this.triggeredShunRanThisTurn = true;
-							this.updateBgImg();
-							return;
-						}
-
-					if (AbstractDungeon.player.hasRelic(LieSiTaShuJian.ID))
-						level = Math.min(level, 7);
-
-					for (AbstractCard c : chosen)
-						this.addToBot(new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand));
-
-					Cthugha_Core.logger.info("ShunRan level: {}", level);
-					this.onShunRan(level);
-				},
-				false
-		));
+		this.addToBot(new FlareAction(this));
 
 		this.triggeredShunRanThisTurn = true;
 		this.updateBgImg();

@@ -12,7 +12,7 @@ import basemod.abstracts.CustomRelic;
 
 public class HuoZhong extends CustomRelic {
   // 遗物ID
-  public static final String ID = ModHelper.MakePath(HuoZhong.class.getSimpleName());
+  public static final String ID = ModHelper.makeID(HuoZhong.class.getSimpleName());
   // 图片路径
   private static final String IMG_PATH = "cthughaResources/img/relics/火种.png";
   // 遗物类型

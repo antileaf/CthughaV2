@@ -11,7 +11,7 @@ import basemod.abstracts.CustomRelic;
 
 public class LongXin extends CustomRelic {
     // 遗物ID
-    public static final String ID = ModHelper.MakePath(LongXin.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(LongXin.class.getSimpleName());
     // 图片路径
     private static final String IMG_PATH = "cthughaResources/img/relics/龙心.png";
     // 遗物类型

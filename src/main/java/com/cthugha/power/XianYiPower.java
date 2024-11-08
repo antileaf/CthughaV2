@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 
 public class XianYiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(XianYiPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(XianYiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public XianYiPower(AbstractCreature owner, int amount) {

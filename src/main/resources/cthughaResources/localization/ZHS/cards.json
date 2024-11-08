@@ -1,14 +1,17 @@
 {
     "Cthugha:Burn": {
         "NAME": "（灼伤）",
-        "DESCRIPTION": "随机对敌人造成 !M! 点伤害。",
-        "UPGRADE_DESCRIPTION": "随机使敌人失去 !M! 点生命和最大生命。"
+        "DESCRIPTION": "造成 !D! 点伤害。",
+        "EXTENDED_DESCRIPTION": [
+            "不能被打出 。 NL 在你的回合结束时，随机对敌人造成 !M! 点伤害。",
+            "不能被打出 。 NL 在你的回合结束时，随机使敌人失去 !M! 点生命和最大生命。"
+        ]
     },
 
     "Cthugha:HuoYanHuaSheng": {
         "NAME": "火焰化生",
-        "DESCRIPTION": "cthugha:生成 1个 cthugha:炎之精 。 NL 抽1张牌。 NL cthugha:爆炎 ：抽1张牌。",
-        "UPGRADE_DESCRIPTION": "cthugha:生成 1个 cthugha:炎之精 。 NL 抽1张牌。 NL cthugha:爆炎 ：抽1张牌。"
+        "DESCRIPTION": "cthugha:生成 1个 cthugha:炎之精 。 NL 抽 !M! 张牌。 NL cthugha:爆炎 ：抽 !cthughaM2! 张牌。",
+        "UPGRADE_DESCRIPTION": "cthugha:生成 1个 cthugha:炎之精 。 NL 抽 !M! 张牌。 NL cthugha:爆炎 ：抽 !cthughaM2! 张牌。"
     },
     "Cthugha:ZongHuo": {
         "NAME": "纵火",
@@ -17,8 +20,7 @@
     },
     "Cthugha:RiShi": {
         "NAME": "日蚀",
-        "DESCRIPTION": "造成 !D! 点伤害。本回合结束时，手牌中每张 灼伤 使你获得 !M! 点 格挡 。",
-        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。回合结束时手牌中每有一张 灼伤 ，获得 !M! 点 格挡 。"
+        "DESCRIPTION": "造成 !D! 点伤害。 NL 本回合剩余时间内每当 灼伤 造成伤害时，获得 !M! 点 格挡 。"
     },
     "Cthugha:TengYanFeiMang": {
         "NAME": "腾焰飞芒",
@@ -27,8 +29,7 @@
     },
     "Cthugha:HuoYanDouPeng": {
         "NAME": "火焰斗篷",
-        "DESCRIPTION": "获得 !M! 张 灼伤 。 NL 获得 !B! 点 格挡 。",
-        "UPGRADE_DESCRIPTION": "获得 !M! 张 灼伤 。 NL 获得 !B! 点 格挡 。"
+        "DESCRIPTION": "获得 !M! 张 灼伤 。 NL 获得 !B! 点 格挡 。"
     },
     "Cthugha:FengHuo": {
         "NAME": "烽火",
@@ -62,13 +63,12 @@
     },
     "Cthugha:XingGui": {
         "NAME": "星轨",
-        "DESCRIPTION": " cthugha:爆炎 ：造成 !cthughaD2! 点伤害。 NL ----------------- NL 移除所有 cthugha:炎之精 ，每移除一个造成 !D! 点伤害。",
-        "UPGRADE_DESCRIPTION": "生成一个 cthugha:炎之精 。 NL cthugha:爆炎 ：造成 !cthughaD2! 点伤害。 NL ----------------- NL 移除所有 cthugha:炎之精 ，每移除一个造成 !D! 点伤害。"
+        "DESCRIPTION": "生成一个 cthugha:炎之精 。 NL cthugha:爆炎 ：造成 !cthughaD2! 点伤害。 NL ----------------- NL 移除所有 cthugha:炎之精 ，每移除一个造成 !D! 点伤害。"
     },
-    "Cthugha:XingLuoShu": {
-        "NAME": "星落术",
-        "DESCRIPTION": "造成 !D! 点伤害。 NL cthugha:生成 2个 cthugha:炎之精 。 NL cthugha:爆炎 ：伤害段数+2。",
-        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL cthugha:生成 2个 cthugha:炎之精 。 NL cthugha:爆炎 ：伤害段数+2。"
+    "Cthugha:StarSpear": {
+        "NAME": "星之枪",
+        "DESCRIPTION": "拾起钥匙时 升级 。 NL 造成 !D! 点伤害。 NL cthugha:生成 !M! 个 cthugha:炎之精 。 NL cthugha:爆炎 ：伤害段数+ !cthughaM2! 。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL cthugha:生成 !M! 个 cthugha:炎之精 。 NL cthugha:爆炎 ：伤害段数+ !cthughaM2! 。"
     },
     "Cthugha:DuanZaoHuoYan": {
         "NAME": "锻造火焰",
@@ -109,17 +109,17 @@
         "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 斩杀 时，恢复 !M! 点生命。"
     },
     "Cthugha:WuYouBuZhu": {
-        "NAME": "无幽不烛",
+        "NAME": "烛幽",
         "DESCRIPTION": "每当你的攻击或 cthugha:炎之精 造成未被 格挡 的伤害时，使敌人失去等量的最大生命。",
         "UPGRADE_DESCRIPTION": "cthugha:生成 !M! 个 cthugha:炎之精 。 NL 每当你的攻击或 cthugha:炎之精 造成未被 格挡 的伤害时，使敌人失去等量的最大生命。"
     },
     "Cthugha:ZhuoXinZhiHun": {
         "NAME": "灼心炙魂",
-        "DESCRIPTION": "造成 !D! 点伤害 !M! 次。每造成1点未被 格挡 的伤害，敌人失去2点最大生命。",
-        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。每造成1点未被 格挡 的伤害，敌人失去2点最大生命。"
+        "DESCRIPTION": "造成 !D! 点伤害 !M! 次。每造成1点未被 格挡 的伤害，敌人失去 !cthughaM2! 点最大生命。",
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。每造成1点未被 格挡 的伤害，敌人失去 !cthughaM2! 点最大生命。"
     },
     "Cthugha:ChiRiZhuYun": {
-        "NAME": "敕日烛云",
+        "NAME": "敕日",
         "DESCRIPTION": "造成 !D! 点伤害3+手牌中 cthugha:灼伤牌 数次。造成未被 格挡 的伤害时，敌人失去最大生命至当前生命。",
         "UPGRADE_DESCRIPTION": "造成 !D! 点伤害3+手牌中 cthugha:灼伤牌 数次。造成未被 格挡 的伤害时，敌人失去最大生命至当前生命。"
     },
@@ -129,13 +129,13 @@
         "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 如果未被 格挡 的伤害大于等于敌人最大生命的60%（boss为30%）或杀死了敌人，获得 !M! 层 cthugha:缓冲 。 NL 消耗 。"
     },
     "Cthugha:ZhuZhaoShuJi": {
-        "NAME": "烛照数计",
+        "NAME": "昭世",
         "DESCRIPTION": " 虚无 。 NL 你每打出一张牌，就使所有敌人失去 !M! 点最大生命。",
         "UPGRADE_DESCRIPTION": "你每打出一张牌，就使所有敌人失去 !M! 点最大生命。"
     },
     "Cthugha:TunYunFuHai": {
         "NAME": "吞云覆海",
-        "DESCRIPTION": "造成 !D! 点伤害。获得 !B! 点 格挡 。 NL 手牌中每张 灼伤 使此牌耗能减少1 [E] 并增加 !M! 点伤害。"
+        "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 !B! 点 格挡 。 NL 手牌中每张 灼伤 使此牌耗能减少1 [E] 并增加 !M! 点伤害。"
     },
     "Cthugha:PoMieZhiZhi": {
         "NAME": "破灭之枝",
@@ -144,8 +144,8 @@
     },
     "Cthugha:XuanCaoXiaoYan": {
         "NAME": "喧嘈嚣焰",
-        "DESCRIPTION": "在你的回合结束时， 保留 手牌中最多 !M! 张 灼伤 。 NL 被 保留 的牌不会被 cthugha:炎之精 吸取。",
-        "UPGRADE_DESCRIPTION": "在你的回合结束时， 保留 手牌中最多 !M! 张 灼伤 。 NL 被 保留 的牌不会被 cthugha:炎之精 吸取。"
+        "DESCRIPTION": "在你的回合结束时， 保留 手牌中最多 !M! 张 灼伤 。被 保留 的牌不会被 cthugha:炎之精 吸取。",
+        "UPGRADE_DESCRIPTION": "在你的回合结束时， 保留 手牌中最多 !M! 张 灼伤 。被 保留 的牌不会被 cthugha:炎之精 吸取。"
     },
     "Cthugha:QinLueRuHuo": {
         "NAME": "侵掠如火",
@@ -162,16 +162,16 @@
     },
     "Cthugha:BaoLie": {
         "NAME": "爆裂",
-        "DESCRIPTION": "cthugha:爆炎 ：造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan! ： cthugha:生成 1个 cthugha:炎之精 。"
+        "DESCRIPTION": "在下回合抽一张牌。 NL cthugha:爆炎 ：造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan! ： cthugha:生成 !M! 个 cthugha:炎之精 。"
     },
     "Cthugha:BaoRan": {
         "NAME": "爆燃",
-        "DESCRIPTION": "获得 [E] 。 NL cthugha:瞬燃 !shunRan! ：获得 [E] 。",
-        "UPGRADE_DESCRIPTION": "获得 [E] 。 NL cthugha:瞬燃 !shunRan! ：获得 [E] [E] 。"
+        "DESCRIPTION": "cthugha:衔烛 ：获得 [E] 。 NL cthugha:瞬燃 !shunRan! ：获得 [E] 。",
+        "UPGRADE_DESCRIPTION": "cthugha:衔烛 ：获得 [E] 。 NL cthugha:瞬燃 !shunRan! ：获得 [E] [E] 。"
     },
     "Cthugha:ChunHuo": {
         "NAME": "鹑火",
-        "DESCRIPTION": "抽到这张牌时从抽牌堆中抽 !cthughaM2! 张 cthugha:灼伤牌 。抽 !cthughaM2! 张牌。 NL cthugha:瞬燃 !shunRan! ：抽 !M! 张牌。"
+        "DESCRIPTION": "抽到这张牌时从抽牌堆中抽 !cthughaM2! 张 cthugha:灼伤牌 。 NL cthugha:衔烛 ：抽 !cthughaM2! 张牌。 NL cthugha:瞬燃 !shunRan! ：抽 !M! 张牌。"
     },
     "Cthugha:ChiShengGuangYan": {
         "NAME": "炽盛光焰",
@@ -185,8 +185,7 @@
     },
     "Cthugha:ZhongKuJianPo": {
         "NAME": "众苦煎迫",
-        "DESCRIPTION": "获得 灼伤 。手牌中每有一张 cthugha:灼伤牌 ，依次给予2层 易伤 、2层 虚弱 、10层 中毒 。",
-        "UPGRADE_DESCRIPTION": "获得 灼伤 。手牌中每有一张 cthugha:灼伤牌 ，依次给予2层 易伤 、2层 虚弱 、10层 中毒 。"
+        "DESCRIPTION": "获得 灼伤 。手牌中每有一张 cthugha:灼伤牌 ，依次给予 !M! 层 易伤 、 !M! 层 虚弱 、 !cthughaM2! 层 中毒 。"
     },
     "Cthugha:SiHuiFuRan": {
         "NAME": "死灰复燃",
@@ -218,13 +217,12 @@
     },
     "Cthugha:LuXinRongJie": {
         "NAME": "炉心融解",
-        "DESCRIPTION": "!M! 回合后进入 cthugha:残阳 。每当你抽到一张 灼伤 ，将其 消耗 ，然后抽1张牌，生效所需回合数减少1。",
+        "DESCRIPTION": "!M! 回合后进入 cthugha:残阳 。 NL 每当你抽到一张 灼伤 ，将其 消耗 ，然后抽1张牌，生效所需回合数减少1。",
         "UPGRADE_DESCRIPTION": " 固有 。 !M! 回合后进入 cthugha:残阳 。每当你抽到一张 灼伤 ，将其 消耗 ，然后抽1张牌，生效所需回合数减少1。"
     },
     "Cthugha:XuanShiXingTai": {
         "NAME": "悬世形态",
-        "DESCRIPTION": "虚无 。 NL 获得 !M! 层 cthugha:飞行 。 NL 在每回合结束时失去 !cthughaM2! 点 力量 。",
-        "UPGRADE_DESCRIPTION": "获得 !M! 层 cthugha:飞行 。 NL 在每回合结束时失去 !cthughaM2! 点 力量 。"
+        "DESCRIPTION": "获得 !M! 层 cthugha:飞行 。 NL 在每回合结束时失去 !cthughaM2! 点 力量 。"
     },
     "Cthugha:YanWu": {
         "NAME": "炎舞",
@@ -251,17 +249,16 @@
     },
     "Cthugha:YangYan": {
         "NAME": "阳炎",
-        "DESCRIPTION": "造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan! ：对所有敌人造成 !D! 点伤害。"
+        "DESCRIPTION": "造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan! ：对所有敌人造成 !cthughaD2! 点伤害。"
     },
     "Cthugha:HuoYanHuXi": {
         "NAME": "火焰呼吸",
-        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：切换你类型为状态/攻击牌的 *灼伤 为另一类型。",
-        "UPGRADE_DESCRIPTION": " 保留 。 NL cthugha:瞬燃 !shunRan! ：切换你类型为状态/攻击牌的 *灼伤 为另一类型。"
+        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 *灼伤+ ，切换你类型为状态/攻击牌的 *灼伤 为另一类型。",
+        "UPGRADE_DESCRIPTION": " 保留 。 NL cthugha:瞬燃 !shunRan! ：获得 *灼伤+ ，切换你类型为状态/攻击牌的 *灼伤 为另一类型。"
     },
     "Cthugha:ShiXinZhuMing": {
-        "NAME": "蚀心烛命",
-        "DESCRIPTION": "使敌人失去 !M! 点最大生命。每当其失去最大生命时，你获得 !cthughaM2! 点 临时生命 。 消耗 。",
-        "UPGRADE_DESCRIPTION": "使敌人失去 !M! 点最大生命。每当其失去最大生命时，你获得 !cthughaM2! 点 临时生命 。 消耗 。"
+        "NAME": "贵族气场",
+        "DESCRIPTION": "给予 !M! 层 cthugha:黑焰 。每当目标敌人失去最大生命时，你获得 !cthughaM2! 点 cthugha:魂命 。 消耗 。"
     },
     "Cthugha:XinJinHuoChuan": {
         "NAME": "薪尽火传",
@@ -270,7 +267,7 @@
     },
     "Cthugha:HuoZhuoLianZi": {
         "NAME": "火濯莲子",
-        "DESCRIPTION": "cthugha:止燎 ：获得 !B! 点 格挡 。 NL cthugha:瞬燃 !shunRan! ：本回合可以任意触发 cthugha:止燎 效果。"
+        "DESCRIPTION": "cthugha:止燎 ：获得 !B! 点 cthugha:魂命 。 NL cthugha:瞬燃 !shunRan! ：本回合可以任意触发 cthugha:止燎 效果。"
     },
     "Cthugha:HongLianYeHuo": {
         "NAME": "红莲业火",
@@ -288,8 +285,8 @@
     },
     "Cthugha:DianJiangChun_JuanJinChouYun": {
         "NAME": "点绛唇·卷尽愁云",
-        "DESCRIPTION": "丢弃至多 !M! 张手牌。 NL 获得等量 灼伤 。",
-        "UPGRADE_DESCRIPTION": "丢弃至多 !M! 张手牌。 NL 获得等量 灼伤 。"
+        "DESCRIPTION": "丢弃至多 !M! 张手牌。 NL 获得等量 灼伤 。 NL 在下回合抽等量牌。",
+        "UPGRADE_DESCRIPTION": "丢弃至多 !M! 张手牌。 NL 获得等量 灼伤 。 NL 在下回合抽等量牌。"
     },
     "Cthugha:TianGuangChuLiang": {
         "NAME": "天光初亮",
@@ -309,16 +306,16 @@
     },
     "Cthugha:Gou": {
         "NAME": "篝",
-        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 点 活力 。 NL ----------------- NL 随机对敌人造成 !D! 点伤害 !cthughaM2! 次。",
-        "UPGRADE_DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 点 活力 。 NL 打出时或 cthugha:瞬燃 !shunRan2! ：随机对敌人造成 !D! 点伤害 !cthughaM2! 次。"
+        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 活力 。 NL ----------------- NL 随机对敌人造成 !D! 点伤害 !cthughaM2! 次。",
+        "UPGRADE_DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 活力 。 NL 打出时或 cthugha:瞬燃 !shunRan2! ：随机对敌人造成 !D! 点伤害 !cthughaM2! 次。"
     },
     "Cthugha:ChongRanLieHuo": {
         "NAME": "重燃烈火",
-        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：随机对敌人造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan2! ：重置所有 cthugha:瞬燃 次数。"
+        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：随机对敌人造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan2! ：重置所有 cthugha:瞬燃 次数，本场战斗这张牌伤害+ !M! 。"
     },
     "Cthugha:XingYouGuangNi": {
         "NAME": "星幽光逆",
-        "DESCRIPTION": "cthugha:爆炎 ：获得 !cthughaB2! 点 格挡 。 ------------- NL 移除所有 cthugha:炎之精 。每移除一个获得 !B! 点 格挡 。"
+        "DESCRIPTION": "cthugha:爆炎 ：获得 !cthughaB2! 点 cthugha:魂命 。 ------------- NL 移除所有 cthugha:炎之精 。每移除一个获得 !B! 点 格挡 。"
     },
     "Cthugha:XianYi": {
         "NAME": "鲜衣",
@@ -327,7 +324,7 @@
     },
     "Cthugha:JuYan": {
         "NAME": "聚焰",
-        "DESCRIPTION": "失去1个 cthugha:炎之精 栏位。本场战斗中触发 cthugha:爆炎 所需 cthugha:炎之精 数量-1。"
+        "DESCRIPTION": "失去1个 cthugha:炎之精 栏位。本场战斗触发 cthugha:爆炎 所需 cthugha:炎之精 数量-1。"
     },
     "Cthugha:FenJi": {
         "NAME": "焚寂",
@@ -344,8 +341,8 @@
     },
     "Cthugha:DaiShiYueLuo": {
         "NAME": "带食月落",
-        "DESCRIPTION": "如果你的手牌耗能之和（包括这张牌）大于等于 !M! ，本回合这些牌的耗能变为0。",
-        "UPGRADE_DESCRIPTION": "如果你的手牌耗能之和（包括这张牌）大于等于 !M! ，本回合这些牌的耗能变为0。"
+        "DESCRIPTION": "如果你的手牌耗能之和（包括这张牌）大于等于 !M! ，本回合这些牌的耗能变为0。 NL 返还这张牌的耗能。",
+        "EXTENDED_DESCRIPTION": ["我的手牌耗能之和 #r不足以 触发效果。"]
     },
     "Cthugha:AnHongHeiYan": {
         "NAME": "暗红黑炎",
@@ -362,11 +359,11 @@
     },
     "Cthugha:TianYouErRi": {
         "NAME": "天有二日",
-        "DESCRIPTION": "每当你打出一张 cthugha:瞬燃 牌时，重置其 cthugha:瞬燃 次数。"
+    "DESCRIPTION": "每当你打出一张 cthugha:瞬燃 牌时，重置其 cthugha:瞬燃 次数。"
     },
     "Cthugha:LieXingSuiXuan": {
         "NAME": "列星随旋",
-        "DESCRIPTION": "每当生成 cthugha:炎之精 栏位中 NL 首位：抽 !M! 张牌； NL 末位：获得 [E] 。"
+        "DESCRIPTION": "每当 cthugha:生成 cthugha:炎之精 栏位中 NL 首位：抽 !M! 张牌； NL 末位：获得 [E] 。"
     },
     "Cthugha:Defend": {
         "NAME": "防御",
@@ -386,5 +383,17 @@
         "NAME": "炽焰华斩",
         "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。",
         "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。"
+    },
+
+    "Cthugha:ShiftingStar": {
+        "NAME": "换斗",
+        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：丢弃所有手牌，抽等量牌。",
+        "UPGRADE_DESCRIPTION": "固有 。 NL cthugha:瞬燃 !shunRan! ：丢弃所有手牌，抽等量牌。"
+    },
+
+    "Cthugha:CastleOfTheSun": {
+        "NAME": "日轮之城",
+        "DESCRIPTION": "获得 !B! 点 格挡 。 NL cthugha:瞬燃 !shunRan! ：这张牌数值+ !M! ，切换为攻击牌。 NL cthugha:瞬燃 !shunRan2! ：切换回来。",
+        "EXTENDED_DESCRIPTION": ["造成 !D! 点伤害。 NL cthugha:瞬燃 !shunRan! ：这张牌数值+ !M! ，切换为技能牌。 NL cthugha:瞬燃 !shunRan2! ：切换回来。", "新月之衰"]
     }
 }

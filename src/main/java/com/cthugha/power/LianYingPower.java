@@ -4,7 +4,6 @@ import com.cthugha.cards.LianYing;
 import com.cthugha.helpers.ModHelper;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,7 +12,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LianYingPower extends AbstractPower implements InvisiblePower {
-	public static final String POWER_ID = ModHelper.MakePath(LianYingPower.class.getSimpleName());
+	public static final String POWER_ID = ModHelper.makeID(LianYingPower.class.getSimpleName());
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
 	public LianYingPower(int amount) {

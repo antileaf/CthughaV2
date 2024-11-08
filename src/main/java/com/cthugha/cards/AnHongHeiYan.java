@@ -2,7 +2,6 @@ package com.cthugha.cards;
 
 import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
-import com.cthugha.actions.YanBaoAction;
 import com.cthugha.actions.common.BaoYanAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
@@ -15,11 +14,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class AnHongHeiYan extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(AnHongHeiYan.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(AnHongHeiYan.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -28,7 +25,7 @@ public class AnHongHeiYan extends AbstractCthughaCard {
 
     private static final int COST = 1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 

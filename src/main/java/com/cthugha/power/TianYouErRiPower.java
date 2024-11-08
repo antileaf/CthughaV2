@@ -2,8 +2,6 @@ package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.cards.AbstractCthughaCard;
-import com.cthugha.cards.AbstractShunRanCard;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,7 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class TianYouErRiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(TianYouErRiPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(TianYouErRiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public TianYouErRiPower(AbstractCreature owner) {

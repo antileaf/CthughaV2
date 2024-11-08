@@ -1,11 +1,10 @@
 package com.cthugha.cards;
 
 import com.cthugha.actions.ZhiLiaoAction;
-import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.power.HuoZhuoLianZiPower;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HuoZhuoLianZi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(HuoZhuoLianZi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(HuoZhuoLianZi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +23,7 @@ public class HuoZhuoLianZi extends AbstractCthughaCard {
     private static final String IMG_PATH = "cthughaResources/img/card/118.png";
     private static final int COST = 2;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 
@@ -39,7 +38,7 @@ public class HuoZhuoLianZi extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ZhiLiaoAction(this, new GainBlockAction(p, block)));
+        this.addToBot(new ZhiLiaoAction(this, new AddTemporaryHPAction(p, p, block)));
     }
 
     @Override

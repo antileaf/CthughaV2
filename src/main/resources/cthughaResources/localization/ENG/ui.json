@@ -1,0 +1,18 @@
+{
+  "Cthugha:SkinSelectScreen": {
+    "TEXT": [
+      "Choose Skin",
+      "Default",
+      "Ardor Blossom Star-Ishmael",
+      "Godskin Apostle",
+      "Midra, Lord of Frenzied Flame"
+    ]
+  },
+
+  "Cthugha:ShunRan": {
+    "TEXT": [
+      "Used for Flare( %s )",
+      "This card has already been used for Flare this turn."
+    ]
+  }
+}

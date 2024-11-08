@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class ChunHuo extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(ChunHuo.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(ChunHuo.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -20,7 +20,7 @@ public class ChunHuo extends AbstractCthughaCard {
 
     private static final int COST = 0;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.NONE;
 
@@ -43,11 +43,12 @@ public class ChunHuo extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new DrawCardAction(p, this.secondaryMagicNumber));
+        if (this.shining())
+            this.addToBot(new DrawCardAction(p, this.secondaryMagicNumber));
     }
 
     public void triggerWhenDrawn() {
-        this.addToBot(new DrawSpecificCardAction(ModHelper::IsBurnCard, this.secondaryMagicNumber));
+        this.addToBot(new DrawSpecificCardAction(ModHelper::isBurnCard, this.secondaryMagicNumber));
     }
 
     @Override

@@ -56,7 +56,7 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
   float centerY = Settings.HEIGHT * 0.74F;
 
   static {
-    final String ID = ModHelper.MakePath(SkinSelectScreen.class.getSimpleName());
+    final String ID = ModHelper.makeID(SkinSelectScreen.class.getSimpleName());
     TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
     SKINS.add(new Skin(0, "default", Color.RED.cpy()));
     SKINS.add(new Skin(1, "mari", Color.BLUE.cpy()));
@@ -76,7 +76,7 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
     this.leftHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
     this.rightHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
     BaseMod.subscribe(this);
-    BaseMod.addSaveField(ModHelper.MakePath("skin"), (CustomSavableRaw) this);
+    BaseMod.addSaveField(ModHelper.makeID("skin"), (CustomSavableRaw) this);
   }
 
   public void loadAnimation(String atlasUrl, String skeletonUrl, float scale) {
@@ -121,7 +121,7 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
   }
 
   private void updateInput() {
-    if (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.MY_PLAYER_CLASS) {
+    if (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS) {
       this.leftHb.update();
       this.rightHb.update();
       if (this.leftHb.clicked) {

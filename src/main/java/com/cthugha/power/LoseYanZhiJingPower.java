@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LoseYanZhiJingPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(LoseYanZhiJingPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(LoseYanZhiJingPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public LoseYanZhiJingPower(AbstractCreature owner, int amount) {

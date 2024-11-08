@@ -13,11 +13,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-
 public class ZhuoShangDaJi extends AbstractCthughaCard {
 
-    public static final String ID = ModHelper.MakePath(ZhuoShangDaJi.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(ZhuoShangDaJi.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -57,6 +55,6 @@ public class ZhuoShangDaJi extends AbstractCthughaCard {
                     AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         }
 
-        this.addToBot(new DrawSpecificCardAction(ModHelper::IsStrikeCard, this.secondaryMagicNumber));
+        this.addToBot(new DrawSpecificCardAction(c -> c.hasTag(CardTags.STRIKE), this.secondaryMagicNumber));
     }
 }

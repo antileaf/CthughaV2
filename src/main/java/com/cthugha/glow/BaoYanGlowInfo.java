@@ -22,6 +22,6 @@ public class BaoYanGlowInfo extends CardBorderGlowManager.GlowInfo {
 
 	@Override
 	public String glowID() {
-		return ModHelper.MakePath("BaoYanGlow");
+		return ModHelper.makeID("BaoYanGlow");
 	}
 }

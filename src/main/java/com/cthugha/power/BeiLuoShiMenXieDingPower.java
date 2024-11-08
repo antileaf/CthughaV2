@@ -2,7 +2,6 @@ package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.cards.AbstractCthughaCard;
-import com.cthugha.enums.CustomTags;
 import com.cthugha.helpers.ModHelper;
 import com.cthugha.orbs.YanZhiJing;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
@@ -15,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BeiLuoShiMenXieDingPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(BeiLuoShiMenXieDingPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(BeiLuoShiMenXieDingPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public BeiLuoShiMenXieDingPower(AbstractCreature owner, int amount) {

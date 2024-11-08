@@ -14,7 +14,7 @@ import basemod.abstracts.CustomCard;
 
 public class QiSeGuBai extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(QiSeGuBai.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(QiSeGuBai.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -22,7 +22,7 @@ public class QiSeGuBai extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/其色孤白.png";
     private static final int COST = 4;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.NONE;
 
@@ -50,7 +50,7 @@ public class QiSeGuBai extends CustomCard {
 
         this.addToBot(
                 new SelectCardsInHandAction(1, "移除", false, true,
-                        card -> ModHelper.IsBurn(card) || ModHelper.IsDefendCard(card),
+                        card -> ModHelper.isBurn(card) || ModHelper.isDefendCard(card),
                         abstractCards -> {
                             System.out.println("5555555555555555555");
                             if (abstractCards.size() > 0) {

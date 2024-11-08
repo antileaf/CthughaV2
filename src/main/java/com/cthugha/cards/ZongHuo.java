@@ -13,7 +13,7 @@ import basemod.abstracts.CustomCard;
 
 public class ZongHuo extends CustomCard {
 
-    public static final String ID = ModHelper.MakePath(ZongHuo.class.getSimpleName());
+    public static final String ID = ModHelper.makeID(ZongHuo.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +21,7 @@ public class ZongHuo extends CustomCard {
     private static final String IMG_PATH = "cthughaResources/img/card/139.png";
     private static final int COST = 1;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = AbstractCardEnum.MOD_NAME_COLOR;;
+    private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 

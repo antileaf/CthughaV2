@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class SiHuiFuRanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(SiHuiFuRanPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(SiHuiFuRanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public SiHuiFuRanPower(AbstractCreature owner, int amount) {
@@ -29,7 +29,7 @@ public class SiHuiFuRanPower extends AbstractPower {
     }
 
     public void onExhaust(AbstractCard card) {
-        if (ModHelper.IsBurn(card)) {
+        if (ModHelper.isBurn(card)) {
             this.flash();
             this.addToBot(new MakeTempCardInDiscardAction(new Burn(), this.amount));
         }

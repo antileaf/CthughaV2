@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class XuanCaoQiYanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.MakePath(XuanCaoQiYanPower.class.getSimpleName());
+    public static final String POWER_ID = ModHelper.makeID(XuanCaoQiYanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("RetainCardsAction");
@@ -41,7 +41,7 @@ public class XuanCaoQiYanPower extends AbstractPower {
 
             this.addToBot(
                     new SelectCardsInHandAction(this.amount, uiStrings.TEXT[0], true, true,
-                            card -> (ModHelper.IsBurn(card)),
+                            card -> (ModHelper.isBurn(card)),
                             abstractCards -> {
                                 for (AbstractCard card : abstractCards) {
                                     if (!card.isEthereal) {
@@ -67,7 +67,7 @@ public class XuanCaoQiYanPower extends AbstractPower {
                                 this.addToBot(new AbstractGameAction() {
                                     public void update() {
                                         for (AbstractCard card : AbstractDungeon.player.hand.group) {
-                                            if (ModHelper.IsBurn(card) && !card.retain) {
+                                            if (ModHelper.isBurn(card) && !card.retain) {
                                                 AbstractDungeon.actionManager.cardQueue
                                                         .add(new CardQueueItem(card, true));
                                             }

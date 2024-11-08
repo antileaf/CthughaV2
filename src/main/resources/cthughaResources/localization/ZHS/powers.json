@@ -2,16 +2,13 @@
   "Cthugha:RiShiPower": {
     "NAME": "日蚀",
     "DESCRIPTIONS": [
-      "本回合结束时手牌中每有一张 #y灼伤 ，获得 #b",
-      " 点 #y格挡 。"
+      "本回合剩余时间内每当 #y灼伤 造成伤害时，获得 #b%d 点 #y格挡 。"
     ]
   },
   "Cthugha:HeiYanPower": {
     "NAME": "黑焰",
     "DESCRIPTIONS": [
-      "受黑焰影响的生物失去 #b",
-      " 点最大生命，并会在他们的回合开始时失去黑焰值 #b",
-      "% 的生命和最大生命。"
+      "受黑焰影响的生物失去 #b%d 点最大生命，并会在他们的回合开始时失去黑焰值 #b%d%% ( #b%d ) 的生命和最大生命。"
     ]
   },
   "Cthugha:HeiYanDaoRenPower": {
@@ -35,13 +32,13 @@
     ]
   },
   "Cthugha:WuYouBuZhuPower": {
-    "NAME": "无幽不烛",
+    "NAME": "烛幽",
     "DESCRIPTIONS": [
       "每当你的攻击或 #y炎之精 造成未被 #y格挡 的伤害时，使敌人失去等量的最大生命。"
     ]
   },
   "Cthugha:ZhuZhaoShuJiPower": {
-    "NAME": "烛照数计",
+    "NAME": "昭世",
     "DESCRIPTIONS": [
       "你每打出一张牌，就使所有敌人失去 #b",
       " 点最大生命。"
@@ -111,7 +108,7 @@
     "NAME": "生命返还",
     "DESCRIPTIONS": [
       "当这名敌人失去最大生命时，你获得 #b",
-      " 点 #y临时生命 。"
+      " 点 #y魂命 。"
     ]
   },
   "Cthugha:HuoZhuoLianZiPower": {
@@ -145,8 +142,7 @@
   "Cthugha:FenJiPower": {
     "NAME": "焚寂",
     "DESCRIPTIONS": [
-      "本次战斗中灼伤造成的伤害增加 #b",
-      " ，你不能再触发除此以外的 #y爆炎 效果。"
+      "本次战斗中灼伤造成的伤害增加 #b%d ，你不能再触发除此以外的 #y爆炎 效果。"
     ]
   },
   "Cthugha:TianYouErRiPower": {
@@ -158,8 +154,7 @@
   "Cthugha:LieXingSuiXuanPower": {
     "NAME": "列星随旋",
     "DESCRIPTIONS": [
-      "每当生成 #y炎之精 栏位中 NL 首位：抽 #b%d 张牌； NL 末位：获得 [E] 。"
+      "每当 #y生成 #y炎之精 栏位中 NL 首位：抽 #b%d 张牌； NL 末位：获得 [E] 。"
     ]
   }
-  
 }

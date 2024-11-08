@@ -1,5 +1,6 @@
 package com.cthugha.actions.common;
 
+import com.cthugha.Cthugha_Core;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -44,10 +45,12 @@ public class BetterSelectCardsInHandAction extends AbstractGameAction {
 					return !this.predicate.test(c) && this.tempHand.add(c);
 				});
 				if (this.hand.isEmpty()) {
+					this.hand.addAll(this.tempHand);
 					this.finish();
 				} else if (this.hand.size() <= this.amount && !this.anyNumber && !this.canPickZero) {
 					ArrayList<AbstractCard> spoof = new ArrayList<>(this.hand);
 					this.hand.clear();
+					this.hand.addAll(this.tempHand);
 					this.callback.accept(spoof);
 					if (this.returnToHand)
 						this.hand.addAll(spoof);
@@ -58,6 +61,7 @@ public class BetterSelectCardsInHandAction extends AbstractGameAction {
 				}
 			}
 		} else if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+			this.hand.addAll(this.tempHand);
 			this.callback.accept(AbstractDungeon.handCardSelectScreen.selectedCards.group);
 			if (this.returnToHand)
 				this.hand.addAll(AbstractDungeon.handCardSelectScreen.selectedCards.group);
@@ -70,7 +74,9 @@ public class BetterSelectCardsInHandAction extends AbstractGameAction {
 	}
 	
 	private void finish() {
-		this.hand.addAll(this.tempHand);
+//		Cthugha_Core.logger.info("finish, hand: {}",
+//				String.join(", ", this.hand.stream().map(c -> c.name).toArray(String[]::new)));
+
 		AbstractDungeon.player.hand.refreshHandLayout();
 		AbstractDungeon.player.hand.applyPowers();
 		this.isDone = true;

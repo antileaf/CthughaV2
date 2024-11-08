@@ -24,7 +24,7 @@ public class RetainBurnAction extends AbstractGameAction {
       if (this.duration == 0.5F) {
          CardGroup g = new CardGroup(null);
          for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (ModHelper.IsBurn(card)) {
+            if (ModHelper.isBurn(card)) {
                g.addToBottom(card);
             }
          }
