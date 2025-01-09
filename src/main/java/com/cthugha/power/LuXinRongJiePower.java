@@ -1,7 +1,7 @@
 package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LuXinRongJiePower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.makeID(LuXinRongJiePower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(LuXinRongJiePower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public LuXinRongJiePower(AbstractCreature owner, int amount) {
@@ -24,7 +24,8 @@ public class LuXinRongJiePower extends AbstractPower {
         this.amount = amount;
         this.updateDescription();
         // this.loadRegion("deva2");
-        this.img = new Texture("cthughaResources/img/power/212_32.png");
+        CthughaHelper.loadPowerRegion(this, "炉心融解");
+//        this.img = new Texture("cthughaResources/img/power/212_32.png");
     }
 
     public void updateDescription() {
@@ -49,7 +50,7 @@ public class LuXinRongJiePower extends AbstractPower {
 
     public void onCardDraw(AbstractCard card) {
         if (this.amount > 0) {
-            if (ModHelper.isBurn(card)) {
+            if (CthughaHelper.isBurn(card)) {
                 this.flash();
                 this.addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
                 this.addToBot(new DrawCardAction(1));

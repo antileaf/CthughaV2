@@ -1,7 +1,7 @@
 // Source code is decompiled from a .class file using FernFlower decompiler.
 package com.cthugha.actions;
 
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -24,7 +24,7 @@ public class RetainBurnAction extends AbstractGameAction {
       if (this.duration == 0.5F) {
          CardGroup g = new CardGroup(null);
          for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (ModHelper.isBurn(card)) {
+            if (CthughaHelper.isBurn(card)) {
                g.addToBottom(card);
             }
          }

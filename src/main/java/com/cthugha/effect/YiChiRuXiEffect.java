@@ -47,11 +47,13 @@ public class YiChiRuXiEffect extends AbstractGameEffect {
 			for (AbstractCard card : cardsToRemove) {
 				card.untip();
 				card.unhover();
-				AbstractDungeon.topLevelEffects
-						.add(new PurgeCardEffect(card, Settings.WIDTH / 3.0F + displayCount, Settings.HEIGHT / 2.0F));
+//				AbstractDungeon.topLevelEffects
+//						.add(new PurgeCardEffect(card, Settings.WIDTH / 3.0F + displayCount, Settings.HEIGHT / 2.0F));
 				displayCount += Settings.WIDTH / 6.0F;
 				AbstractDungeon.player.masterDeck.removeCard(card);
 			}
+
+			Cthugha_Core.logger.info("YiChiRuXi effect: removed {} cards", cardsToRemove.size());
 		}
 	}
 

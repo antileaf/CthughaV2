@@ -3,7 +3,7 @@ package com.cthugha.power;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPower;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class HeiYanPower extends AbstractPower implements HealthBarRenderPower {
-    public static final String POWER_ID = ModHelper.makeID(HeiYanPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(HeiYanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public static int percentage = 10; // 10%
@@ -24,7 +24,8 @@ public class HeiYanPower extends AbstractPower implements HealthBarRenderPower {
         this.owner = owner;
         this.amount = amount;
         this.updateDescription();
-        this.img = new Texture("cthughaResources/img/power/202_32.png");
+        CthughaHelper.loadPowerRegion(this, "黑焰");
+//        this.img = new Texture("cthughaResources/img/power/202_32.png");
 
         this.type = PowerType.DEBUFF;
     }

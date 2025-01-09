@@ -1,6 +1,6 @@
 package com.cthugha.actions;
 
-import com.cthugha.helpers.ZhiLiaoHelper;
+import com.cthugha.utils.ZhiLiaoHelper;
 import com.cthugha.power.HuoZhuoLianZiPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;

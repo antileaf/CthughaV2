@@ -1,8 +1,7 @@
 package com.cthugha.power;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.cards.XianYi;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.cards.cthugha.XianYi;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +13,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 
 public class XianYiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.makeID(XianYiPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(XianYiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public XianYiPower(AbstractCreature owner, int amount) {
@@ -23,7 +22,8 @@ public class XianYiPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.updateDescription();
-        this.img = new Texture("cthughaResources/img/power/219_32.png");
+        CthughaHelper.loadPowerRegion(this, "219");
+//        this.img = new Texture("cthughaResources/img/power/219_32.png");
     }
 
     public void updateDescription() {

@@ -2,11 +2,10 @@ package com.cthugha.actions.common;
 
 import com.cthugha.Cthugha_Core;
 import com.cthugha.cards.AbstractCthughaCard;
-import com.cthugha.cards.FuZhuoShangHuan;
-import com.cthugha.cards.ZhaoZhuoShangTianQue;
-import com.cthugha.helpers.LanguageHelper;
-import com.cthugha.helpers.ModHelper;
-import com.cthugha.relics.LieSiTaShuJian;
+import com.cthugha.cards.cthugha.FuZhuoShangHuan;
+import com.cthugha.cards.cthugha.ZhaoZhuoShangTianQue;
+import com.cthugha.utils.LanguageHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -39,7 +38,7 @@ public class FlareAction extends AbstractGameAction {
 			this.addToTop(new WaitAction(0F)); // 并非诗人
 
 			this.tempHand.addAll(AbstractDungeon.player.hand.group.stream()
-					.filter(c -> !ModHelper.isBurnCard(c))
+					.filter(c -> !CthughaHelper.isBurnCard(c))
 					.collect(Collectors.toCollection(ArrayList::new)));
 
 			if (this.tempHand.size() == AbstractDungeon.player.hand.size()) {
@@ -82,7 +81,7 @@ public class FlareAction extends AbstractGameAction {
 
 		int fz = selected.stream()
 				.filter(c -> c instanceof FuZhuoShangHuan)
-				.mapToInt(c -> c.magicNumber)
+				.mapToInt(c -> c.baseMagicNumber)
 				.max()
 				.orElse(-1);
 
@@ -98,8 +97,8 @@ public class FlareAction extends AbstractGameAction {
 				return;
 			}
 
-		if (AbstractDungeon.player.hasRelic(LieSiTaShuJian.ID))
-			level = Math.min(level, 7);
+//		if (AbstractDungeon.player.hasRelic(LieSiTaShuJian.ID))
+//			level = Math.min(level, 7);
 
 		for (AbstractCard c : this.selected) {
 			AbstractDungeon.player.hand.moveToExhaustPile(c);

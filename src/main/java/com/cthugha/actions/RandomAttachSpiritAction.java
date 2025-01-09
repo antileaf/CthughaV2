@@ -26,14 +26,14 @@ public class RandomAttachSpiritAction extends AbstractGameAction {
         setValues(AbstractDungeon.player, AbstractDungeon.player, amount);
         this.spirit = spirit;
         this.predicate = predicate;
-        this.duration = fast ? Settings.ACTION_DUR_FAST : Settings.ACTION_DUR_LONG;
+        this.duration = this.startDuration = fast ? Settings.ACTION_DUR_XFAST : Settings.ACTION_DUR_FAST;
         this.actionType = AbstractGameAction.ActionType.SPECIAL;
         this.hideVisual = hideVisual;
         this.fast = fast;
     }
 
     public void update() {
-        if (this.duration == (this.fast ? Settings.ACTION_DUR_FAST : Settings.ACTION_DUR_LONG)) {
+        if (this.duration == this.startDuration) {
             ArrayList<AbstractCard> rngPool = new ArrayList<>();
             for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
                 if (this.predicate.test(card)) {
@@ -78,7 +78,7 @@ public class RandomAttachSpiritAction extends AbstractGameAction {
                 }
             }
 
-            for (int i = 0; i < this.amount && rngPool.size() > 0; i++) {
+            for (int i = 0; i < this.amount && !rngPool.isEmpty(); i++) {
                 AbstractCard card = rngPool.get(AbstractDungeon.cardRandomRng.random(rngPool.size() - 1));
 
                 AbstractSpirit spirit = SpiritField.spirit.get(card);

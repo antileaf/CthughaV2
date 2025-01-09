@@ -2,11 +2,14 @@ package com.cthugha.patch.burn;
 
 import basemod.ReflectionHacks;
 import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.blight.TheBurningOne;
+import com.cthugha.orbs.FireVampire;
+import com.cthugha.relics.cthugha.EmeraldTabletVolumeVII;
+import com.cthugha.utils.CthughaHelper;
 import com.cthugha.power.FenJiPower;
 import com.cthugha.power.RiShiPower;
-import com.cthugha.relics.HuoTiHuoYan;
-import com.cthugha.relics.ShengLingLieYan;
+import com.cthugha.relics.cthugha.HuoTiHuoYan;
+import com.cthugha.relics.cthugha.ShengLingLieYan;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -19,23 +22,23 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 
 @SuppressWarnings("unused")
 public class BurnMechanismPatch {
-	private static boolean hasCthughaRelic() {
-		return AbstractDungeon.player.hasRelic(HuoTiHuoYan.ID) ||
-				AbstractDungeon.player.hasRelic(ShengLingLieYan.ID);
+	private static boolean hasCthughaBlight() {
+		return AbstractDungeon.player.hasBlight(TheBurningOne.ID);
 	}
 
 	private static String getCardStringForBurn(AbstractCard c) {
-		CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ModHelper.makeID("Burn"));
+		CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(CthughaHelper.makeID("Burn"));
 
 		if (c.type == AbstractCard.CardType.ATTACK)
 			return cardStrings.DESCRIPTION;
 
-		if (ModHelper.isInBattle() && hasCthughaRelic())
+		if (CthughaHelper.isInBattle() && hasCthughaBlight())
 			return !AbstractDungeon.player.hasRelic(ShengLingLieYan.ID) ?
 					cardStrings.EXTENDED_DESCRIPTION[0] :
 					cardStrings.EXTENDED_DESCRIPTION[1];
@@ -57,7 +60,7 @@ public class BurnMechanismPatch {
 		@SpireInsertPatch(locator = Locator.class, localvars = {"card"})
 		public static void Insert(AbstractCard _inst, AbstractCard card) {
 			if (_inst instanceof Burn && _inst.type == AbstractCard.CardType.ATTACK) {
-				ModHelper.changeBurn(card);
+				CthughaHelper.changeBurn(card);
 			}
 		}
 	}
@@ -75,7 +78,7 @@ public class BurnMechanismPatch {
 	public static class ApplyPowersPatch {
 		@SpirePostfixPatch
 		public static void Postfix(AbstractCard _inst) {
-			if (_inst instanceof Burn && _inst.type == AbstractCard.CardType.STATUS && hasCthughaRelic()) {
+			if (_inst instanceof Burn && _inst.type == AbstractCard.CardType.STATUS && hasCthughaBlight()) {
 				Burn burn = (Burn) _inst;
 
 				int bonus = 0;
@@ -86,6 +89,14 @@ public class BurnMechanismPatch {
 
 				if (AbstractDungeon.player.hasPower(FenJiPower.POWER_ID))
 					bonus += AbstractDungeon.player.getPower(FenJiPower.POWER_ID).amount;
+
+				if (AbstractDungeon.player.hasPower(VigorPower.POWER_ID) &&
+						AbstractDungeon.player.hasRelic(EmeraldTabletVolumeVII.ID)) {
+					int vigor = Math.min(AbstractDungeon.player.getPower(VigorPower.POWER_ID).amount,
+							burn.baseMagicNumber + bonus);
+
+					bonus += vigor;
+				}
 
 				burn.magicNumber = burn.baseMagicNumber + bonus;
 				burn.isMagicNumberModified = burn.magicNumber != burn.baseMagicNumber;
@@ -142,20 +153,32 @@ public class BurnMechanismPatch {
 						AbstractGameAction.AttackEffect.FIRE));
 				return SpireReturn.Return();
 			}
-			else if (_inst.dontTriggerOnUseCard && hasCthughaRelic()) {
-				AbstractMonster monster = AbstractDungeon.getMonsters().getRandomMonster(true);
+			else if (_inst.dontTriggerOnUseCard && hasCthughaBlight()) {
+				AbstractMonster monster = AbstractDungeon.getMonsters().getRandomMonster(
+						null, true, AbstractDungeon.cardRandomRng);
 				if (monster != null) {
 					if (p.hasPower(RiShiPower.POWER_ID))
 						AbstractDungeon.actionManager.addToBottom(
 								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(monster));
 
+					int damage = _inst.magicNumber;
+					FireVampire vampire = (FireVampire) AbstractDungeon.player.orbs.stream()
+							.filter(orb -> orb instanceof FireVampire && ((FireVampire) orb).charge > 0)
+							.findFirst()
+							.orElse(null);
+					if (vampire != null) {
+						damage += FireVampire.BONUS;
+						vampire.charge--;
+						vampire.passiveVFX();
+					}
+
 					AbstractDungeon.actionManager.addToBottom(new DamageAction(monster,
-							new DamageInfo(p, _inst.magicNumber, DamageInfo.DamageType.THORNS),
+							new DamageInfo(p, damage, DamageInfo.DamageType.THORNS),
 							AbstractGameAction.AttackEffect.FIRE));
 
 					if (AbstractDungeon.player.hasRelic(ShengLingLieYan.ID))
 						AbstractDungeon.actionManager.addToBottom(
-								new DecreaseMonsterMaxHealthAction(monster, _inst.magicNumber));
+								new DecreaseMonsterMaxHealthAction(monster, damage));
 				}
 
 				return SpireReturn.Return();

@@ -4,5 +4,19 @@
     "DESCRIPTIONS": [
       "获得 #b%d 张 #y灼伤+ 。"
     ]
+  },
+
+  "Cthugha:EvilSunrise": {
+    "NAME": "邪恶日出",
+    "DESCRIPTIONS": [
+      "#y生成 #b%d 个 #y炎之精 。"
+    ]
+  },
+
+  "Cthugha:RedLotusWater": {
+    "NAME": "朱莲太液",
+    "DESCRIPTIONS": [
+      "抽牌直到手牌中 #y灼伤牌 与非 #y灼伤牌 的数量相等。"
+    ]
   }
 }

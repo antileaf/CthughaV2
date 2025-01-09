@@ -2,7 +2,7 @@
   "Cthugha:RiShiPower": {
     "NAME": "日蚀",
     "DESCRIPTIONS": [
-      "本回合剩余时间内每当 #y灼伤 造成伤害时，获得 #b%d 点 #y格挡 。"
+      "本回合剩余时间内每当 #y灼伤 或 #y炎之精 造成伤害时，获得 #b%d 点 #y格挡 。"
     ]
   },
   "Cthugha:HeiYanPower": {
@@ -44,7 +44,7 @@
       " 点最大生命。"
     ]
   },
-  "Cthugha:XuanCaoQiYanPower": {
+  "Cthugha:XuanCaoXiaoYanPower": {
     "NAME": "喧嘈嚣焰",
     "DESCRIPTIONS": [
       "在你的回合结束时， #y保留 手牌中最多 #b",
@@ -155,6 +155,38 @@
     "NAME": "列星随旋",
     "DESCRIPTIONS": [
       "每当 #y生成 #y炎之精 栏位中 NL 首位：抽 #b%d 张牌； NL 末位：获得 [E] 。"
+    ]
+  },
+
+  "Cthugha:ChaosIncarnatePower": {
+    "NAME": "混沌化身",
+    "DESCRIPTIONS": [
+      "回合开始时，失去所有 #y好奇 、 #y时间扭曲 、 #y人工制品 和 #y混沌化身 。"
+    ]
+  },
+
+  "Cthugha:StampPower": {
+    "NAME": "色彩印记",
+    "DESCRIPTIONS": [
+      "",
+      "#r红色 印记",
+      "#g绿色 印记",
+      "#b蓝色 印记",
+      "#p紫色 印记"
+    ]
+  },
+
+  "Cthugha:TimeWarp": {
+    "NAME": "时间扭曲",
+    "DESCRIPTIONS": [
+      "每当你打出 #b12 张牌，你的回合会强制结束，并且 %s 获得 #b2 点 #y力量 。"
+    ]
+  },
+
+  "Cthugha:FourColorTheoremPower": {
+    "NAME": "四色定理",
+    "DESCRIPTIONS": [
+      "当你身上叠加相同的 #y色彩印记 时，阿雷什卡高 #r立即行动 。 NL 当你叠加 #b4 种不同 #y色彩印记 后，所有 #y色彩印记 层数减少 #b1 层。"
     ]
   }
 }

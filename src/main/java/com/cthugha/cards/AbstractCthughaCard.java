@@ -1,26 +1,30 @@
 package com.cthugha.cards;
 
-import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
-import com.cthugha.Cthugha_Core;
-import com.cthugha.actions.common.BetterSelectCardsInHandAction;
 import com.cthugha.actions.common.FlareAction;
+import com.cthugha.flare.FlareCardQueueItem;
+import com.cthugha.flare.FlareHelper;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.cthugha.cards.interfaces.RightClickableCard;
-import com.cthugha.helpers.LanguageHelper;
-import com.cthugha.helpers.ModHelper;
-import com.cthugha.relics.LieSiTaShuJian;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.cthugha.utils.LanguageHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
 public abstract class AbstractCthughaCard extends CustomCard implements RightClickableCard {
+	private static final Logger logger = LogManager.getLogger(AbstractCthughaCard.class.getName());
+
+	private static final Color FLAVOR_TEXT_COLOR = new Color(
+			255 / 255.0F, 231 / 255.0F, 150 / 255.0F, 1.0F);
+	private static final Color FLAVOR_BOX_COLOR = new Color(
+			38 / 255.0F, 8 / 255.0F, 4 / 255.0F, 1.0F);
+
 	public boolean canBaoYan = false;
 	public boolean triggeredBaoYanLastTime = false;
 	public boolean canZhiLiao = false;
@@ -67,7 +71,8 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 	) {
 		super(id, name, img, cost, rawDescription, type, color, rarity, target);
 
-		FlavorText.AbstractCardFlavorFields.boxColor.set(this, Color.SCARLET);
+		FlavorText.AbstractCardFlavorFields.textColor.set(this, FLAVOR_TEXT_COLOR);
+		FlavorText.AbstractCardFlavorFields.boxColor.set(this, FLAVOR_BOX_COLOR);
 	}
 
 	public int getExtraYanZhiJing() {
@@ -298,8 +303,16 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 
 	@Override
 	public void onRightClick() { // 瞬燃
+		logger.info("Card right clicked.");
+
 		if (this.shunRan == -1)
 			return;
+
+		if (FlareHelper.isCardQueued(this)) {
+			logger.info("Card is already queued. (Please do not spam click.)");
+
+			return;
+		}
 
 		if (this.triggeredShunRanThisTurn) {
 			AbstractDungeon.effectList.add(new ThoughtBubble(
@@ -308,7 +321,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 			return;
 		}
 
-		this.addToBot(new FlareAction(this));
+		AbstractDungeon.actionManager.cardQueue.add(new FlareCardQueueItem(this));
 
 		this.triggeredShunRanThisTurn = true;
 		this.updateBgImg();

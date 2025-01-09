@@ -1,8 +1,8 @@
 {
-    "Cthugha:YanZhiJing": {
+    "Cthugha:FireVampire": {
         "NAME": "Fire Vampire",
         "DESCRIPTION": [
-            "At the end of your turn, absorb a #yBurn from your hand, randomly deal #b10 damage to an enemy, then put that #yBurn into your discard pile."
+            "At the end of your turn, absorb a #yBurn from your hand, randomly deal #b%d damage to an enemy, then put that #yBurn into your discard pile."
         ]
     }
 }

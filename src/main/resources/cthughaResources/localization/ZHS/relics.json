@@ -3,30 +3,18 @@
     "NAME": "活体火焰",
     "FLAVOR": "一团燃烧着的物质，形状千变万化。",
     "DESCRIPTIONS": [
-      "#y灼伤 造成的伤害增加 #b3 。你每次受到的 #y灼伤 伤害由随机敌人承担。"
+      "#y灼伤 对敌人造成的伤害增加 #b3 点。"
     ]
   },
-  "Cthugha:LieSiTaShuJian": {
-    "NAME": "聂斯塔书简",
-    "FLAVOR": "“黄金之塔将化作火焰之柱，您的伟力将净化芸芸众生。”",
-    "DESCRIPTIONS": [
-      "所有牌视为 #y灼伤牌 ，你不能再触发 #y瞬燃8 和 #y瞬燃9 。"
-    ]
-  },
+
   "Cthugha:ShengLingLieYan": {
     "NAME": "生灵烈焰",
     "FLAVOR": "那流向天际的巨大而不定的形体与同样巨大的飞掠而过的活焰之云。",
     "DESCRIPTIONS": [
-      "替换 #r活体火焰 。 #y灼伤 造成的伤害增加 #b8 。你每次受到的 #y灼伤 伤害效果改为随机使敌人失去等量生命和最大生命。"
+      "替换 #r活体火焰 。 #y灼伤 对敌人造成的伤害增加 #b8 点。 NL #y灼伤 对敌人造成的伤害改为使敌人失去等量生命和最大生命。"
     ]
   },
-  "Cthugha:LongXin": {
-    "NAME": "龙心",
-    "FLAVOR": "庚仓鸣有，阳载日春。衣绶月九，火流月七。",
-    "DESCRIPTIONS": [
-      "如果你在回合中剩余能量，在下回合开始时获得 [E] [E] 。"
-    ]
-  },
+
   "Cthugha:YongRanShi": {
     "NAME": "永燃石",
     "FLAVOR": "纯粹伊希尔能量浓缩而成的固体……？",
@@ -34,11 +22,110 @@
       "这个牌组中的牌包括 #y灼伤 ， #y炸弹 ， #y断魂斩 ，"
     ]
   },
+
   "Cthugha:HuoZhong": {
     "NAME": "火种",
     "FLAVOR": "祂持着这火种降到地上，并带给了人类。",
     "DESCRIPTIONS": [
       "在每场战斗开始时的抽牌中或你的回合结束时，手牌中每有3张 #y灼伤 ，抽1张牌。"
+    ]
+  },
+
+  "Cthugha:LongXin": {
+    "NAME": "龙心",
+    "FLAVOR": "庚仓鸣有，阳载日春。衣绶月九，火流月七。",
+    "DESCRIPTIONS": [
+      "在每回合开始时获得 [E] 。 NL 每当你从牌组中移除一张非 #ycthugha:灼伤牌 时，将一张 #y灼伤 加入牌组。"
+    ]
+  },
+
+  "Cthugha:LettersOfNestar": {
+    "NAME": "聂斯塔书简",
+    "FLAVOR": "“黄金之塔将化作火焰之柱，您的伟力将净化芸芸众生。”",
+    "DESCRIPTIONS": [
+      "每回合开始时，先从抽牌堆中抽 #b%d 张 #ycthugha:灼伤牌 。"
+    ]
+  },
+
+  "Cthugha:AshesToAshes": {
+    "NAME": "尘归尘",
+    "FLAVOR": "褪去颜色者。",
+    "DESCRIPTIONS": [
+      "你现在能在休息处一次进行所有行动。"
+    ]
+  },
+
+  "Cthugha:EverBurningStone": {
+    "NAME": "永燃石",
+    "FLAVOR": "一种永远燃烧的石头，在某些地方也被称作次元石。",
+    "DESCRIPTIONS": [
+      "拾起时，从 #r被遗留的火焰牌组 中选择 #b2 次卡牌奖励。",
+      "被遗留的火焰牌组",
+      "这个牌组中的牌包括 %s 。"
+    ]
+  },
+
+  "Cthugha:SoulCoin": {
+    "NAME": "灵魂钱币",
+    "FLAVOR": "这枚钱币发出了奇怪而令人费解的低语，让愤怒和绝望在你的脑海中蔓延。",
+    "DESCRIPTIONS": [
+      "当手牌中 #ycthugha:灼伤牌 数量之和大于等于其他牌时，获得额外 #b%d 点 #y力量 。"
+    ]
+  },
+
+  "Cthugha:FireEmblem": {
+    "NAME": "火焰纹章",
+    "FLAVOR": "这一位是远从艾雷欧斯大陆而来的琉尔殿下。她身上似乎流着神龙的血脉呢！",
+    "DESCRIPTIONS": [
+      "首次进入与第三阶段的Boss战斗时，每一个钥匙使你的最大生命值增加 #b%d ，然后获得所有你没有的钥匙。"
+    ]
+  },
+
+  "Cthugha:WilderingMirror": {
+    "NAME": "迷途之镜",
+    "FLAVOR": "多重景观！迷乱视觉！盯着我，以你五感的融解取乐吧！",
+    "DESCRIPTIONS": [
+      "手牌中同名牌最多的那张牌每有一张，敌人失去生命时额外失去 #b1 点。"
+    ]
+  },
+
+  "Cthugha:EmeraldTabletVolumeVII": {
+    "NAME": "翠玉录-卷七",
+    "FLAVOR": "要获得真知卓识，必须慢下脚步，不要急迫。",
+    "DESCRIPTIONS": [
+      "在每回合开始时获得 #b%d #y活力 。 NL #y活力 会加成 #y灼伤 伤害，但每张 #y灼伤 因此获得的伤害提高值至多不超过其原本伤害。"
+    ]
+  },
+
+  "Cthugha:FireDancePictureBook": {
+    "NAME": "火舞绘本",
+    "FLAVOR": "左脚向前，走一步，转圈……—不知火",
+    "DESCRIPTIONS": [
+      "你每打出 #b3 张牌，抽 #b1 张牌并在本回合将其 #y保留 。当你抽牌时，重置本遗物计数。"
+    ]
+  },
+
+  "Cthugha:KingskinBodhran": {
+    "NAME": "王皮框鼓",
+    "FLAVOR": "密林中，那位君主交出了他不得不交出的最后一样东西，以之造出此永庇疆土之器。",
+    "DESCRIPTIONS": [
+      "拾起时，将你的最大生命值提升 #b%d 。"
+    ]
+  },
+
+  "Cthugha:ChaliceMurmurous": {
+    "NAME": "低语之觚",
+    "FLAVOR": "对于那些我们用此杯饮酒的夜晚，我们后来并不确定我们做了什么。",
+    "DESCRIPTIONS": [
+      "拾起时，获得 #b%d 个药水栏位，获得你的每种专属药水各 #b1 瓶。"
+    ]
+  },
+
+  "Cthugha:Frangiclave": {
+    "NAME": "碎门之钥",
+    "FLAVOR": "有用来开门的钥匙，也有用来毁门的钥匙。",
+    "DESCRIPTIONS": [
+      "每当你抽到一张 #y状态牌 时，抽 #b%d 张牌。"
     ]
   }
 }

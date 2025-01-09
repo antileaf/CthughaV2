@@ -1,9 +1,9 @@
 package com.cthugha.actions;
 
-import com.cthugha.cards.FenJi;
+import com.cthugha.cards.cthugha.FenJi;
 import com.cthugha.enums.CustomTags;
-import com.cthugha.helpers.StaticHelper;
-import com.cthugha.orbs.YanZhiJing;
+import com.cthugha.utils.StaticHelper;
+import com.cthugha.orbs.FireVampire;
 import com.cthugha.power.FenJiPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -49,7 +49,7 @@ public class YanBaoAction extends AbstractGameAction {
         int size = AbstractDungeon.player.orbs.size();
         for (int i = 0; i < size; i++) {
             AbstractOrb orb = AbstractDungeon.player.orbs.get(i);
-            if (orb.ID == YanZhiJing.ORB_ID) {
+            if (orb.ID == FireVampire.ORB_ID) {
                 matchNums++;
             }
         }

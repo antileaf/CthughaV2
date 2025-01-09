@@ -1,7 +1,7 @@
 package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class XinShangWuMingHuoPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.makeID(XinShangWuMingHuoPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(XinShangWuMingHuoPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public XinShangWuMingHuoPower(AbstractCreature owner, int amount) {
@@ -21,7 +21,8 @@ public class XinShangWuMingHuoPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.updateDescription();
-        this.img = new Texture("cthughaResources/img/power/208_32.png");
+        CthughaHelper.loadPowerRegion(this, "208");
+//        this.img = new Texture("cthughaResources/img/power/208_32.png");
     }
 
     public void updateDescription() {

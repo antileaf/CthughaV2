@@ -77,7 +77,7 @@ public class DecreaseMonsterMaxHealthAction extends AbstractGameAction {
 			}
 			else
 				this.addToTop(new ApplyPowerAction(this.target, this.target,
-						new CounterOfLossMaxHpPower(this.target, this.amount)));
+						new CounterOfLossMaxHpPower(this.target, this.amount), this.amount, true));
 
 			int tempHP = 0;
 

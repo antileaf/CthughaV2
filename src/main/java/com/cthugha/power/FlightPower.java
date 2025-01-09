@@ -1,6 +1,6 @@
 package com.cthugha.power;
 
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FlightPower extends AbstractPower {
 
-    public static final String POWER_ID = ModHelper.makeID(FlightPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(FlightPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     private int storedAmount;

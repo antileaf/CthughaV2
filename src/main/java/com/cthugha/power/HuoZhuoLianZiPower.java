@@ -1,7 +1,7 @@
 package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.EntanglePower;
 
 public class HuoZhuoLianZiPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.makeID(HuoZhuoLianZiPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(HuoZhuoLianZiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public HuoZhuoLianZiPower(AbstractCreature owner, int amount) {
@@ -19,7 +19,8 @@ public class HuoZhuoLianZiPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.updateDescription();
-        this.img = new Texture("cthughaResources/img/power/216_32.png");
+        CthughaHelper.loadPowerRegion(this, "火濯莲子");
+//        this.img = new Texture("cthughaResources/img/power/216_32.png");
     }
 
     public void updateDescription() {

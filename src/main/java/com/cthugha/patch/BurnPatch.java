@@ -1,31 +1,5 @@
 package com.cthugha.patch;
 
-import com.cthugha.characters.Cthugha;
-import com.cthugha.helpers.ModHelper;
-import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
-import com.cthugha.power.FenJiPower;
-import com.cthugha.power.DaoHuoShiYanPower;
-import com.cthugha.relics.HuoTiHuoYan;
-import com.cthugha.relics.ShengLingLieYan;
-import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.Burn;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
-
 @Deprecated
 public class BurnPatch {
 

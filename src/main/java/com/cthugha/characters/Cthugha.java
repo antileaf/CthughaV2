@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.cthugha.cards.ShiftingStar;
-import com.cthugha.cards.StarSpear;
+import com.cthugha.cards.cthugha.Chixiao;
+import com.cthugha.cards.cthugha.ShiftingStar;
+import com.cthugha.cards.cthugha.StarSpear;
+import com.cthugha.orbs.FireVampire;
+import com.cthugha.patch.fire_vampire.GameActionManagerPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
@@ -21,6 +24,8 @@ import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,7 +36,7 @@ import com.cthugha.object.AbstractSpirit;
 import com.cthugha.patch.SpiritField;
 import com.cthugha.power.HeiYanPower;
 import com.cthugha.power.XingYunPower;
-import com.cthugha.relics.HuoTiHuoYan;
+import com.cthugha.relics.cthugha.HuoTiHuoYan;
 import com.cthugha.ui.SkinSelectScreen;
 
 public class Cthugha extends CustomPlayer {
@@ -50,6 +55,7 @@ public class Cthugha extends CustomPlayer {
             "cthughaResources/img/UI/orb/layer2d.png",
             "cthughaResources/img/UI/orb/layer1d.png"
     };
+    private static final String ORB_VFX = "cthughaResources/img/UI/orb/vfx.png";
 
     // 火堆的人物立绘（行动前）
     private static final String MY_CHARACTER_SHOULDER_1 = "cthughaResources/img/char/huodui.png";
@@ -63,7 +69,7 @@ public class Cthugha extends CustomPlayer {
             -5.0F, 0.0F };
 
     public Cthugha(String name) {
-        super(name, MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS, null, null,
+        super(name, MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS, ORB_TEXTURES, ORB_VFX,
                 LAYER_SPEED, null, null);
 
         // 初始化你的人物，如果你的人物只有一张图，那么第一个参数填写你人物图片的路径。
@@ -73,13 +79,12 @@ public class Cthugha extends CustomPlayer {
                 CORPSE_IMAGE, // 人物死亡图像
                 this.getLoadout(),
                 0.0F, 0.0F,
-                200.0F, 220.0F, // 人物碰撞箱大小，越大的人物模型这个越大
+                220.0F, 290.0F, // 人物碰撞箱大小，越大的人物模型这个越大
                 new EnergyManager(3) // 初始每回合的能量
         );
 
         this.refreshSkin();
 
-        // 修复卡牌命定之死在sl情况下会保留翻倍效果的bug。
         HeiYanPower.percentage = HeiYanPower.BASE_PERCENTAGE;
     }
 
@@ -272,7 +277,22 @@ public class Cthugha extends CustomPlayer {
         super.useCard(c, monster, energyOnUse);
     }
 
+    @Override
+    public void channelOrb(AbstractOrb orbToSet) {
+        if (this.maxOrbs > 0 && orbToSet instanceof FireVampire)
+            Chixiao.updateAll();
+
+        super.channelOrb(orbToSet);
+    }
+
     public void removeNextOrb() {
+        AbstractOrb orb = this.orbs.isEmpty() ? null : this.orbs.get(0);
+        if (orb != null && !(orb instanceof EmptyOrbSlot)) {
+            Chixiao.updateAll();
+            GameActionManagerPatch.Fields.orbsRemovedThisCombat
+                    .get(AbstractDungeon.actionManager).add(orb);
+        }
+
         super.removeNextOrb();
 
         if (AbstractDungeon.player.hasPower(XingYunPower.POWER_ID)) {
@@ -280,7 +300,6 @@ public class Cthugha extends CustomPlayer {
             AbstractDungeon.actionManager.addToBottom(new DamageRandomEnemyAction(
                     new DamageInfo(AbstractDungeon.player, power.amount, DamageType.THORNS), AttackEffect.NONE));
         }
-
     }
 
     // 碎心图片
@@ -293,4 +312,21 @@ public class Cthugha extends CustomPlayer {
         panels.add(new CutscenePanel("cthughaResources/img/char/cg3.png"));
         return panels;
     }
+
+//    @Override
+//    public void renderPlayerImage(SpriteBatch sb) {
+//        Cthugha_Core.logger.info("Rendering player image");
+//
+//        if (CthughaHelper.isInBattle() && CardCrawlGame.dungeon instanceof TheTricuspidGate) {
+//            Cthugha_Core.logger.info("Rendering player image in The Tricuspid Gate");
+//
+//            sb.setColor(Color.WHITE);
+//            sb.draw(this.img, this.drawX - this.img.getWidth() / 2.0F * 0.8F + this.animX, this.animY,
+//                    this.img.getWidth() / 2.0F, this.img.getHeight() / 2.0F, this.img.getWidth(), this.img.getHeight(),
+//                    0.8F, 0.8F, 0.0F, 0, 0, this.img.getWidth(), this.img.getHeight(),
+//                    this.flipHorizontal, this.flipVertical);
+//        }
+//        else
+//            super.renderPlayerImage(sb);
+//    }
 }

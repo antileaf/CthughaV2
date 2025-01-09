@@ -1,6 +1,6 @@
 package com.cthugha.actions;
 
-import com.cthugha.orbs.YanZhiJing;
+import com.cthugha.orbs.FireVampire;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.RemoveNextOrbAction;
@@ -30,7 +30,7 @@ public class EachYanZhiJingWeakAction extends AbstractGameAction {
         int size = AbstractDungeon.player.orbs.size();
         for (int i = 0; i < size; i++) {
             AbstractOrb orb = AbstractDungeon.player.orbs.get(i);
-            if (orb.ID == YanZhiJing.ORB_ID) {
+            if (orb.ID == FireVampire.ORB_ID) {
                 if (needRemove) {
                     this.addToBot(new RemoveNextOrbAction());
                 }

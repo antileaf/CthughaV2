@@ -1,15 +1,7 @@
 package com.cthugha.patch;
 
-import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
-import com.evacipated.cardcrawl.modthespire.lib.Matcher;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.cthugha.helpers.StaticHelper;
 import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-
-import javassist.CtBehavior;
 
 @SpirePatch(clz = GameActionManager.class, method = "getNextAction")
 public class GlobalAtTurnStartHookPatch {

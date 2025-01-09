@@ -1,8 +1,6 @@
 package com.cthugha.actions;
 
 import com.cthugha.cards.AbstractCthughaCard;
-import com.cthugha.cards.AbstractShunRanCard;
-import com.cthugha.enums.CustomTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;

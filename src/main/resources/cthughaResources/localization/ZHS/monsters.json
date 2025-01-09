@@ -1,0 +1,19 @@
+{
+  "Cthugha:BurialWatchdogSword": {
+    "NAME": "葬送的看门犬（剑）",
+    "DIALOG": ["重生中……"],
+    "MOVES": ["灼烧攻击", "强化", "连击", "???", "重生"]
+  },
+
+  "Cthugha:BurialWatchdogScepter": {
+      "NAME": "葬送的看门犬（杖）",
+      "DIALOG": ["重生中……"],
+      "MOVES": ["痛击", "加固", "粉碎", "???", "重生"]
+  },
+
+  "Cthugha:Areshkagal": {
+    "NAME": "阿雷什卡高",
+    "DIALOG": ["你是我的了！！！", "你怎么还在这里？", "重生中……"],
+    "MOVES": ["你是我的了！", "重击", "灵魂打击", "强化", "愚蠢", "???", "重生"]
+  }
+}

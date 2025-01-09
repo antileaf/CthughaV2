@@ -1,14 +1,14 @@
 package com.cthugha.power;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.helpers.ModHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ShengMingFanHuanPower extends AbstractPower {
-    public static final String POWER_ID = ModHelper.makeID(ShengMingFanHuanPower.class.getSimpleName());
+    public static final String POWER_ID = CthughaHelper.makeID(ShengMingFanHuanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public ShengMingFanHuanPower(AbstractCreature owner, int amount) {
@@ -18,7 +18,8 @@ public class ShengMingFanHuanPower extends AbstractPower {
         this.amount = amount;
         this.updateDescription();
         // this.loadRegion("thorns");
-        this.img = new Texture("cthughaResources/img/power/215_32.png");
+        CthughaHelper.loadPowerRegion(this, "生命返还");
+//        this.img = new Texture("cthughaResources/img/power/215_32.png");
 
         this.type = PowerType.DEBUFF;
         
