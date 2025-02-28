@@ -87,7 +87,7 @@ public class CastleOfTheSun extends AbstractCthughaCard {
 	}
 
 	@Override
-	public void onShunRan(int level) {
+	public void onFlare(int level) {
 		if (level >= this.shunRan) {
 			if (level < this.secondaryShunRan)
 				this.changeType(this.type == CardType.SKILL ? CardType.ATTACK : CardType.SKILL);

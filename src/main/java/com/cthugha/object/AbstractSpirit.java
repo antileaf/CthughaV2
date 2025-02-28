@@ -1,7 +1,7 @@
 package com.cthugha.object;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.cthugha.patch.SpiritField;
+import com.cthugha.patches.SpiritField;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public abstract class AbstractSpirit {

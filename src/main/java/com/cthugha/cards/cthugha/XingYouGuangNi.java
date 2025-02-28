@@ -2,10 +2,10 @@ package com.cthugha.cards.cthugha;
 
 import com.cthugha.actions.ForEachYanZhiJingAction;
 import com.cthugha.actions.common.BaoYanAction;
+import com.cthugha.actions.common.CthughaAddTempHPAction;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -39,7 +39,7 @@ public class XingYouGuangNi extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new BaoYanAction(this, new AddTemporaryHPAction(p, p, this.magicNumber)));
+        this.addToBot(new BaoYanAction(this, new CthughaAddTempHPAction(p, p, this.magicNumber)));
 
         this.addToBot(new ForEachYanZhiJingAction(count -> {
             for (int i = 0; i < count; i++)

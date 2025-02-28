@@ -58,6 +58,26 @@
             <systemPath>${Steam.path}/workshop/content/646570/1934902042/actlikeit.jar</systemPath>
         </dependency>
 
+        <!-- Optional -->
+
+        <dependency>
+            <groupId>me.antileaf</groupId>
+            <artifactId>SignatureLib</artifactId>
+            <version>newest</version>
+            <scope>system</scope>
+            <systemPath>${Steam.path}/workshop/content/646570/3433319964/SignatureLib.jar</systemPath>
+        </dependency>
+
+        <!-- Compatibility -->
+
+        <dependency>
+            <groupId>kaltsit</groupId>
+            <artifactId>kaltsit</artifactId>
+            <version>newest</version>
+            <scope>system</scope>
+            <systemPath>${Steam.path}/workshop/content/646570/2672531653/KaltsitMod.jar</systemPath>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>mintySpire</groupId>-->
 <!--            <artifactId>minty</artifactId>-->

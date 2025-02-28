@@ -1,0 +1,12 @@
+{
+  "Cthugha:ColorificStampModifier": {
+    "NAME": "#rC #go #bl #po #rr #gi #bf #pi #rc #gM #ba #pr #rk", 
+    "DESCRIPTION": "When you play a card with #yColorific #yMark, add 1 the corresponding #yColorific #yMark, then swap the mark with another mark of a random card(Card without mark are prioritized). NL When you stack the same #yColorific #yMark, Areshkagal takes an action immediately. NL When you stake #b4 different #yColorific #yMark, reduce all #yColorific #yMark by #b1.",
+    "EXTENDED_DESCRIPTION": [
+      "#rRed : The damage dealt by this card is reduced by #b2.",
+      "#gGreen : The Block gained by this card is reduced by #b2.",
+      "#bBlue : Take #b2 damage.",
+      "#pPurple : All enemies heal #b2 HP."
+    ]
+  }
+}

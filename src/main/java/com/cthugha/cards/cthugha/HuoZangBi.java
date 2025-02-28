@@ -40,7 +40,7 @@ public class HuoZangBi extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, this.block));
             this.addToBot(new MakeTempCardInDiscardAction(new Burn(), this.magicNumber));

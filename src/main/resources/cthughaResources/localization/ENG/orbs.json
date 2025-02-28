@@ -2,7 +2,7 @@
     "Cthugha:FireVampire": {
         "NAME": "Fire Vampire",
         "DESCRIPTION": [
-            "At the end of your turn, absorb a #yBurn from your hand, randomly deal #b%d damage to an enemy, then put that #yBurn into your discard pile."
+            "At the end of your turn, absorb a #yBurn from your hand, deal ( #b5 + #yBurn damage) damage to a random enemy, then discard that #yBurn."
         ]
     }
 }

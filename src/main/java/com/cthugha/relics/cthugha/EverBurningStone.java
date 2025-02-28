@@ -124,43 +124,54 @@ public class EverBurningStone extends CustomRelic {
 			return;
 		}
 
-		AbstractDungeon.effectsQueue.add(new AbstractGameEffect() {
-			private int counter = 2;
-			private boolean wait = false;
-
-			@Override
-			public void update() {
-				if (this.counter > 0 && !this.wait) {
-					this.counter--;
-					this.wait = true;
-
-					AbstractDungeon.cardRewardScreen.customCombatOpen(EverBurningStone.generate(),
-							CardRewardScreen.TEXT[1], true);
-				}
-
-				if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
-					AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(
-							AbstractDungeon.cardRewardScreen.discoveryCard,
-							Settings.WIDTH * 0.5F,
-							Settings.HEIGHT * 0.5F));
-					AbstractDungeon.cardRewardScreen.discoveryCard = null;
-					this.wait = false;
-
-					if (this.counter == 0)
-						this.isDone = true;
-				}
-			}
-
-			@Override
-			public void render(SpriteBatch sb) {}
-
-			@Override
-			public void dispose() {}
-		});
+		AbstractDungeon.effectsQueue.add(new EverBurningStoneEffect());
 	}
 
 	@Override
 	public String getUpdatedDescription() {
 		return this.DESCRIPTIONS[0];
+	}
+
+	public static class EverBurningStoneEffect extends AbstractGameEffect {
+		private int counter = 2;
+		private boolean wait = false;
+		public boolean canceled = false;
+
+		@Override
+		public void update() {
+			if (this.counter > 0 && !this.wait) {
+				this.counter--;
+				this.wait = true;
+
+				AbstractDungeon.cardRewardScreen.customCombatOpen(EverBurningStone.generate(),
+						CardRewardScreen.TEXT[1], true);
+			}
+
+			if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
+				AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(
+						AbstractDungeon.cardRewardScreen.discoveryCard,
+						Settings.WIDTH * 0.5F,
+						Settings.HEIGHT * 0.5F));
+				AbstractDungeon.cardRewardScreen.discoveryCard = null;
+				this.wait = false;
+
+				if (this.counter == 0)
+					this.isDone = true;
+			}
+
+			else if (this.canceled) {
+				this.wait = false;
+				this.canceled = false;
+
+				if (this.counter == 0)
+					this.isDone = true;
+			}
+		}
+
+		@Override
+		public void render(SpriteBatch sb) {}
+
+		@Override
+		public void dispose() {}
 	}
 }

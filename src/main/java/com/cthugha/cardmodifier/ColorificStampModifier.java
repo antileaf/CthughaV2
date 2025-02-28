@@ -138,8 +138,10 @@ public class ColorificStampModifier extends AbstractCardModifier {
 					.toArray(AbstractCard[]::new);
 
 			AbstractCard c = choices[AbstractDungeon.cardRandomRng.random(choices.length - 1)];
-			this.addToBot(new AnonymousAction(() -> {
+			this.addToTop(new AnonymousAction(() -> {
 				CardModifierManager.addModifier(c, new ColorificStampModifier(this.color));
+				if (AbstractDungeon.player.hand.contains(c))
+					c.flash();
 				CardModifierManager.removeSpecificModifier(card, this, true);
 			}));
 		}
@@ -147,12 +149,14 @@ public class ColorificStampModifier extends AbstractCardModifier {
 			AbstractCard c = cards.get(AbstractDungeon.cardRandomRng.random(cards.size() - 1));
 
 			if (c != card)
-				this.addToBot(new AnonymousAction(() -> {
+				this.addToTop(new AnonymousAction(() -> {
 					ColorEnum other = ((ColorificStampModifier) CardModifierManager.getModifiers(c, ID)
 									.get(0)).color;
 
 					CardModifierManager.getModifiers(c, ID)
 							.forEach(mod -> ((ColorificStampModifier) mod).color = this.color);
+					if (AbstractDungeon.player.hand.contains(c))
+						c.flash();
 
 					this.color = other;
 				}));

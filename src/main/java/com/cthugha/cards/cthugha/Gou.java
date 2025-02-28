@@ -34,6 +34,7 @@ public class Gou extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.shunRan = this.baseShunRan = 1;
+        this.secondaryShunRan = this.baseSecondaryShunRan = 3;
         this.magicNumber = this.baseMagicNumber = 4;
         this.damage = this.baseDamage = 4;
         this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 2;
@@ -48,22 +49,21 @@ public class Gou extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
                     new VigorPower(AbstractDungeon.player, this.magicNumber)));
         }
-        if (this.upgraded) {
-            if (level >= this.secondaryShunRan) {
-                this.addToBot(new AnonymousAction(() -> {
-                    this.applyPowers();
-                    this.calculateCardDamage(null);
 
-                    for (int i = 0; i < this.secondaryMagicNumber; i++)
-                        this.addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.damage),
-                                AttackEffect.FIRE));
-                }));
-            }
+        if (level >= this.secondaryShunRan) {
+            this.addToBot(new AnonymousAction(() -> {
+                this.applyPowers();
+                this.calculateCardDamage(null);
+
+                for (int i = 0; i < this.secondaryMagicNumber; i++)
+                    this.addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.damage),
+                            AttackEffect.FIRE));
+            }));
         }
     }
 
@@ -71,8 +71,7 @@ public class Gou extends AbstractCthughaCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.secondaryShunRan = this.baseSecondaryShunRan = 3;
-            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.upgradeSecondaryShunRan(-1);
             this.initializeDescription();
         }
     }

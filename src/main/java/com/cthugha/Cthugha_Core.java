@@ -17,14 +17,13 @@ import com.cthugha.dungeons.the_tricuspid_gate.monsters.Areshkagal;
 import com.cthugha.events.ReplacedVampires;
 import com.cthugha.glow.BaoYanGlowInfo;
 import com.cthugha.glow.ZhiLiaoGlowInfo;
-import com.cthugha.patch.misc.HPLostThisCombatPatch;
+import com.cthugha.patches.misc.HPLostThisCombatPatch;
+import com.cthugha.patches.signature.SignaturePatch;
 import com.cthugha.potions.EvilSunrise;
 import com.cthugha.potions.RedLotusWater;
 import com.cthugha.power.StampPower;
 import com.cthugha.strings.CthughaCardModifierStrings;
-import com.cthugha.utils.BaoYanHelper;
-import com.cthugha.utils.CthughaHelper;
-import com.cthugha.utils.EnergyHelper;
+import com.cthugha.utils.*;
 import com.cthugha.potions.BottledHell;
 import com.cthugha.power.HeiYanPower;
 import com.cthugha.variable.*;
@@ -32,13 +31,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.blights.AbstractBlight;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.city.Vampires;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import me.antileaf.signature.utils.SignatureHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -112,6 +114,7 @@ public class Cthugha_Core implements
 	// 注解需要调用的方法，必须写
 	public static void initialize() {
 		new Cthugha_Core();
+		ConfigHelper.load();
 	}
 
 	@Override
@@ -130,9 +133,6 @@ public class Cthugha_Core implements
 
 	@Override
 	public void receiveEditCards() {
-		// BaseMod.addCard(new CiJi());
-		// BaseMod.addCard(new XiaDunHuiJian());
-
 		this.loadVariables();
 
 		logger.info("Starting edit cards...");
@@ -158,25 +158,11 @@ public class Cthugha_Core implements
 				});
 
 		new AutoAdd("CthughaV2")
-				.packageFilter("com.cthugha.relics.publics")
+				.packageFilter("com.cthugha.relics.shared")
 				.any(AbstractRelic.class, (info, relic) -> {
 					BaseMod.addRelic(relic, RelicType.SHARED);
 					UnlockTracker.markRelicAsSeen(relic.relicId);
 				});
-
-//		BaseMod.addRelicToCustomPool(new HuoTiHuoYan(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new ShengLingLieYan(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new LongXin(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new LettersOfNestar(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new AshesToAshes(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new EverBurningStone(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new SoulCoin(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new FireEmblem(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new WilderingMirror(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new EmeraldTabletVolumeVII(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new KingskinBodhran(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new ChaliceMurmurous(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
-//		BaseMod.addRelicToCustomPool(new Frangiclave(), AbstractCardEnum.CTHUGHA_CARD_COLOR);
 	}
 
 	@Override
@@ -190,6 +176,7 @@ public class Cthugha_Core implements
 			lang = "ENG";
 		}
 
+		BaseMod.loadCustomStringsFile(CharacterStrings.class, "cthughaResources/localization/" + lang + "/character.json");
 		BaseMod.loadCustomStringsFile(CardStrings.class, "cthughaResources/localization/" + lang + "/cards.json");
 		BaseMod.loadCustomStringsFile(RelicStrings.class, "cthughaResources/localization/" + lang + "/relics.json");
 		BaseMod.loadCustomStringsFile(OrbStrings.class, "cthughaResources/localization/" + lang + "/orbs.json");
@@ -200,6 +187,7 @@ public class Cthugha_Core implements
 		BaseMod.loadCustomStringsFile(BlightStrings.class, "cthughaResources/localization/" + lang + "/blights.json");
 		BaseMod.loadCustomStringsFile(MonsterStrings.class, "cthughaResources/localization/" + lang + "/monsters.json");
 		BaseMod.loadCustomStringsFile(ScoreBonusStrings.class, "cthughaResources/localization/" + lang + "/score.json");
+		BaseMod.loadCustomStringsFile(TutorialStrings.class, "cthughaResources/localization/" + lang + "/tutorial.json");
 
 		CthughaCardModifierStrings.init((new Gson()).fromJson(
 				Gdx.files.internal("cthughaResources/localization/" + lang + "/card_modifiers.json")
@@ -230,7 +218,6 @@ public class Cthugha_Core implements
 
 	@Override
 	public void receiveOnBattleStart(AbstractRoom room) {
-//        StaticHelper.resetvaluesAtBattleStart();
 		BaoYanHelper.initPreBattle();
 		EnergyHelper.initPreBattle();
 
@@ -275,11 +262,50 @@ public class Cthugha_Core implements
 
 		ColorificStampModifier.initialize();
 		StampPower.initialize();
+
+		BaseMod.registerModBadge(
+				ImageMaster.loadImage("cthughaResources/img/badge.png"),
+				"cthugha",
+				"ee, antileaf",
+				"",
+				ConfigHelper.createConfigPanel()
+		);
+
+		if (CthughaHelper.isSignatureLibAvailable()) {
+			SignatureHelper.register(Burn.ID, new SignatureHelper.Info(
+					(card) -> {
+						if (card.type == AbstractCard.CardType.STATUS)
+							return "cthughaResources/img/signature/burn.png";
+						else
+							return "cthughaResources/img/signature/burn_attack.png";
+					},
+					(card) -> {
+						if (card.type == AbstractCard.CardType.STATUS)
+							return "cthughaResources/img/signature/burn_p.png";
+						else
+							return "cthughaResources/img/signature/burn_attack_p.png";
+					}
+			));
+
+			if (!ConfigHelper.hasCheckedHistory()) {
+				boolean res = CheckHistoryHelper.checkHistories();
+
+				if (res) {
+					SignatureHelper.unlock(Burn.ID, true);
+					logger.info("Has defeated Areshkagal before, Signature of Burn unlocked!");
+				}
+				else
+					logger.info("Signature not unlocked.");
+
+				ConfigHelper.setHasCheckedHistory(true);
+			}
+		}
 	}
 
 	@Override
 	public void receivePostDungeonInitialize() {
-		if (AbstractDungeon.player instanceof Cthugha) {
+		if (AbstractDungeon.player instanceof Cthugha &&
+				!AbstractDungeon.player.hasBlight(TheBurningOne.ID)) {
 			AbstractBlight blight = new TheBurningOne();
 
 			blight.spawn(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F);
@@ -309,6 +335,9 @@ public class Cthugha_Core implements
 //				"cthughaResources/audio/music/Facing_the_Faceless_Sphinx.mp3");
 //		BaseMod.addAudio("Cthugha:LAUGHING_TILL_THE_END",
 //				"cthughaResources/audio/music/Laughing_till_the_End.mp3");
+
+		BaseMod.addAudio("Cthugha:CHAR_SELECT",
+				"cthughaResources/audio/sound/CHAR_SELECT.ogg");
 	}
 
 	@Override

@@ -99,7 +99,7 @@
 
   "Cthugha:FireDancePictureBook": {
     "NAME": "火舞绘本",
-    "FLAVOR": "左脚向前，走一步，转圈……—不知火",
+    "FLAVOR": "左脚向前，走一步，转圈……——不知火",
     "DESCRIPTIONS": [
       "你每打出 #b3 张牌，抽 #b1 张牌并在本回合将其 #y保留 。当你抽牌时，重置本遗物计数。"
     ]

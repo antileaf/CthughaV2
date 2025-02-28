@@ -1,27 +1,19 @@
 package com.cthugha.cards.colorless;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cthugha.cards.AbstractCthughaCard;
-import com.cthugha.enums.AbstractCardEnum;
-import com.cthugha.patch.misc.HPLostThisCombatPatch;
+import com.cthugha.patches.misc.HPLostThisCombatPatch;
 import com.cthugha.power.CounterOfLossMaxHpPower;
 import com.cthugha.utils.CthughaHelper;
-import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
-import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BloodboonRitual extends AbstractCthughaCard {
 

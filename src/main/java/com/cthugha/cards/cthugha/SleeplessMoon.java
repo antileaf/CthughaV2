@@ -1,5 +1,6 @@
 package com.cthugha.cards.cthugha;
 
+import basemod.BaseMod;
 import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cards.AbstractCthughaCard;
@@ -26,7 +27,7 @@ public class SleeplessMoon extends AbstractCthughaCard {
 
 	private static final int COST = 1;
 	private static final CardType TYPE = CardType.ATTACK;
-	private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
+	private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;
 	private static final CardRarity RARITY = CardRarity.RARE;
 	private static final CardTarget TARGET = CardTarget.ENEMY;
 
@@ -70,16 +71,28 @@ public class SleeplessMoon extends AbstractCthughaCard {
 	}
 
 	@Override
-	public void onShunRan(int level) {
+	public void onFlare(int level) {
 		if (level >= this.shunRan) {
 			this.addToBot(new AnonymousAction(() -> {
+				boolean handIsFull = AbstractDungeon.player.hand.size() >= BaseMod.MAX_HAND_SIZE;
+
+				if (handIsFull)
+					AbstractDungeon.player.createHandIsFullDialog();
+
 				if (AbstractDungeon.player.drawPile.contains(this)) {
-					AbstractDungeon.player.drawPile.moveToHand(this);
+					if (!handIsFull)
+						AbstractDungeon.player.drawPile.moveToHand(this);
+					else
+						AbstractDungeon.player.drawPile.moveToDiscardPile(this);
 				} else if (AbstractDungeon.player.discardPile.contains(this)) {
 					AbstractDungeon.player.discardPile.moveToHand(this);
 				} else if (AbstractDungeon.player.exhaustPile.contains(this)) {
 					this.unfadeOut();
-					AbstractDungeon.player.exhaustPile.moveToHand(this);
+
+					if (!handIsFull)
+						AbstractDungeon.player.exhaustPile.moveToHand(this);
+					else
+						AbstractDungeon.player.exhaustPile.moveToDiscardPile(this);
 				}
 
 				this.triggeredShunRanThisTurn = false;

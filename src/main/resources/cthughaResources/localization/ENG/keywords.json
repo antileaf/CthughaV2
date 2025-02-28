@@ -3,16 +3,17 @@
         "NAMES": [
             "Fire Vampire",
             "firevampire",
-            "fire_vampire"
+            "fire_vampire",
+            "FireVampire"
         ],
-        "DESCRIPTION": "At the end of your turn, absorb a #yBurn from your hand, randomly deal #b10 damage to an enemy, then put that #yBurn into your discard pile."
+        "DESCRIPTION": "At the end of your turn, absorb a #yBurn from your hand, deal ( #b5 + #yBurn damage) damage to a random enemy, then discard that #yBurn."
     },
     {
         "NAMES": [
             "Blaze",
             "blaze"
         ],
-        "DESCRIPTION": "When you already have #b6 #yFireVampires, this card triggers an additional effect when played."
+        "DESCRIPTION": "When you already have #b6 #yFire #yVampires, this card triggers an additional effect when played."
     },
     {
         "NAMES": [
@@ -21,7 +22,7 @@
             "blackflame",
             "blackflamed"
         ],
-        "DESCRIPTION": "When applied, lose max HP equals to #yBlackFlame. #yBlackFlamed creatures lose HP and max HP equals to #b10% of #yBlackFlame at the start of their turn."
+        "DESCRIPTION": "When applied, lose max HP equals to #yBlack #yFlame. #yBlack #yFlamed creatures lose HP and max HP equals to #b10% of #yBlack #yFlame at the start of their turn."
     },
     {
         "NAMES": [
@@ -42,7 +43,7 @@
             "Flare",
             "flare"
         ],
-        "DESCRIPTION": "Each #yFlare card can be trigged once per turn. #bRight #bClick to #yExhaust any number of #yBurn in your hand and trigger effects corresponding to the number of #yExhausted #yBurns."
+        "DESCRIPTION": "Each #yFlare card can be trigged once per turn. #bRight #bClick to #yExhaust any number of #yBurn #yCard in your hand, trigger corresponding effects within the number of #yExhausted cards."
     },
     {
         "NAMES": [
@@ -70,7 +71,7 @@
             "Flight",
             "flight"
         ],
-        "DESCRIPTION": "Receives 50% less unblocked attack damage. Losing this power if dealt corresponding times of #yAttack damage in one turn, otherwise restore all at the beginning of next turn."
+        "DESCRIPTION": "Receives 50% less attack damage. Losing this power if dealt corresponding times of unblocked attack damage in one turn, otherwise restore all at the beginning of next turn."
     },
     {
         "NAMES": [
@@ -78,7 +79,7 @@
             "channel",
             "channeled"
         ],
-        "DESCRIPTION": "Channeling an #yFireVampire puts it into your first empty slot."
+        "DESCRIPTION": "Channeling a #yFire #yVampire puts it into your first empty slot."
     },
     {
         "NAMES": [
@@ -95,7 +96,13 @@
             "Shining",
             "shining"
         ],
-        "DESCRIPTION": "Additional effect triggered when playing this card with remaining Flare."
+        "DESCRIPTION": "Additional effect triggered when playing this card with unused #yFlare."
+    },
+    {
+        "NAMES": [
+            "Temp_HP"
+        ],
+        "DESCRIPTION": "Temporary HP disappears at the end of combat."
     }
     
 ]

@@ -4,11 +4,13 @@ import basemod.abstracts.CustomMonster;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cardmodifier.ColorificStampModifier;
 import com.cthugha.cards.colorless.Erosion;
+import com.cthugha.patches.RevivePatch;
 import com.cthugha.power.ChaosIncarnatePower;
-import com.cthugha.power.FourColorTheoremPower;
+import com.cthugha.power.ShengMingFanHuanPower;
 import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -19,9 +21,7 @@ import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.colorless.DarkShackles;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -32,8 +32,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.combat.HeartBuffEffect;
-
-import java.util.ArrayList;
 
 public class Areshkagal extends CustomMonster {
 	public static final String SIMPLE_NAME = Areshkagal.class.getSimpleName();
@@ -160,16 +158,22 @@ public class Areshkagal extends CustomMonster {
 			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this,
 					new StrengthPower(this, strength)));
 
-			if (this.strengthenCount == 0)
+			for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
+				if (!m.isDeadOrEscaped())
+					this.addToBot(new GainBlockAction(m, 30));
+
+			this.strengthenCount++;
+
+			if (this.strengthenCount == 1)
 				this.addToBot(new ApplyPowerAction(this, this,
 						new ArtifactPower(this, 2)));
-			else if (this.strengthenCount == 1)
-				this.addToBot(new ApplyPowerAction(this, this,
-						new BeatOfDeathPower(this, 1)));
 			else if (this.strengthenCount == 2)
 				this.addToBot(new ApplyPowerAction(this, this,
-						new PainfulStabsPower(this)));
+						new BeatOfDeathPower(this, 1)));
 			else if (this.strengthenCount == 3)
+				this.addToBot(new ApplyPowerAction(this, this,
+						new PainfulStabsPower(this)));
+			else if (this.strengthenCount == 4)
 				this.addToBot(new ApplyPowerAction(this, this,
 						new StrengthPower(this, 10)));
 			else
@@ -194,32 +198,57 @@ public class Areshkagal extends CustomMonster {
 				this.addToBot(new ApplyPowerAction(this, this, new MalleablePower(this, 3)));
 			}
 
-//			BurialWatchdogSword sword = (BurialWatchdogSword)
-//					AbstractDungeon.getMonsters().getMonster(BurialWatchdogSword.ID);
-//			if (sword != null && sword.halfDead)
-//				sword.setIntentToRevive();
-//
-//			BurialWatchdogScepter scepter = (BurialWatchdogScepter)
-//					AbstractDungeon.getMonsters().getMonster(BurialWatchdogScepter.ID);
-//			if (scepter != null && scepter.halfDead)
-//				scepter.setIntentToRevive();
+			BurialWatchdogSword sword = (BurialWatchdogSword)
+					AbstractDungeon.getMonsters().getMonster(BurialWatchdogSword.ID);
+			if (sword != null) {
+				if (!sword.halfDead) {
+					int targetMaxHp = sword.initialMaxHealth * 2;
+
+					if (sword.maxHealth < targetMaxHp)
+						this.addToBot(new AnonymousAction(() -> {
+							sword.increaseMaxHp(targetMaxHp - sword.maxHealth, true);
+						}));
+				}
+				else
+					sword.reviveByAreshkagal();
+			}
+			BurialWatchdogScepter scepter = (BurialWatchdogScepter)
+					AbstractDungeon.getMonsters().getMonster(BurialWatchdogScepter.ID);
+			if (scepter != null) {
+				if (!scepter.halfDead) {
+					int targetMaxHp = scepter.initialMaxHealth * 2;
+
+					if (scepter.maxHealth < targetMaxHp)
+						this.addToBot(new AnonymousAction(() -> {
+							scepter.increaseMaxHp(targetMaxHp - scepter.maxHealth, true);
+						}));
+				}
+				else
+					scepter.reviveByAreshkagal();
+			}
 		}
 		else if (this.nextMove == UNKNOWN)
 			this.addToBot(new TextAboveCreatureAction(this, monsterStrings.DIALOG[2]));
 		else if (this.nextMove == REVIVE) {
-			this.addToBot(new SFXAction("DARKLING_REGROW_" + MathUtils.random(1, 2),
-					MathUtils.random(-0.1F, 0.1F)));
+			if (this.maxHealth <= 1)
+				Cthugha_Core.logger.info("Areshkagal: maxHealth <= 1");
+			else {
+				this.addToBot(new SFXAction("DARKLING_REGROW_" + MathUtils.random(1, 2),
+						MathUtils.random(-0.1F, 0.1F)));
 
-			this.addToBot(new HealAction(this, this, this.maxHealth / 2));
-			this.addToBot(new AnonymousAction(() -> this.halfDead = false));
+				this.addToBot(new HealAction(this, this, this.maxHealth / 2));
+				this.addToBot(new AnonymousAction(() -> this.halfDead = false));
 
-			this.addToBot(new ApplyPowerAction(this, this, new RegrowPower(this)));
-			this.addToBot(new ApplyPowerAction(this, this, new InvinciblePower(this,
-					AbstractDungeon.ascensionLevel >= 19 ? 300 : 400)));
+				this.addToBot(new ApplyPowerAction(this, this, new RegrowPower(this)));
+				this.addToBot(new ApplyPowerAction(this, this, new InvinciblePower(this,
+						AbstractDungeon.ascensionLevel >= 19 ? 300 : 400)));
 //			this.addToBot(new ApplyPowerAction(this, this, new FourColorTheoremPower(this)));
 
-			for (AbstractRelic relic : AbstractDungeon.player.relics)
-				relic.onSpawnMonster(this);
+				for (AbstractRelic relic : AbstractDungeon.player.relics)
+					relic.onSpawnMonster(this);
+
+				RevivePatch.Fields.tempHpReturnAmount.set(this, 0);
+			}
 		}
 
 		this.addToBot(new RollMoveAction(this));
@@ -232,7 +261,10 @@ public class Areshkagal extends CustomMonster {
 	@Override
 	protected void getMove(int num) {
 		if (this.halfDead) {
-			this.setMove(REVIVE, Intent.BUFF);
+			if (this.maxHealth <= 1)
+				this.setMove((byte) 0, Intent.NONE);
+			else
+				this.setMove(REVIVE, Intent.BUFF);
 		}
 		else {
 			if (!this.firstMove) { // First move
@@ -240,7 +272,7 @@ public class Areshkagal extends CustomMonster {
 				this.firstMove = true;
 			}
 			else if (this.currentHealth <= this.maxHealth / 2 && !this.foolishUsed) {
-				this.setMove(FOOLISH, Intent.BUFF);
+				this.setMove(FOOLISH, Intent.MAGIC);
 				this.foolishUsed = true;
 			}
 			else {
@@ -261,7 +293,7 @@ public class Areshkagal extends CustomMonster {
 								this.damage.get(1).base, 7, true);
 				}
 				else
-					this.setMove(STRENGTHEN, Intent.BUFF);
+					this.setMove(STRENGTHEN, Intent.DEFEND_BUFF);
 
 				this.moveCount++;
 			}
@@ -279,6 +311,10 @@ public class Areshkagal extends CustomMonster {
 
 			for (AbstractRelic relic : AbstractDungeon.player.relics)
 				relic.onMonsterDeath(this);
+
+			if (this.hasPower(ShengMingFanHuanPower.POWER_ID))
+				RevivePatch.Fields.tempHpReturnAmount.set(this,
+						this.getPower(ShengMingFanHuanPower.POWER_ID).amount);
 
 			this.powers.clear();
 
@@ -306,6 +342,8 @@ public class Areshkagal extends CustomMonster {
 	}
 
 	private void halfDie() {
+		this.currentBlock = 0;
+
 //		BurialWatchdogScepter other = AbstractDungeon.getMonsters().monsters.stream()
 //				.filter(m -> m instanceof BurialWatchdogScepter)
 //				.map(m -> (BurialWatchdogScepter) m)

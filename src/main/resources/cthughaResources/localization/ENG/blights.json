@@ -1,0 +1,8 @@
+{
+  "Cthugha:TheBurningOne": {
+    "NAME": "The Burning One",
+    "DESCRIPTION": [
+      "The damage dealt by #yBurn will be borne by a random enemy."
+    ]
+  }
+}

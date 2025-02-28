@@ -60,7 +60,7 @@ public class XianYi extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (this.shunRan == -1) {
             Cthugha_Core.logger.info("XianYi: shunRan is -1");
             return;

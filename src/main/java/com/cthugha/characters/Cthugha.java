@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.cards.cthugha.Chixiao;
 import com.cthugha.cards.cthugha.ShiftingStar;
 import com.cthugha.cards.cthugha.StarSpear;
 import com.cthugha.orbs.FireVampire;
-import com.cthugha.patch.fire_vampire.GameActionManagerPatch;
+import com.cthugha.patches.fire_vampire.GameActionManagerPatch;
+import com.cthugha.utils.ConfigHelper;
+import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
@@ -17,12 +20,16 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.cutscenes.CutscenePanel;
 import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.ScreenShake;
+import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.localization.TutorialStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
@@ -33,13 +40,16 @@ import basemod.abstracts.CustomPlayer;
 
 import com.cthugha.enums.*;
 import com.cthugha.object.AbstractSpirit;
-import com.cthugha.patch.SpiritField;
+import com.cthugha.patches.SpiritField;
 import com.cthugha.power.HeiYanPower;
 import com.cthugha.power.XingYunPower;
 import com.cthugha.relics.cthugha.HuoTiHuoYan;
 import com.cthugha.ui.SkinSelectScreen;
+import com.megacrit.cardcrawl.ui.FtueTip;
 
 public class Cthugha extends CustomPlayer {
+    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(
+            Cthugha.class.getSimpleName());
 
     // 战斗界面左下角能量图标的每个图层
     private static final String[] ORB_TEXTURES = new String[] {
@@ -97,8 +107,9 @@ public class Cthugha extends CustomPlayer {
     // 人物选择界面点击你的人物按钮时触发的方法，这里为屏幕轻微震动
     @Override
     public void doCharSelectScreenSelectEffect() {
-        // CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED,
-        // ScreenShake.ShakeDur.MED, false);
+        CardCrawlGame.sound.play("Cthugha:CHAR_SELECT");
+        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW,
+                ScreenShake.ShakeDur.MED, false);
     }
 
     // 高进阶带来的生命值损失
@@ -129,7 +140,7 @@ public class Cthugha extends CustomPlayer {
     // 自定义模式选择你的人物时播放的音效
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
-        return "ATTACK_HEAVY";
+        return "Cthugha:CHAR_SELECT";
     }
 
     // 卡牌的能量字体，没必要修改
@@ -140,21 +151,9 @@ public class Cthugha extends CustomPlayer {
 
     @Override
     public CharSelectInfo getLoadout() {
-        String name, description;
-        if (Settings.language == Settings.GameLanguage.ZHS ||
-                Settings.language == Settings.GameLanguage.ZHT ||
-                Settings.language == Settings.GameLanguage.JPN) {
-            name = "克图格亚";
-            description = "由炎之精侍奉的被称为火焰之主的旧日支配者。 NL 永燃之焰可焚尽一切，境随心转亦御烛蚀死亡。";
-        }
-        else {
-            name = "Cthugha";
-            description = "An ancient ruler once worshipped by the spirits of flame as the Lord of Fire. NL The eternal flame can burn all, and the realm follows the heart to control the candle to erode death.";
-        }
-
         return new CharSelectInfo(
-                name, // 人物名字
-                description, // 人物介绍
+                characterStrings.NAMES[0], // 人物名字
+                characterStrings.TEXT[0], // 人物介绍
                 66, // 当前血量
                 66, // 最大血量
                 6, // 初始充能球栏位
@@ -170,27 +169,13 @@ public class Cthugha extends CustomPlayer {
     // 游戏中左上角显示在你的名字之后的人物名称
     @Override
     public String getLocalizedCharacterName() {
-        if (Settings.language == Settings.GameLanguage.ZHS ||
-                Settings.language == Settings.GameLanguage.ZHT ||
-                Settings.language == Settings.GameLanguage.JPN) {
-            return "克图格亚";
-        }
-        else {
-            return "Cthugha";
-        }
+        return characterStrings.NAMES[0];
     }
 
     // 人物名字（出现在游戏左上角）
     @Override
     public String getTitle(PlayerClass arg0) {
-        if (Settings.language == Settings.GameLanguage.ZHS ||
-                Settings.language == Settings.GameLanguage.ZHT ||
-                Settings.language == Settings.GameLanguage.JPN) {
-            return "克图格亚";
-        }
-        else {
-            return "Cthugha";
-        }
+        return characterStrings.NAMES[0];
     }
 
     // 打心脏的颜色，不是很明显
@@ -211,7 +196,7 @@ public class Cthugha extends CustomPlayer {
     // 第三章面对心脏说的话（例如战士是“你握紧了你的长刀……”之类的）
     @Override
     public String getSpireHeartText() {
-        return "你将那焰引起随之任之燃到炽烈已极……";
+        return characterStrings.TEXT[1];
     }
 
     // 翻牌事件出现的你的职业牌（一般设为打击）
@@ -261,7 +246,7 @@ public class Cthugha extends CustomPlayer {
 
     @Override
     public AbstractPlayer newInstance() {
-        return new Cthugha("123");
+        return new Cthugha("Cthugha");
     }
 
     public void onVictory() {
@@ -329,4 +314,38 @@ public class Cthugha extends CustomPlayer {
 //        else
 //            super.renderPlayerImage(sb);
 //    }
+
+    @Override
+    public void onCardDrawOrDiscard() {
+        super.onCardDrawOrDiscard();
+
+        if (ConfigHelper.showTutorial() || (Settings.isControllerMode && ConfigHelper.showControllerTutorial())) {
+            AbstractCard flareCard = AbstractDungeon.player.hand.group.stream()
+                    .filter(c -> c instanceof AbstractCthughaCard)
+                    .filter(c -> ((AbstractCthughaCard) c).shunRan > -1)
+                    .findFirst()
+                    .orElse(null);
+
+            if (flareCard != null) {
+                TutorialStrings tutorialStrings = CardCrawlGame.languagePack.getTutorialString(
+                        CthughaHelper.makeID("Cthugha"));
+
+                String body = "";
+                if (ConfigHelper.showTutorial())
+                    body = tutorialStrings.TEXT[0];
+                if (Settings.isControllerMode && ConfigHelper.showControllerTutorial()) {
+                    if (!body.isEmpty())
+                        body += " NL ";
+                    body += tutorialStrings.TEXT[1];
+                }
+
+                AbstractDungeon.ftue = new FtueTip(tutorialStrings.LABEL[0], body,
+                        Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, flareCard);
+
+                ConfigHelper.setShowTutorial(false);
+                ConfigHelper.setShowControllerTutorial(false);
+                ConfigHelper.save();
+            }
+        }
+    }
 }

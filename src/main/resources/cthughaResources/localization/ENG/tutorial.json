@@ -1,0 +1,9 @@
+{
+  "Cthugha:Cthugha": {
+    "LABEL": ["Flare"],
+    "TEXT": [
+      "The #yFlare effect of a card can be triggered by #bright-clicking it.",
+      "When using a controller, press #bRS (right stick) to trigger the #yFlare effect."
+    ]
+  }
+}

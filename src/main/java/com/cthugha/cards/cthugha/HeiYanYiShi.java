@@ -42,7 +42,7 @@ public class HeiYanYiShi extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
                 if (!m.isDeadOrEscaped())

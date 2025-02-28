@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.cthugha.enums.CustomTags;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.status.Burn;
@@ -109,5 +110,9 @@ public abstract class CthughaHelper {
 		power.region48 = new TextureAtlas.AtlasRegion(new Texture(
 				"cthughaResources/img/power/" + id + "_32.png"),
 				0, 0, 32, 32);
+	}
+
+	public static boolean isSignatureLibAvailable() {
+		return Loader.isModLoaded("SignatureLib");
 	}
 }

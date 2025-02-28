@@ -1,5 +1,6 @@
 package com.cthugha.actions.unique;
 
+import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -28,44 +29,60 @@ public class HeLuSiZhiYanAction extends AbstractGameAction {
         this.duration = this.startingDuration;
     }
 
+    private AbstractCard generateBurn() {
+        AbstractCard burn = new Burn();
+
+        StSLib.onCreateCard(burn);
+
+        return burn;
+    }
+
+    @Override
     public void update() {
         if (AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.isDone = true;
             return;
         }
+
         if (this.duration == this.startingDuration) {
             for (AbstractPower p : AbstractDungeon.player.powers)
                 p.onScry();
+
             if (AbstractDungeon.player.drawPile.isEmpty()) {
                 this.isDone = true;
                 return;
             }
+
             CardGroup tmpGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
             if (this.amount != -1) {
                 for (int i = 0; i < Math.min(this.amount, AbstractDungeon.player.drawPile.size()); i++)
                     tmpGroup.addToTop(AbstractDungeon.player.drawPile.group
                             .get(AbstractDungeon.player.drawPile.size() - i - 1));
-            } else {
+            }
+            else {
                 for (AbstractCard c : AbstractDungeon.player.drawPile.group)
                     tmpGroup.addToBottom(c);
             }
+
             AbstractDungeon.gridSelectScreen.open(tmpGroup, this.amount, true, TEXT[0]);
-        } else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+        }
+        else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                 int index = AbstractDungeon.player.drawPile.group.indexOf(c);
                 if (index != -1) {
-                    AbstractDungeon.player.drawPile.group.add(index, new Burn());
+                    AbstractDungeon.player.drawPile.group.add(index, generateBurn());
                     AbstractDungeon.player.drawPile.moveToDiscardPile(c);
-                    if (AbstractDungeon.player.hand.size() < 10) {
+                    if (AbstractDungeon.player.hand.size() < 10)
                         AbstractDungeon.player.discardPile.moveToHand(c);
-                    }
                 }
             }
+
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }
+
         for (AbstractCard c : AbstractDungeon.player.discardPile.group)
             c.triggerOnScry();
-        tickDuration();
 
+        tickDuration();
     }
 }

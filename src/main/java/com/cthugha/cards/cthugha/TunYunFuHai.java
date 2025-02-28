@@ -63,7 +63,7 @@ public class TunYunFuHai extends AbstractCthughaCard {
         if (curCost < 0)
             curCost = 0;
 
-        this.upgradeBaseCost(curCost);
+        this.updateCost(curCost - this.cost);
     }
 
     @Override
@@ -79,13 +79,14 @@ public class TunYunFuHai extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        this.addToBot(new GainBlockAction(p, this.block));
+
         if (m != null)
             this.addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY,
                     this.getBurnCount() + 1)));
 
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        this.addToBot(new GainBlockAction(p, this.block));
     }
 
     @Override

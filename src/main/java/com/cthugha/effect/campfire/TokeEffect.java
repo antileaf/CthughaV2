@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.cthugha.effect.campfire;
 
 import com.badlogic.gdx.Gdx;
@@ -54,7 +49,7 @@ public class TokeEffect extends AbstractGameEffect {
 
         if (this.duration < 1.0F && !this.openedScreen) {
             this.openedScreen = true;
-            AbstractDungeon.gridSelectScreen.open(CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()), 1, TEXT[0], false, false, true, true);
+            AbstractDungeon.gridSelectScreen.open(CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()), 1, TEXT[0], false, false, false, true);
         }
 
         if (this.duration < 0.0F) {

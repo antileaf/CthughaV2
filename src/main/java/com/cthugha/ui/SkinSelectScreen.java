@@ -1,15 +1,12 @@
 package com.cthugha.ui;
 
-import basemod.BaseMod;
 import basemod.Pair;
-import basemod.abstracts.CustomSavable;
-import basemod.abstracts.CustomSavableRaw;
-import basemod.interfaces.ISubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.cthugha.utils.ConfigHelper;
 import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.Skeleton;
@@ -25,34 +22,29 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import java.util.ArrayList;
 
-public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
+public class SkinSelectScreen {
 	private static final String[] TEXT;
 
 	private static final ArrayList<Skin> SKINS = new ArrayList<>();
 
-	public static SkinSelectScreen Inst;
+	public static SkinSelectScreen inst;
 
 	public static boolean shouldUpdateBackground = false;
 
-	public Hitbox leftHb;
-
-	public Hitbox rightHb;
+	public Hitbox leftHb, rightHb;
 
 	public TextureAtlas atlas;
 
 	public Skeleton skeleton;
 
 	public AnimationStateData stateData;
-
 	public AnimationState state;
 
-	public String curName = "";
-
-	public String nextName = "";
-
+	public String curName = "", nextName = "";
 	public int index;
 
 	static {
@@ -68,12 +60,15 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 		SKINS.add(new Skin(7, "kagari")); // 闪刀姬-燎里
 		SKINS.add(new Skin(8, "helia")); // 豪赌客-海拉
 		SKINS.add(new Skin(9, "rin")); // 火焰猫燐
+		SKINS.add(new Skin(10, "junko")); // 赤司纯子
 
-		Inst = new SkinSelectScreen();
+		inst = new SkinSelectScreen();
+		inst.index = ConfigHelper.getSkin();
+		inst.refresh();
 	}
 
 	public static Pair<String, Color> getFireVampireSkin() {
-		int index = Inst.index;
+		int index = inst.index;
 
 		if (index == 2) // god
 			return new Pair<>(null, Color.DARK_GRAY);
@@ -85,22 +80,20 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 			return new Pair<>("cthughaResources/img/orbs/stardust.png", null);
 		else if (index == 9) // rin
 			return new Pair<>(null, Color.ROYAL);
+		else if (index == 10) // junko
+			return new Pair<>("cthughaResources/img/orbs/junko.png", null);
 
 		// default
 		return new Pair<>(null, Color.SCARLET);
 	}
 
-	public SkinSelectScreen() {
-		this.index = 0;
-		refresh();
+	private SkinSelectScreen() {
 		this.leftHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
 		this.rightHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
-		BaseMod.subscribe(this);
-		BaseMod.addSaveField(CthughaHelper.makeID("skin"), (CustomSavableRaw) this);
 	}
 
 	public static Skin getSkin() {
-		return SKINS.get(Inst.index);
+		return SKINS.get(inst.index);
 	}
 
 	public void loadAnimation(String atlasUrl, String skeletonUrl, float scale) {
@@ -120,7 +113,7 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 		Skin skin = SKINS.get(this.index);
 		this.curName = skin.name;
 		// loadAnimation(skin.charPath + ".atlas", skin.charPath + ".json", 1.5F);
-		this.nextName = ((Skin) SKINS.get(nextIndex())).name;
+		this.nextName = SKINS.get(nextIndex()).name;
 
 		shouldUpdateBackground = true;
 
@@ -151,18 +144,43 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 		if (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS) {
 			this.leftHb.update();
 			this.rightHb.update();
-			if (this.leftHb.clicked) {
-				this.leftHb.clicked = false;
-				CardCrawlGame.sound.play("UI_CLICK_1");
-				this.index = prevIndex();
-				refresh();
+
+			int oldIndex = this.index;
+
+			if (!Settings.isControllerMode) {
+				if (this.leftHb.clicked) {
+					this.leftHb.clicked = false;
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.index = prevIndex();
+				}
+
+				if (this.rightHb.clicked) {
+					this.rightHb.clicked = false;
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.index = nextIndex();
+				}
 			}
-			if (this.rightHb.clicked) {
-				this.rightHb.clicked = false;
-				CardCrawlGame.sound.play("UI_CLICK_1");
-				this.index = nextIndex();
-				refresh();
+			else {
+				if (CInputActionSet.up.isJustPressed() || CInputActionSet.altUp.isJustPressed()) {
+					CInputActionSet.up.unpress();
+					CInputActionSet.altUp.unpress();
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.index = prevIndex();
+				}
+				else if (CInputActionSet.down.isJustPressed() || CInputActionSet.altDown.isJustPressed()) {
+					CInputActionSet.down.unpress();
+					CInputActionSet.altDown.unpress();
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.index = nextIndex();
+				}
 			}
+
+			if (this.index != oldIndex) {
+				refresh();
+				ConfigHelper.setSkin(this.index);
+				ConfigHelper.save();
+			}
+
 			if (InputHelper.justClickedLeft) {
 				if (this.leftHb.hovered)
 					this.leftHb.clickStarted = true;
@@ -225,6 +243,7 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 		}
 		sb.draw(ImageMaster.CF_LEFT_ARROW, this.leftHb.cX - 24.0F, this.leftHb.cY - 24.0F, 24.0F, 24.0F, 48.0F, 48.0F,
 				Settings.scale, Settings.scale, 0.0F, 0, 0, 48, 48, false, false);
+
 		if (this.rightHb.hovered) {
 			sb.setColor(Color.LIGHT_GRAY);
 		} else {
@@ -232,6 +251,34 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 		}
 		sb.draw(ImageMaster.CF_RIGHT_ARROW, this.rightHb.cX - 24.0F, this.rightHb.cY - 24.0F, 24.0F, 24.0F, 48.0F, 48.0F,
 				Settings.scale, Settings.scale, 0.0F, 0, 0, 48, 48, false, false);
+
+		if (Settings.isControllerMode) {
+			final float OFFSET = 56.0F * Settings.scale;
+
+			sb.setColor(Color.WHITE);
+			sb.draw(CInputActionSet.up.getKeyImg(),
+					this.leftHb.cX - 32.0F,
+					this.leftHb.cY - OFFSET - 32.0F,
+					32.0F, 32.0F,
+					64.0F, 64.0F,
+					Settings.scale, Settings.scale,
+					0.0F,
+					0, 0,
+					64, 64,
+					false, false);
+
+			sb.draw(CInputActionSet.down.getKeyImg(),
+					this.rightHb.cX - 32.0F,
+					this.rightHb.cY - OFFSET - 32.0F,
+					32.0F, 32.0F,
+					64.0F, 64.0F,
+					Settings.scale, Settings.scale,
+					0.0F,
+					0, 0,
+					64, 64,
+					false, false);
+		}
+
 		this.rightHb.render(sb);
 		this.leftHb.render(sb);
 	}
@@ -267,16 +314,5 @@ public class SkinSelectScreen implements ISubscriber, CustomSavable<Integer> {
 			// this.shoulder = "KaltsitResources/img/char/shoulder.png";
 			this.name = SkinSelectScreen.TEXT[index + 1];
 		}
-	}
-
-	public void onLoad(Integer arg0) {
-		if (arg0 != null) {
-			this.index = arg0.intValue();
-		}
-		refresh();
-	}
-
-	public Integer onSave() {
-		return Integer.valueOf(this.index);
 	}
 }

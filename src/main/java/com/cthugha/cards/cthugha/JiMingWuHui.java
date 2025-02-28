@@ -1,9 +1,11 @@
 package com.cthugha.cards.cthugha;
 
+import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -30,27 +32,28 @@ public class JiMingWuHui extends AbstractCthughaCard {
 
         this.magicNumber = this.baseMagicNumber = 5;
         this.shunRan = this.baseShunRan = 2;
+
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, "");
+        this.initializeDescription();
     }
 
     @Override
-    public void applyPowers() {
-        boolean hasNotUpdatedDesc = this.block == -1;
+    public void applyPowersToBlock() {
         this.baseBlock = this.magicNumber + (int) AbstractDungeon.player.exhaustPile.group.stream()
                 .filter(CthughaHelper::isBurnCard)
                 .count();
 
-        super.applyPowers();
+        super.applyPowersToBlock();
 
-        if (hasNotUpdatedDesc && this.block != -1)
-            this.initializeDescription();
+        this.rawDescription = String.format(cardStrings.DESCRIPTION,
+                CthughaHelper.isInBattle() && this.block != -1 ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
+        this.initializeDescription();
     }
 
     @Override
-    public void initializeDescription() {
-        this.rawDescription = String.format(cardStrings.DESCRIPTION,
-                CthughaHelper.isInBattle() && this.block != -1 ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
-
-        super.initializeDescription();
+    public void onMoveToDiscard() {
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, "");
+        this.initializeDescription();
     }
 
     @Override
@@ -59,10 +62,11 @@ public class JiMingWuHui extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.costForTurn = 0;
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, false));
+//            this.addToBot(new AnonymousAction(this::applyPowers));
+            this.addToBot(new NewQueueCardAction(this, true, false, true));
         }
     }
 

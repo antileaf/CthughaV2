@@ -3,42 +3,113 @@
     "NAME": "Living Flame",
     "FLAVOR": "A mass of burning matter, constantly shifting in shape.",
     "DESCRIPTIONS": [
-      "The damage of #yBurn increases #b3. The effect of #yBurn is changed to \"Deal damage to random enemy\"."
+      "The damage of #yBurn increases by #b3."
     ]
   },
-  "Cthugha:LieSiTaShuJian": {
-    "NAME": "Letters of Nestar",
-    "FLAVOR": "\"The Tower of Gold shall become the Pillar of Fire. Let mankind be cleansed by your power.\"",
-    "DESCRIPTIONS": [
-      "所有牌视为 #y灼伤牌 ，你不能再触发 #y瞬燃8 和 #y瞬燃9 。"
-    ]
-  },
+
   "Cthugha:ShengLingLieYan": {
     "NAME": "Vitality Flame",
     "FLAVOR": "That massive, shifting form rising to the heavens, accompanied by an equally enormous cloud of living flames sweeping across the sky.",
     "DESCRIPTIONS": [
-      "Replaces #rLiving #rFlame. The damage of #yBurn increases #b8. The effect of #yBurn is changed to \"Random enemy lose HP and max HP\"."
+      "Replaces #rLiving #rFlame. The damage of #yBurn increases by #b8. The #yBurn will reduce the enemy's max HP, regardless of whether it deals damage to the enemy."
     ]
   },
+
   "Cthugha:LongXin": {
     "NAME": "Heart of Tarrasque",
     "FLAVOR": "Heat fades in July, clothes donned in September. Spiring brings warmth, and orioles sing.",
     "DESCRIPTIONS": [
-      "If you have energy remain at the end of your turn, gain [E] [E] at the start of your next turn."
+      "Gain [E] at the start of your turn. NL Every time you remove a non #ycthugha:Burn_Card from your deck, add 1 #yBurn to your deck."
     ]
   },
-  "Cthugha:YongRanShi": {
-    "NAME": "Ever-Burning Stone",
-    "FLAVOR": "A solid formed from pure, concentrated Ithal energy?",
+
+  "Cthugha:LettersOfNestar": {
+    "NAME": "Letters of Nestar",
+    "FLAVOR": "\"The Tower of Gold shall become the Pillar of Fire. Let mankind be cleansed by your power.\"",
     "DESCRIPTIONS": [
-      "这个牌组中的牌包括 #y灼伤 ， #y炸弹 ， #y断魂斩 ，"
+      "At the start of your turn, draw #b%d #ycthugha:Burn_Card from your draw pile."
     ]
   },
-  "Cthugha:HuoZhong": {
-    "NAME": "Ember",
-    "FLAVOR": "He descended to the earth with this ember and gifted it to humanity.",
+
+  "Cthugha:AshesToAshes": {
+    "NAME": "Ashes to Ashes",
+    "FLAVOR": "The Tarnished.",
     "DESCRIPTIONS": [
-      "在每场战斗开始时的抽牌中或你的回合结束时，手牌中每有3张 #y灼伤 ，抽1张牌。"
+      "You can now take all actions at once at Rest Sites."
+    ]
+  },
+
+  "Cthugha:EverBurningStone": {
+    "NAME": "Ever-burning Stone",
+    "FLAVOR": "A stone that burns eternally, also known as a \"Warpstone\" in some places.",
+    "DESCRIPTIONS": [
+      "UPon pickup, choose #b2 card reward from #rThe #rLost #rFire #rDeck.",
+      "The Lost Fire Deck",
+      "The deck contains %s."
+    ]
+  },
+
+  "Cthugha:SoulCoin": {
+    "NAME": "Soul Coin",
+    "FLAVOR": "Strange, incomprehensible whispers emanate from this coin, pervading your mind with rage and despair.",
+    "DESCRIPTIONS": [
+      "When the number of #ycthugha:Burn_Cards is greater than or equal to the number of other cards in your hand, you have #b%d additional #yStrength."
+    ]
+  },
+
+  "Cthugha:FireEmblem": {
+    "NAME": "Fire Emblem",
+    "FLAVOR": "This is Alear, a Hero from the continent of Elyos! Apparently, she's a Divine Dragon!",
+    "DESCRIPTIONS": [
+      "When you first enter the combat with the Act 3 Boss, raise your Max HP by #b%d for every key you have, then gain all keys."
+    ]
+  },
+
+  "Cthugha:WilderingMirror": {
+    "NAME": "Wildering Mirror",
+    "FLAVOR": "A multiplicity of vistas! A bewilderment of views! Gaze upon me, and rejoice in the dissolution of your senses!",
+    "DESCRIPTIONS": [
+      "When the enemies lose HP, they lose an additional HP equal to the quantity of the most numerous identical cards in your hand."
+    ]
+  },
+
+  "Cthugha:EmeraldTabletVolumeVII": {
+    "NAME": "Emerald Tablet - Volume VII",
+    "FLAVOR": "To gain true knowledge, one must slow down and not hurry.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b%d Vigor. NL Vigor also affects #yBurn, but each #yBurn can deal a maximum of twice its original damage."
+    ]
+  },
+
+  "Cthugha:FireDancePictureBook": {
+    "NAME": "Fire Dance Picture Book",
+    "FLAVOR": "Step your left foot like this and turn around once... -Shiranui",
+    "DESCRIPTIONS": [
+      "For every #b3 cards played, draw #b1 card and #yRetain it. When you draw, reset this relic's count."
+    ]
+  },
+
+  "Cthugha:KingskinBodhran": {
+    "NAME": "Kingskin Bodhrán",
+    "FLAVOR": "In the deep forests, the monarch gave up the last thing they had to give, and so the tool was shaped to keep their land forever safe. ",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your max HP by #b%d ."
+    ]
+  },
+
+  "Cthugha:ChaliceMurmurous": {
+    "NAME": "Chalice Murmurous",
+    "FLAVOR": "On those nights when we drink from the chalice, we are not certain, afterwards, what we have done. ",
+    "DESCRIPTIONS": [
+      "Upon pickup, gain #b%d Potion slots, then obtain #b1 of each of your unique Potion."
+    ]
+  },
+
+  "Cthugha:Frangiclave": {
+    "NAME": "Frangiclave",
+    "FLAVOR": "There are keys that open doors; then there are keys that destroy them.",
+    "DESCRIPTIONS": [
+      "Whenever you draw a #yStatus card, draw #b%d cards."
     ]
   }
 }

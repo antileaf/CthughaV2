@@ -52,16 +52,6 @@ public class ShadowlessSun extends AbstractCthughaCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-
-
-		for (int i = 0; i < this.magicNumber; i++)
-			this.addToBot(new ChannelAction(new FireVampire()));
-
-		this.addToBot(new BaoYanAction(this, () -> {
-			for (int i = 0; i < this.secondaryMagicNumber; i++)
-				this.addToTop(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-						AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-		}));
 	}
 
 	@Override

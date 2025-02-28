@@ -1,7 +1,8 @@
 package com.cthugha.actions;
 
 import com.cthugha.Cthugha_Core;
-import com.cthugha.patch.DarklingPatch;
+import com.cthugha.actions.common.CthughaAddTempHPAction;
+import com.cthugha.patches.RevivePatch;
 import com.cthugha.power.CounterOfLossMaxHpPower;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -9,9 +10,6 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.InstantKillAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.beyond.Darkling;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 
 // 减少怪物最大生命值
 public class DecreaseMonsterMaxHealthAction extends AbstractGameAction {
@@ -72,8 +70,8 @@ public class DecreaseMonsterMaxHealthAction extends AbstractGameAction {
 
 				this.addToTop(new InstantKillAction(this.target));
 
-				if (this.target instanceof Darkling)
-					DarklingPatch.Fields.cannotRevive.set(this.target, true);
+//				if (this.target instanceof Darkling)
+//					RevivePatch.Fields.cannotRevive.set(this.target, true);
 			}
 			else
 				this.addToTop(new ApplyPowerAction(this.target, this.target,
@@ -84,14 +82,16 @@ public class DecreaseMonsterMaxHealthAction extends AbstractGameAction {
 			if (this.target.hasPower(ShengMingFanHuanPower.POWER_ID))
 				tempHP = this.target.getPower(ShengMingFanHuanPower.POWER_ID).amount;
 
-			if (tempHP == 0 && this.target instanceof Darkling &&
-					DarklingPatch.Fields.tempHpReturnAmount.get(this.target) != 0) {
-				tempHP = DarklingPatch.Fields.tempHpReturnAmount.get(this.target);
-				Cthugha_Core.logger.info("Special case for Darkling, tempHP: {}", tempHP);
+			if (tempHP == 0 && RevivePatch.Fields.tempHpReturnAmount.get(this.target) != 0) {
+				tempHP = RevivePatch.Fields.tempHpReturnAmount.get(this.target);
+				Cthugha_Core.logger.info("Special case for reviving monster, tempHP: {}", tempHP);
+
+//				RevivePatch.Fields.tempHpReturnAmount.set(this.target, 0);
 			}
 
-			this.addToTop(new AddTemporaryHPAction(AbstractDungeon.player,
-					AbstractDungeon.player, tempHP));
+			if (tempHP > 0)
+				this.addToTop(new CthughaAddTempHPAction(AbstractDungeon.player,
+						AbstractDungeon.player, tempHP));
 		}
 	}
 }

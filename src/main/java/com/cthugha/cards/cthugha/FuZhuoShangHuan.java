@@ -52,6 +52,7 @@ public class FuZhuoShangHuan extends AbstractCthughaCard {
     }
 
     // 硬编码就硬编码吧，无所谓了
+    @Override
     public void triggerOnExhaust() {
         if (this.baseMagicNumber > 2) {
             FuZhuoShangHuan card = (FuZhuoShangHuan) this.makeStatEquivalentCopy();
@@ -72,5 +73,10 @@ public class FuZhuoShangHuan extends AbstractCthughaCard {
 
             this.addToBot(new MakeTempCardInHandAction(card));
         }
+    }
+
+    @Override
+    public int modifyFlareLevel() {
+        return this.baseMagicNumber;
     }
 }

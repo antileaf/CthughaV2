@@ -11,7 +11,8 @@
       "星尘",
       "闪刀姬-燎里",
       "豪赌客-海拉",
-      "火焰猫燐"
+      "火焰猫燐",
+      "赤司纯子"
     ]
   },
 
@@ -64,6 +65,38 @@
   "Cthugha:TempRetainModifier": {
     "TEXT": [
       "在本回合 保留 。"
+    ]
+  },
+
+  "Cthugha:ResetTutorial": {
+    "TEXT": [
+      "重新显示教程"
+    ]
+  },
+
+  "Cthugha:VictoryQuestion": {
+    "TEXT": [
+      "胜利？",
+      "飞升！"
+    ]
+  },
+
+  "Cthugha:EnableSignature": {
+    "TEXT": [
+      "启用异画"
+    ]
+  },
+
+  "Cthugha:HideDescription": {
+    "TEXT": [
+      "隐藏描述"
+    ]
+  },
+
+  "Cthugha:UnlockSignature": {
+    "TEXT": [
+      "解锁异画！",
+      "提示：你可以在大图预览界面切换是否启用异画。"
     ]
   }
 }

@@ -1,20 +1,25 @@
 package com.cthugha.actions.common;
 
+import basemod.ReflectionHacks;
 import com.cthugha.Cthugha_Core;
 import com.cthugha.cards.AbstractCthughaCard;
+import com.cthugha.cards.cthugha.CastleOfTheSun;
 import com.cthugha.cards.cthugha.FuZhuoShangHuan;
 import com.cthugha.cards.cthugha.ZhaoZhuoShangTianQue;
 import com.cthugha.utils.LanguageHelper;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
+import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.screens.select.HandCardSelectScreen;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class FlareAction extends AbstractGameAction {
@@ -58,6 +63,19 @@ public class FlareAction extends AbstractGameAction {
 					false,
 					false);
 
+			if (!(this.card instanceof CastleOfTheSun)) {
+				ArrayList<AbstractCard> defaultSelection = this.defaultSelection();
+				AbstractDungeon.handCardSelectScreen.selectedCards.group.addAll(defaultSelection);
+				defaultSelection.forEach(c -> {
+					AbstractDungeon.player.hand.group.remove(c);
+					c.setAngle(0.0F, false);
+				});
+
+				ReflectionHacks.privateMethod(HandCardSelectScreen.class, "refreshSelectedCards")
+						.invoke(AbstractDungeon.handCardSelectScreen);
+				AbstractDungeon.player.hand.refreshHandLayout();
+			}
+
 			this.tickDuration();
 			return;
 		}
@@ -80,8 +98,8 @@ public class FlareAction extends AbstractGameAction {
 		int level = this.selected.size();
 
 		int fz = selected.stream()
-				.filter(c -> c instanceof FuZhuoShangHuan)
-				.mapToInt(c -> c.baseMagicNumber)
+				.filter(c -> c instanceof AbstractCthughaCard)
+				.mapToInt(c -> ((AbstractCthughaCard) c).modifyFlareLevel())
 				.max()
 				.orElse(-1);
 
@@ -89,28 +107,81 @@ public class FlareAction extends AbstractGameAction {
 			level = fz;
 
 		for (AbstractCard c : this.selected)
-			if (c instanceof ZhaoZhuoShangTianQue) {
-				c.costForTurn = 0;
-				AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(c, false));
-				this.addToBot(new ExhaustSpecificCardAction(this.card, AbstractDungeon.player.hand));
-
-				return;
+			if (c instanceof AbstractCthughaCard) {
+				AbstractCthughaCard ac = (AbstractCthughaCard) c;
+				if (ac.onFlareSelectedBy(this.card)) {
+					AbstractDungeon.player.hand.group.addAll(this.selected);
+					this.selected.clear();
+					return;
+				}
 			}
 
-//		if (AbstractDungeon.player.hasRelic(LieSiTaShuJian.ID))
-//			level = Math.min(level, 7);
-
-		for (AbstractCard c : this.selected) {
+		for (AbstractCard c : this.selected)
 			AbstractDungeon.player.hand.moveToExhaustPile(c);
-		}
 
 		Cthugha_Core.logger.info("ShunRan level: {}", level);
-		this.card.onShunRan(level);
+		this.card.onFlare(level);
 	}
 
 	private void returnCards() {
 		AbstractDungeon.player.hand.group.addAll(this.tempHand);
 		this.tempHand.clear();
 		AbstractDungeon.player.hand.refreshHandLayout();
+	}
+
+	private ArrayList<AbstractCard> get(int count) {
+		return AbstractDungeon.player.hand.group.stream()
+				.filter(CthughaHelper::isBurnCard)
+				.filter(c -> !(c instanceof AbstractCthughaCard) ||
+						(((AbstractCthughaCard) c).modifyFlareLevel() == -1) &&
+								!((AbstractCthughaCard) c).onFlareSelectedBy(this.card)).sorted((a, b) -> {
+					if (a instanceof Burn && b instanceof Burn)
+						return ((Burn) b).baseMagicNumber - ((Burn) a).baseMagicNumber;
+					if (a instanceof Burn)
+						return -1;
+					if (b instanceof Burn)
+						return 1;
+
+					return a.baseDamage - b.baseDamage;
+				})
+				.limit(count)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	private ArrayList<AbstractCard> checkLevel(int count) {
+		int burnCardCount = (int) AbstractDungeon.player.hand.group.stream()
+				.filter(CthughaHelper::isBurnCard)
+				.filter(c -> !(c instanceof AbstractCthughaCard) ||
+						(((AbstractCthughaCard) c).modifyFlareLevel() == -1) &&
+								!((AbstractCthughaCard) c).onFlareSelectedBy(this.card))
+				.count();
+
+		if (burnCardCount >= count)
+			return this.get(count);
+
+		if (count <= 6 && AbstractDungeon.player.hand.group.stream()
+				.anyMatch(c -> c instanceof FuZhuoShangHuan))
+			return AbstractDungeon.player.hand.group.stream()
+					.filter(c -> c instanceof FuZhuoShangHuan)
+					.limit(1)
+					.collect(Collectors.toCollection(ArrayList::new));
+
+		return null;
+	}
+
+	private ArrayList<AbstractCard> defaultSelection() {
+		if (this.card.secondaryShunRan != -1) {
+			ArrayList<AbstractCard> tmp = this.checkLevel(this.card.secondaryShunRan);
+			if (tmp != null)
+				return tmp;
+		}
+
+		if (this.card.shunRan != -1) {
+			ArrayList<AbstractCard> tmp = this.checkLevel(this.card.shunRan);
+			if (tmp != null)
+				return tmp;
+		}
+
+		return new ArrayList<>();
 	}
 }

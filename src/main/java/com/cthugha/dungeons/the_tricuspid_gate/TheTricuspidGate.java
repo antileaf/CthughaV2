@@ -9,9 +9,9 @@ import com.cthugha.dungeons.the_tricuspid_gate.monsters.Areshkagal;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.BurialWatchdogScepter;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.BurialWatchdogSword;
 import com.cthugha.dungeons.the_tricuspid_gate.shop.BloodShopScreen;
-import com.cthugha.relics.publics.ChaliceMurmurous;
-import com.cthugha.relics.publics.Frangiclave;
-import com.cthugha.relics.publics.KingskinBodhran;
+import com.cthugha.relics.shared.ChaliceMurmurous;
+import com.cthugha.relics.shared.Frangiclave;
+import com.cthugha.relics.shared.KingskinBodhran;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -46,7 +46,7 @@ public class TheTricuspidGate extends CustomDungeon {
 		CustomDungeon.addAct(5, new TheTricuspidGate());
 
 		BaseMod.addMonster(Areshkagal.ID, () -> new MonsterGroup(new AbstractMonster[] {
-				new Areshkagal(), new BurialWatchdogSword(), new BurialWatchdogScepter()
+				new BurialWatchdogSword(), new BurialWatchdogScepter(), new Areshkagal()
 		}));
 		BaseMod.addBoss(ID, Areshkagal.ID,
 				"cthughaResources/img/dungeon/Areshkagal.png",

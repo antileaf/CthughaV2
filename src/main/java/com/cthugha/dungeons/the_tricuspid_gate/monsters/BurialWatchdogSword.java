@@ -3,9 +3,12 @@ package com.cthugha.dungeons.the_tricuspid_gate.monsters;
 import basemod.abstracts.CustomMonster;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.math.MathUtils;
+import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cardmodifier.ColorificStampModifier;
 import com.cthugha.cards.colorless.Erosion;
+import com.cthugha.patches.RevivePatch;
+import com.cthugha.power.ShengMingFanHuanPower;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -13,12 +16,15 @@ import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.TextAboveCreatureEffect;
 
 import java.util.ArrayList;
 
@@ -34,8 +40,11 @@ public class BurialWatchdogSword extends CustomMonster {
 	private static final byte REVIVE = 5; // 复活
 	private static final int BURN_STRIKE_COUNT = 2;
 
+	public final int initialMaxHealth;
 	private int moveCount = 0;
 	private final int skewerCount;
+
+//	private boolean foolish = false;
 
 	public BurialWatchdogSword() {
 		super(
@@ -54,7 +63,7 @@ public class BurialWatchdogSword extends CustomMonster {
 		this.type = EnemyType.ELITE;
 
 		this.setHp(AbstractDungeon.ascensionLevel >= 8 ? 70 : 60);
-
+		this.initialMaxHealth = this.maxHealth;
 
 		this.skewerCount = AbstractDungeon.ascensionLevel >= 3 ? 4 : 3;
 		this.damage.add(new DamageInfo(this, 2));
@@ -74,8 +83,44 @@ public class BurialWatchdogSword extends CustomMonster {
 //		this.addToBot(new SetMoveAction(this, REVIVE, Intent.BUFF));
 //	}
 
+	public void reviveByAreshkagal() {
+		int targetMaxHealth = this.initialMaxHealth * 2;
+		if (this.maxHealth < targetMaxHealth) {
+			int amount = targetMaxHealth - this.maxHealth;
+			this.maxHealth = targetMaxHealth;
+			this.addToBot(new AnonymousAction(() -> {
+				AbstractDungeon.effectsQueue.add(new TextAboveCreatureEffect(
+						this.hb.cX - this.animX, this.hb.cY,
+						AbstractCreature.TEXT[2] + amount, Settings.GREEN_TEXT_COLOR));
+			}));
+		}
+
+		this.revive();
+
+		this.addToBot(new RollMoveAction(this));
+	}
+
+	public void revive() {
+		this.addToBot(new SFXAction("DARKLING_REGROW_" + MathUtils.random(1, 2),
+				MathUtils.random(-0.1F, 0.1F)));
+
+		this.addToBot(new HealAction(this, this, this.maxHealth / 2));
+		this.addToBot(new AnonymousAction(() -> this.halfDead = false));
+		this.addToBot(new ApplyPowerAction(this, this, new RegrowPower(this)));
+
+		for (AbstractRelic relic : AbstractDungeon.player.relics)
+			relic.onSpawnMonster(this);
+
+		RevivePatch.Fields.tempHpReturnAmount.set(this, 0);
+	}
+
+
 	@Override
 	public void takeTurn() {
+		if (AbstractDungeon.getMonsters().monsters.stream()
+				.anyMatch(m -> m instanceof Areshkagal && m.intent == Intent.MAGIC))
+			return;
+
 		if (this.nextMove == BURN_STRIKE) {
 			for (int i = 0; i < BURN_STRIKE_COUNT; i++)
 				this.addToBot(new DamageAction(AbstractDungeon.player, this.damage.get(0)));
@@ -111,15 +156,10 @@ public class BurialWatchdogSword extends CustomMonster {
 		else if (this.nextMove == UNKNOWN)
 			this.addToBot(new TextAboveCreatureAction(this, monsterStrings.DIALOG[0]));
 		else if (this.nextMove == REVIVE) {
-			this.addToBot(new SFXAction("DARKLING_REGROW_" + MathUtils.random(1, 2),
-					MathUtils.random(-0.1F, 0.1F)));
-
-			this.addToBot(new HealAction(this, this, this.maxHealth / 2));
-			this.addToBot(new AnonymousAction(() -> this.halfDead = false));
-			this.addToBot(new ApplyPowerAction(this, this, new RegrowPower(this)));
-
-			for (AbstractRelic relic : AbstractDungeon.player.relics)
-				relic.onSpawnMonster(this);
+			if (this.maxHealth <= 1)
+				Cthugha_Core.logger.info("BurialWatchdogSword: maxHealth <= 1");
+			else
+				this.revive();
 		}
 
 		this.addToBot(new RollMoveAction(this));
@@ -128,7 +168,10 @@ public class BurialWatchdogSword extends CustomMonster {
 	@Override
 	protected void getMove(int num) {
 		if (this.halfDead) {
-			this.setMove(REVIVE, Intent.BUFF);
+			if (this.maxHealth <= 1)
+				this.setMove((byte) 0, Intent.NONE);
+			else
+				this.setMove(REVIVE, Intent.BUFF);
 		}
 		else {
 			if (this.moveCount % 3 == 0) {
@@ -164,6 +207,10 @@ public class BurialWatchdogSword extends CustomMonster {
 			for (AbstractRelic relic : AbstractDungeon.player.relics)
 				relic.onMonsterDeath(this);
 
+			if (this.hasPower(ShengMingFanHuanPower.POWER_ID))
+				RevivePatch.Fields.tempHpReturnAmount.set(this,
+						this.getPower(ShengMingFanHuanPower.POWER_ID).amount);
+
 			this.powers.clear();
 
 			boolean allDead = AbstractDungeon.getMonsters().monsters.stream()
@@ -178,16 +225,9 @@ public class BurialWatchdogSword extends CustomMonster {
 						this.addToBot(new SetMoveAction(this, (byte) 0, Intent.NONE));
 					}
 					else {
-						Areshkagal boss = (Areshkagal) AbstractDungeon.getMonsters().getMonster(Areshkagal.ID);
-						if (boss != null && boss.nextMove == Areshkagal.FOOLISH) {
-							this.setMove(REVIVE, Intent.BUFF);
-							this.createIntent();
-							this.addToBot(new SetMoveAction(this, REVIVE, Intent.BUFF));
-						} else {
-							this.setMove(UNKNOWN, Intent.UNKNOWN);
-							this.createIntent();
-							this.addToBot(new SetMoveAction(this, UNKNOWN, Intent.UNKNOWN));
-						}
+						this.setMove(UNKNOWN, Intent.UNKNOWN);
+						this.createIntent();
+						this.addToBot(new SetMoveAction(this, UNKNOWN, Intent.UNKNOWN));
 					}
 
 					this.halfDie();
@@ -204,6 +244,8 @@ public class BurialWatchdogSword extends CustomMonster {
 	}
 
 	private void halfDie() {
+		this.currentBlock = 0;
+
 		BurialWatchdogScepter other = AbstractDungeon.getMonsters().monsters.stream()
 				.filter(m -> m instanceof BurialWatchdogScepter)
 				.map(m -> (BurialWatchdogScepter) m)

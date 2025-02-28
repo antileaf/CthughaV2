@@ -1,0 +1,30 @@
+{
+  "Cthugha:ReplacedVampires": {
+    "NAME": "Vampires(?)",
+    "DESCRIPTIONS": [
+      "Navigating an unlit street, you come across several hooded figures in the midst of some dark ritual. As you approach, they turn to you in eerie unison. The tallest among them bares fanged teeth and extends a long, pale hand towards you. NL ~\"Join~ ~us,~ ~and~ ~feel~ ~the~ ~warmth~ ~of~ ~the~ ~Spire.\"~",
+      "You pull off the vampire's hood, see his appearance clearly, #p~an~ #p~outer~ #p~god~ , #p~The~ #p~mother~ #p~of~ #p~truth~ .~ NL NL He smiles: \"Cthugha, you are finally here. There is no need to say anything else, I believe you'll try your best to reach the top of the spire. So, accept my true inheritance, it has already waited for you for #r~over~ #r~a~ #r~million~ #r~years~ !\" ",
+      "You nod and extend your hand, trying to grasp the Trident. NL NL The mother of truth remains you quickly: \"Be careful, #ySacred #ySpear cannot be touched directly, otherwise even if you #rrefine it, you will be drowned in endless #r~accursed~ #r~blood~ ! I have already prepared a method for you, you only need...\"",
+      "\"No need for that.\" Your expression is indifferent as you grab #y@Sacred@ #y@Spear@ and #r@instantly@ #r@refine@ .",
+      "You step back and raise your weapon in defiance. The tall figure sighs. \"Very well.\" The entire group of hooded figures morph into a thick black fog that flows away from you. NL You are alone once more."
+    ],
+    "OPTIONS": [
+      "[Punch] #gRemove #gall Burn #g, #gthen...",
+      "[Refuse]",
+      "[Grasp]",
+      "[Instantly Refine] #gGain #g3 BloodboonRitual #g.",
+      "[Leave]"
+    ]
+  },
+
+  "Cthugha:TheTricuspidGate": {
+    "NAME": "The Tricuspid Gate",
+    "DESCRIPTIONS": [
+      "Mansus"
+    ],
+    "OPTIONS": [
+      "[Enter]",
+      "[Leave]"
+    ]
+  }
+}

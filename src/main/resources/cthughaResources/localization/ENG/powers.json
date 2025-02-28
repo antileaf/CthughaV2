@@ -2,7 +2,7 @@
   "Cthugha:RiShiPower": {
     "NAME": "Eclipse",
     "DESCRIPTIONS": [
-      "In the remaining time of this turn, whenever your #bBurn deals damage, gain #b%d block."
+      "In the remaining time of this turn, whenever your #yBurn or #yFireVampire deals damage, gain #b%d block."
     ]
   },
   "Cthugha:HeiYanPower": {
@@ -11,24 +11,10 @@
       "BlackFlamed creatures lose #b%d max HP, and lose HP and max HP equals to #b%d%% of the value of #yBlackFlame ( #b%d ) at the start of their turn."
     ]
   },
-  "Cthugha:HeiYanDaoRenPower": {
-    "NAME": "黑焰刀刃",
-    "DESCRIPTIONS": [
-      "每有一次攻击造成未被格挡的伤害，就给予 #b",
-      " 层黑焰。"
-    ]
-  },
   "Cthugha:BeiLuoShiMenXieDingPower": {
     "NAME": "The Fomalhaut Convention",
     "DESCRIPTIONS": [
       "Whenever you play a #yBlaze card without triggering #yBlaze, channel #b%d #yFireVampire and gain [E]."
-    ]
-  },
-  "Cthugha:XinShangWuMingHuoPower": {
-    "NAME": "心上无明火",
-    "DESCRIPTIONS": [
-      "在你的回合开始时每有一名意图不是攻击的敌人，你都获得 #b",
-      " 点力量。"
     ]
   },
   "Cthugha:WuYouBuZhuPower": {
@@ -40,11 +26,11 @@
   "Cthugha:ZhuZhaoShuJiPower": {
     "NAME": "Illuminated Insight",
     "DESCRIPTIONS": [
-      "Whenever you play a card, all enemies lose #b",
+      "Whenever you play a card, ALL enemies lose #b",
       " max HP."
     ]
   },
-  "Cthugha:XuanCaoQiYanPower": {
+  "Cthugha:XuanCaoXiaoYanPower": {
     "NAME": "Arrogant Flame",
     "DESCRIPTIONS": [
       "At the end of your turn, #yRetain at most #b",
@@ -52,7 +38,7 @@
     ]
   },
   "Cthugha:SiHuiFuRanPower": {
-    "NAME": "死灰复燃",
+    "NAME": "Revival",
     "DESCRIPTIONS": [
       "When a #yBurn is Exhausted, add #b",
       " #yBurn into your discard pile."
@@ -101,14 +87,14 @@
   "Cthugha:DaoHuoShiYanPower": {
     "NAME": "Oath of Firewalking",
     "DESCRIPTIONS": [
-      "Whenever a #yBurn is created, it is #yUpgraded."
+      "Whenever a #yBurn is created, #yUpgrade it."
     ]
   },
   "Cthugha:ShengMingFanHuanPower": {
     "NAME": "HP Return",
     "DESCRIPTIONS": [
       "When losing max HP, you gain #b",
-      " #ytemporary_hp."
+      " #yTemporary #yHP."
     ]
   },
   "Cthugha:HuoZhuoLianZiPower": {
@@ -135,15 +121,14 @@
   "Cthugha:XianYiPower": {
     "NAME": "Splendid Attire",
     "DESCRIPTIONS": [
-      "如果本回合结束时没有打出过 #y鲜衣 以外的牌，获得 #b",
-      " 层 #y无实体 。"
+      "If no card other than #ySplendid #yAttire is played at the end of this turn, gain #b",
+      " #yIntangible."
     ]
   },
   "Cthugha:FenJiPower": {
     "NAME": "Cremate Silence",
     "DESCRIPTIONS": [
-      "The damage of #yBurn increases #b",
-      " , you cannot trigger any other #yBlaze."
+      "The damage of #yBurn increases #b%d , you cannot trigger any other #yBlaze effects."
     ]
   },
   "Cthugha:TianYouErRiPower": {
@@ -155,7 +140,40 @@
   "Cthugha:LieXingSuiXuanPower": {
     "NAME": "Stars in Orbit",
     "DESCRIPTIONS": [
-      "Whenever you channel #yFireVampire in the first slot: Draw #b%d cards. NL Whenever you channel #yFireVampire in the last slot: Gain [E] . "
+      "Whenever you channel #yFireVampire in NL the first slot: Draw #b%d cards; NL the last slot: Gain [E] . ",
+      "Whenever you channel #yFireVampire in NL the first slot: Draw #b%d cards; NL the last slot: Gain [E] . "
+    ]
+  },
+  
+  "Cthugha:ChaosIncarnatePower": {
+    "NAME": "Chaos Incarnate",
+    "DESCRIPTIONS": [
+      "At the start of its turn, lose all #yCuriosity, #yTime #yWarp, #yArtifact and #yChaos #yIncarnate."
+    ]
+  },
+
+  "Cthugha:StampPower": {
+    "NAME": "Colorific Mark",
+    "DESCRIPTIONS": [
+      "",
+      "#rRed Mark",
+      "#gGreen Mark",
+      "#bBlue Mark",
+      "#pPurple Mark"
+    ]
+  },
+
+  "Cthugha:TimeWarp": {
+    "NAME": "Time Warp",
+    "DESCRIPTIONS": [
+      "Whenever you play #b12 cards, ends your turn and gains #b2 #yStrength."
+    ]
+  },
+
+  "Cthugha:FourColorTheoremPower": {
+    "NAME": "Four Color Theorem",
+    "DESCRIPTIONS": [
+      "When you stack the same #yColorific #yMark, Areshkagal takes an action immediately. NL When you stake #b4 different #yColorific #yMark, reduce all #yColorific #yMark by #b1."
     ]
   }
   

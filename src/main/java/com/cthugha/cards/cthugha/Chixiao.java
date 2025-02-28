@@ -6,7 +6,7 @@ import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.cthugha.orbs.FireVampire;
-import com.cthugha.patch.fire_vampire.GameActionManagerPatch;
+import com.cthugha.patches.fire_vampire.GameActionManagerPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;

@@ -1,11 +1,11 @@
 package com.cthugha.cards.cthugha;
 
 import com.cthugha.actions.ZhiLiaoAction;
+import com.cthugha.actions.common.CthughaAddTempHPAction;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.cthugha.power.HuoZhuoLianZiPower;
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -38,11 +38,11 @@ public class HuoZhuoLianZi extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ZhiLiaoAction(this, new AddTemporaryHPAction(p, p, this.magicNumber)));
+        this.addToBot(new ZhiLiaoAction(this, new CthughaAddTempHPAction(p, p, this.magicNumber)));
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
                     new HuoZhuoLianZiPower(AbstractDungeon.player, 1), 1));

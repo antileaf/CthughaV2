@@ -54,7 +54,7 @@ public class HuoYanHuXi extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             AbstractCard burn = new Burn();
             burn.upgrade();

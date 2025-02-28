@@ -6,7 +6,13 @@
       "Ardor Blossom Star-Ishmael",
       "Godskin Apostle",
       "Midra, Lord of Frenzied Flame",
-      "Flame Cirno"
+      "Achi Cirno",
+      "McDonald's French Fries",
+      "Stardust",
+      "Sky Striker Ace - Kagari",
+      "High Roller - Helia",
+      "Rin Kaenbyou",
+      "Junko Akashi"
     ]
   },
 
@@ -14,6 +20,76 @@
     "TEXT": [
       "Used for Flare( %s )",
       "This card has already been used for Flare this turn."
+    ]
+  },
+  
+  "Cthugha:InstantlyRefineOption": {
+    "TEXT": [
+      "Instantly Refine",
+      "Take all actions."
+    ]
+  },
+
+  "Cthugha:ContinueButton": {
+    "TEXT": [
+      "Go to Act 5."
+    ]
+  },
+
+  "Cthugha:CantBuyMessage": {
+    "TEXT": [
+      "You don't got enough #rMax #rHP .",
+      "Hey buddy, you got no #rMax #rHP !",
+      "This isn't a charity.",
+      "Huh, you're willing to risk your life, right?",
+      "You can't afford that."
+    ],
+    "EXTRA_TEXT": [
+      "Just Bloodletting~"
+    ]
+  },
+
+  "Cthugha:Merchant": {
+    "TEXT": [
+      "This time, I'm selling some ~SPECIAL~ items...",
+      "What would you like to buy?",
+      "Think carefully, the #rprice is not low.",
+      "The enemies are very powerful, I advise you to be well prepared.",
+      "Take your time."
+    ],
+    "EXTRA_TEXT": [
+      "Do you know? The code for the shop is REALLY complex. The poor code man is almost going crazy."
+    ]
+  },
+
+  "Cthugha:TempRetainModifier": {
+    "TEXT": [
+      "Retain for this turn."
+    ]
+  },
+
+  "Cthugha:ResetTutorial": {
+    "TEXT": [
+      "Re-show tutorials"
+    ]
+  },
+
+  "Cthugha:VictoryQuestion": {
+    "TEXT": [
+      "Victory?",
+      "Soaring!"
+    ]
+  },
+
+  "Cthugha:EnableSignature": {
+    "TEXT": [
+      "Enable Signature"
+    ]
+  },
+
+  "Cthugha:HideDescription": {
+    "TEXT": [
+      "Hide Description"
     ]
   }
 }

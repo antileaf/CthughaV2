@@ -2,7 +2,7 @@ package com.cthugha.cards;
 
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
-import com.cthugha.actions.common.FlareAction;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.cthugha.flare.FlareCardQueueItem;
 import com.cthugha.flare.FlareHelper;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
@@ -24,6 +24,9 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 			255 / 255.0F, 231 / 255.0F, 150 / 255.0F, 1.0F);
 	private static final Color FLAVOR_BOX_COLOR = new Color(
 			38 / 255.0F, 8 / 255.0F, 4 / 255.0F, 1.0F);
+
+	private static final float FADE_DURATION = 0.3F;
+	private static final float FORCED_FADE_DURATION = 0.5F;
 
 	public boolean canBaoYan = false;
 	public boolean triggeredBaoYanLastTime = false;
@@ -270,10 +273,15 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		return levels;
 	}
 
-	@Override
-	public void atTurnStart() {
+	public void clearShunRanAtStartOfTurn() {
 		this.triggeredShunRanThisTurn = false;
 		this.updateBgImg();
+	}
+
+	@Override
+	public void atTurnStart() {
+		super.atTurnStart();
+		this.clearShunRanAtStartOfTurn();
 	}
 
 	@Override
@@ -327,5 +335,14 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		this.updateBgImg();
 	}
 
-	public void onShunRan(int level) {}
+	public void onFlare(int level) {}
+
+	public int modifyFlareLevel() {
+		return -1;
+	}
+
+	// Returning true will cancel the flare action
+	public boolean onFlareSelectedBy(AbstractCthughaCard card) {
+		return false;
+	}
 }

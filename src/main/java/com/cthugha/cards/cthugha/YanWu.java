@@ -58,6 +58,9 @@ public class YanWu extends AbstractCthughaCard {
 					.filter(CthughaHelper::isBurn)
 					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
+			if (burns.isEmpty())
+				return;
+
 			for (AbstractOrb orb : p.orbs)
 				if (orb instanceof FireVampire) {
 					int count = 1;

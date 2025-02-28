@@ -1,6 +1,7 @@
 package com.cthugha.relics.cthugha;
 
 import basemod.abstracts.CustomRelic;
+import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -22,6 +23,7 @@ public class SoulCoin extends CustomRelic {
 
 	public static final int STRENGTH = 3;
 
+	private boolean canTrigger = false;
 	private boolean activated = false;
 
 	public SoulCoin() {
@@ -43,8 +45,16 @@ public class SoulCoin extends CustomRelic {
 	}
 
 	@Override
-	public void onRefreshHand() {
+	public void atBattleStart() {
+		this.addToBot(new AnonymousAction(() -> this.canTrigger = true));
+	}
+
+	@Override
+	public void onDrawOrDiscard() {
 		if (!CthughaHelper.isInBattle())
+			return;
+
+		if (!this.canTrigger)
 			return;
 
 		int count = (int) AbstractDungeon.player.hand.group.stream()

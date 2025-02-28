@@ -4,5 +4,19 @@
     "DESCRIPTIONS": [
       "Add #b%d copies of #yBurn+ to your hand."
     ]
+  },
+
+  "Cthugha:EvilSunrise": {
+    "NAME": "Evil Sunrise",
+    "DESCRIPTIONS": [
+      "#yChannel #b%d #yFire #yVampire."
+    ]
+  },
+
+  "Cthugha:RedLotusWater": {
+    "NAME": "RedLotus Water",
+    "DESCRIPTIONS": [
+      "Draw card, until the number of #yBurn and other cards in your hand are equal."
+    ]
   }
 }

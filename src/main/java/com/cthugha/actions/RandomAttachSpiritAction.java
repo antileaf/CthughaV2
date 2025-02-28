@@ -3,7 +3,7 @@ package com.cthugha.actions;
 import com.cthugha.effect.SpiritAttachedEffect;
 import com.cthugha.object.AbstractSpirit;
 import com.cthugha.object.GiveFire;
-import com.cthugha.patch.SpiritField;
+import com.cthugha.patches.SpiritField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;

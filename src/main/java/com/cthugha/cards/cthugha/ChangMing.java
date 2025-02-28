@@ -47,7 +47,7 @@ public class ChangMing extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new DrawCardAction(this.magicNumber, new AnonymousAction(() -> {
                 DrawCardAction.drawnCards.forEach(c -> {

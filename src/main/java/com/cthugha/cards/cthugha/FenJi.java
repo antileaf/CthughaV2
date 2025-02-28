@@ -37,6 +37,11 @@ public class FenJi extends AbstractCthughaCard {
     }
 
     @Override
+    public int getExtraYanZhiJing() {
+        return 1;
+    }
+
+    @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();

@@ -12,6 +12,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+import java.util.Objects;
+
 public class LieXingSuiXuanPower extends AbstractPower {
     public static final String POWER_ID = CthughaHelper.makeID(LieXingSuiXuanPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
@@ -27,22 +29,26 @@ public class LieXingSuiXuanPower extends AbstractPower {
     }
 
     public void updateDescription() {
-        this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
+        if (this.amount <= 1 || powerStrings.DESCRIPTIONS.length == 1)
+            this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
+        else
+            this.description = String.format(powerStrings.DESCRIPTIONS[1], this.amount);
     }
 
     public void onChannel(AbstractOrb orb) {
         int count = 0;
         for (int i = 0; i < AbstractDungeon.player.orbs.size(); i++) {
-            if (AbstractDungeon.player.orbs.get(i).ID == FireVampire.ORB_ID) {
+            if (AbstractDungeon.player.orbs.get(i) instanceof FireVampire) {
                 count++;
             }
         }
 
         if (count == 1) {
             this.addToBot(new DrawCardAction(this.amount));
-        } else if (count == AbstractDungeon.player.maxOrbs) {
+        }
+
+        if (count == AbstractDungeon.player.maxOrbs) {
             this.addToBot(new GainEnergyAction(1));
         }
     }
-
 }

@@ -1,0 +1,19 @@
+{
+  "Cthugha:BurialWatchdogSword": {
+    "NAME": "The Burial Watchdog - Sword",
+    "DIALOG": ["Regrowing..."],
+    "MOVES": ["Burn Attack", "Strength Up", "Consecutive Attac", "???", "Regrow"]
+  },
+
+  "Cthugha:BurialWatchdogScepter": {
+      "NAME": "The Burial Watchdog - Cane",
+      "DIALOG": ["Regrowing..."],
+      "MOVES": ["Bash", "Reinforce", "Smash", "???", "Regrow"]
+  },
+
+  "Cthugha:Areshkagal": {
+    "NAME": "Areshkagal",
+    "DIALOG": ["You are mine!!!", "Why are you still here?", "Regrowing..."],
+    "MOVES": ["You are mine!", "Bash", "Soul Strike", "Strength Up", "Foolish", "???", "Regrow"]
+  }
+}

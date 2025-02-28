@@ -53,7 +53,7 @@ public class ChunHuo extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new DrawCardAction(AbstractDungeon.player, this.magicNumber));
         }

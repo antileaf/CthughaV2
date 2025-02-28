@@ -62,7 +62,7 @@ public class MieShiZhiYanLaiWaTing extends AbstractCthughaCard {
     }
 
     @Override
-    public void onShunRan(int level) {
+    public void onFlare(int level) {
         if (level >= this.shunRan) {
             this.addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.damage),
                     AttackEffect.BLUNT_HEAVY));

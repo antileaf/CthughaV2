@@ -44,7 +44,7 @@ public class ShiftingStar extends AbstractCthughaCard {
 	}
 
 	@Override
-	public void onShunRan(int level) {
+	public void onFlare(int level) {
 		if (level >= this.shunRan) {
 			this.addToBot(new CalculatedGambleAction(false)); // 我是懒狗
 		}

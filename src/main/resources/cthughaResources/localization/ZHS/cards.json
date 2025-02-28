@@ -5,7 +5,8 @@
         "EXTENDED_DESCRIPTION": [
             "不能被打出 。 NL 在你的回合结束时，随机对敌人造成 !M! 点伤害。",
             "不能被打出 。 NL 在你的回合结束时，随机使敌人失去 !M! 点生命和最大生命。"
-        ]
+        ],
+        "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚完成第五幕。"
     },
 
     "Cthugha:HuoYanHuaSheng": {
@@ -137,7 +138,7 @@
     },
     "Cthugha:TunYunFuHai": {
         "NAME": "吞云覆海",
-        "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 !B! 点 格挡 。 NL 手牌中每张 灼伤 使此牌耗能减少1 [E] 并增加 !M! 点伤害。"
+        "DESCRIPTION": "获得 !B! 点 格挡 。 NL 造成 !D! 点伤害。 NL 手牌中每张 灼伤 使此牌耗能减少1 [E] 并增加 !M! 点伤害。"
     },
     "Cthugha:PoMieZhiZhi": {
         "NAME": "破灭之枝",
@@ -183,7 +184,7 @@
     "Cthugha:JiMingWuHui": {
         "NAME": "霁明无晦",
         "DESCRIPTION": "获得 !M! +已 消耗 的 cthugha:灼伤牌 数%s点 格挡 。 NL cthugha:瞬燃 !shunRan! ：从手牌中打出。",
-        "EXTENDED_DESCRIPTION": [" ( !B! ) "]
+        "EXTENDED_DESCRIPTION": [" (共 !B! ) "]
     },
     "Cthugha:ZhongKuJianPo": {
         "NAME": "众苦煎迫",
@@ -306,14 +307,13 @@
     },
     "Cthugha:LiuXingBao": {
         "NAME": "流星爆",
-        "DESCRIPTION": "本回合未花费 [E] 才能打出。 NL cthugha:爆炎 ：此牌造成三倍伤害。 NL ----------------- NL 对所有敌人造成 !D! 点伤害X次。 cthugha:生成 X个 cthugha:炎之精 。",
-        "UPGRADE_DESCRIPTION": "本回合未花费 [E] 才能打出。 NL cthugha:爆炎 ：此牌造成三倍伤害。 NL ----------------- NL 对所有敌人造成 !D! 点伤害X+1次。 cthugha:生成 X+1个 cthugha:炎之精 。",
+        "DESCRIPTION": "本回合未用 [E] 才能打出。 NL cthugha:爆炎 ：此牌造成三倍伤害。 NL ----------------- NL 对所有敌人造成 !D! 点伤害X次。 cthugha:生成 X个 cthugha:炎之精 。",
+        "UPGRADE_DESCRIPTION": "本回合未用 [E] 才能打出。 NL cthugha:爆炎 ：此牌造成三倍伤害。 NL ----------------- NL 对所有敌人造成 !D! 点伤害X+1次。 cthugha:生成 X+1个 cthugha:炎之精 。",
         "EXTENDED_DESCRIPTION": ["我在本回合 #r已经 花费过能量了！"]
     },
     "Cthugha:Gou": {
         "NAME": "篝",
-        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 活力 。 NL ----------------- NL 随机对敌人造成 !D! 点伤害 !cthughaM2! 次。",
-        "UPGRADE_DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 活力 。 NL 打出时或 cthugha:瞬燃 !shunRan2! ：随机对敌人造成 !D! 点伤害 !cthughaM2! 次。"
+        "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：获得 !M! 活力 。 NL 打出时或 cthugha:瞬燃 !shunRan2! ：随机对敌人造成 !D! 点伤害 !cthughaM2! 次。"
     },
     "Cthugha:ChongRanLieHuo": {
         "NAME": "重燃烈火",
@@ -387,7 +387,7 @@
         "FLAVOR": "“金铁为水——土石化蜡——肉身成烟——来入我内，不复续存。”"
     },
     "Cthugha:ChiYanHuaZhan": {
-        "NAME": "炽焰华斩",
+        "NAME": "黄昏与白银",
         "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。",
         "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。"
     },

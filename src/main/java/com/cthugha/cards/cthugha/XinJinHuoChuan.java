@@ -4,7 +4,7 @@ import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.cthugha.object.GiveFire;
-import com.cthugha.patch.SpiritField;
+import com.cthugha.patches.SpiritField;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
