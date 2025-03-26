@@ -53,10 +53,22 @@ public class YanWu extends AbstractCthughaCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new ChannelAction(new FireVampire()));
 		this.addToBot(new AnonymousAction(() -> {
-			ArrayList<AbstractCard> burns = AbstractDungeon.player.drawPile.group
+			ArrayList<AbstractCard> burns = new ArrayList<>();
+
+			burns.addAll(AbstractDungeon.player.drawPile.group
 					.stream()
 					.filter(CthughaHelper::isBurn)
-					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
+
+			burns.addAll(AbstractDungeon.player.discardPile.group
+					.stream()
+					.filter(CthughaHelper::isBurn)
+					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
+
+			burns.addAll(AbstractDungeon.player.hand.group
+					.stream()
+					.filter(CthughaHelper::isBurn)
+					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll));
 
 			if (burns.isEmpty())
 				return;

@@ -12,12 +12,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import me.antileaf.signature.card.AbstractSignatureCard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-public abstract class AbstractCthughaCard extends CustomCard implements RightClickableCard {
+public abstract class AbstractCthughaCard extends AbstractSignatureCard implements RightClickableCard {
 	private static final Logger logger = LogManager.getLogger(AbstractCthughaCard.class.getName());
 
 	private static final Color FLAVOR_TEXT_COLOR = new Color(
@@ -78,6 +79,16 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 		FlavorText.AbstractCardFlavorFields.boxColor.set(this, FLAVOR_BOX_COLOR);
 	}
 
+	@Override
+	public String getSignatureImgPath() {
+		String img = super.getSignatureImgPath();
+
+		if (this.triggeredShunRanThisTurn)
+			img = img.replace(".png", "_bw.png");
+
+		return img;
+	}
+
 	public int getExtraYanZhiJing() {
 		return 0;
 	}
@@ -106,6 +117,7 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 //		return super.getBackgroundSmallTexture();
 //	}
 
+	// 衔烛
 	public boolean shining() {
 		return this.shunRan != -1 && !this.triggeredShunRanThisTurn;
 	}
@@ -342,7 +354,9 @@ public abstract class AbstractCthughaCard extends CustomCard implements RightCli
 	}
 
 	// Returning true will cancel the flare action
-	public boolean onFlareSelectedBy(AbstractCthughaCard card) {
+	public boolean cancelFlare() {
 		return false;
 	}
+
+	public void onFlareSelectedBy(AbstractCthughaCard card) {}
 }

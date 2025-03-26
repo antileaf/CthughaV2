@@ -3,7 +3,9 @@ package com.cthugha.patches.misc;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomUnlock;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.cthugha.cards.cthugha.ShiftingStar;
 import com.cthugha.characters.Cthugha;
+import com.cthugha.dungeons.the_tricuspid_gate.TheTricuspidGate;
 import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.status.Burn;
@@ -19,9 +21,9 @@ import com.megacrit.cardcrawl.unlock.AbstractUnlock;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
+import me.antileaf.signature.utils.SignatureHelper;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
 
 @SuppressWarnings("unused")
 public class UnlockBurnSignaturePatch {
@@ -32,10 +34,18 @@ public class UnlockBurnSignaturePatch {
 		@SpirePostfixPatch
 		public static void Postfix(GameOverScreen _inst) {
 			if (AbstractDungeon.player instanceof Cthugha && _inst instanceof VictoryScreen &&
-					ReflectionHacks.getPrivate(_inst, GameOverScreen.class, "unlockBundle") == null) {
+					CardCrawlGame.dungeon instanceof TheTricuspidGate &&
+					ReflectionHacks.getPrivate(_inst, GameOverScreen.class, "unlockBundle") == null &&
+					(!SignatureHelper.isUnlocked(Burn.ID) || !SignatureHelper.isUnlocked(ShiftingStar.ID))) {
+				SignatureHelper.unlock(Burn.ID, true);
+				SignatureHelper.enable(Burn.ID, true);
+
+				SignatureHelper.unlock(ShiftingStar.ID, true);
+				SignatureHelper.enable(ShiftingStar.ID, true);
+
 				ArrayList<AbstractUnlock> unlocks = new ArrayList<>();
-				for (int i = 0; i < 2; i++) {
-					AbstractUnlock unlock = new CustomUnlock(Burn.ID);
+				for (int i = 0; i < 3; i++) {
+					AbstractUnlock unlock = new CustomUnlock(i < 2 ? Burn.ID : ShiftingStar.ID);
 					unlock.card = unlock.card.makeCopy();
 
 					if (i == 0)

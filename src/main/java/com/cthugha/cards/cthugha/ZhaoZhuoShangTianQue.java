@@ -49,7 +49,12 @@ public class ZhaoZhuoShangTianQue extends AbstractCthughaCard {
     }
 
     @Override
-    public boolean onFlareSelectedBy(AbstractCthughaCard card) {
+    public boolean cancelFlare() {
+        return true;
+    }
+
+    @Override
+    public void onFlareSelectedBy(AbstractCthughaCard card) {
         this.addToBot(new NewQueueCardAction(this, true, false, true));
 
         this.addToBot(new AnonymousAction(() -> {
@@ -58,7 +63,5 @@ public class ZhaoZhuoShangTianQue extends AbstractCthughaCard {
                             AbstractDungeon.player.drawPile.contains(card) ? AbstractDungeon.player.drawPile :
                                     AbstractDungeon.player.discardPile));
         }));
-
-        return true;
     }
 }

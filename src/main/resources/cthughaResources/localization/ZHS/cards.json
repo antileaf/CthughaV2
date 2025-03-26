@@ -1,10 +1,12 @@
 {
     "Cthugha:Burn": {
         "NAME": "（灼伤）",
-        "DESCRIPTION": "造成 !D! 点伤害。",
+        "DESCRIPTION": "WWW",
         "EXTENDED_DESCRIPTION": [
             "不能被打出 。 NL 在你的回合结束时，随机对敌人造成 !M! 点伤害。",
-            "不能被打出 。 NL 在你的回合结束时，随机使敌人失去 !M! 点生命和最大生命。"
+            "不能被打出 。 NL 在你的回合结束时，随机使敌人失去 !M! 点生命和最大生命。",
+            "造成 !D! 点伤害。",
+            "使目标敌人失去 !D! 点生命和最大生命。"
         ],
         "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚完成第五幕。"
     },
@@ -395,7 +397,8 @@
     "Cthugha:ShiftingStar": {
         "NAME": "换斗",
         "DESCRIPTION": "cthugha:瞬燃 !shunRan! ：丢弃所有手牌，抽等量牌。",
-        "UPGRADE_DESCRIPTION": "固有 。 NL cthugha:瞬燃 !shunRan! ：丢弃所有手牌，抽等量牌。"
+        "UPGRADE_DESCRIPTION": "固有 。 NL cthugha:瞬燃 !shunRan! ：丢弃所有手牌，抽等量牌。",
+        "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚完成第五幕。"
     },
 
     "Cthugha:CastleOfTheSun": {

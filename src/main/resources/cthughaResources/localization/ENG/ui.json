@@ -12,7 +12,11 @@
       "Sky Striker Ace - Kagari",
       "High Roller - Helia",
       "Rin Kaenbyou",
-      "Junko Akashi"
+      "Junko Akashi",
+      "Cthugha (Ark Order)",
+      "Campfire Skin",
+      "Default",
+      "Achi Cirno"
     ]
   },
 
@@ -77,7 +81,8 @@
   "Cthugha:VictoryQuestion": {
     "TEXT": [
       "Victory?",
-      "Soaring!"
+      "Deified!",
+      "Deified"
     ]
   },
 
@@ -90,6 +95,40 @@
   "Cthugha:HideDescription": {
     "TEXT": [
       "Hide Description"
+    ]
+  },
+
+  "Cthugha:UnlockSignature": {
+    "TEXT": [
+      "Signature Unlocked!",
+      "Tip: You can switch whether to enable Signature in single card view."
+    ]
+  },
+
+  "Cthugha:ConfirmUseCardPopup": {
+    "TEXT": [
+      "Two-Step Confirmation",
+      "Are you sure to play this card? If so, Areshkagal will take an action immediately. (You can switch this at the left-bottom corner of the screen.)"
+    ]
+  },
+
+  "Cthugha:ConfirmCheckbox": {
+    "TEXT": [
+      "Two-Step Confirmation"
+    ]
+  },
+
+  "Cthugha:AnotherProceedButton": {
+    "TEXT": [
+      "Go To Act 5"
+    ]
+  },
+
+  "Cthugha:ConfirmProceedPopup": {
+    "TEXT": [
+      "Are you sure?",
+      "Are you sure to leave now? If you do not want to challenge Act 5, you are still treated as Victory.",
+      "Are you ready to go to Act 5? You will face a very powerful enemy."
     ]
   }
 }

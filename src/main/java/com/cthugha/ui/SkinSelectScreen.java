@@ -1,6 +1,8 @@
 package com.cthugha.ui;
 
+import basemod.CustomCharacterSelectScreen;
 import basemod.Pair;
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,28 +26,32 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
+
 import java.util.ArrayList;
 
 public class SkinSelectScreen {
 	private static final String[] TEXT;
 
 	private static final ArrayList<Skin> SKINS = new ArrayList<>();
+	private static final ArrayList<CampfireSkin> CAMPFIRE_SKINS = new ArrayList<>();
 
 	public static SkinSelectScreen inst;
 
 	public static boolean shouldUpdateBackground = false;
 
 	public Hitbox leftHb, rightHb;
+	public Hitbox campfireLeftHb, campfireRightHb;
 
-	public TextureAtlas atlas;
+//	public TextureAtlas atlas;
 
 	public Skeleton skeleton;
 
 	public AnimationStateData stateData;
 	public AnimationState state;
 
-	public String curName = "", nextName = "";
-	public int index;
+	public String curName = "", campfireCurName = ""; // , nextName = "";
+	public int index, campfireIndex;
 
 	static {
 		final String ID = CthughaHelper.makeID(SkinSelectScreen.class.getSimpleName());
@@ -61,10 +67,16 @@ public class SkinSelectScreen {
 		SKINS.add(new Skin(8, "helia")); // 豪赌客-海拉
 		SKINS.add(new Skin(9, "rin")); // 火焰猫燐
 		SKINS.add(new Skin(10, "junko")); // 赤司纯子
+		SKINS.add(new Skin(11, "ark")); // 克图格亚（方舟指令）
+		CAMPFIRE_SKINS.add(new CampfireSkin(0, "default",
+				"default", "default", "default"));
+		CAMPFIRE_SKINS.add(new CampfireSkin(1, "cirno",
+				"cirno", "cirno", "cirno"));
 
 		inst = new SkinSelectScreen();
 		inst.index = ConfigHelper.getSkin();
-		inst.refresh();
+		inst.campfireIndex = ConfigHelper.getCampfireSkin();
+//		inst.refresh();
 	}
 
 	public static Pair<String, Color> getFireVampireSkin() {
@@ -90,30 +102,54 @@ public class SkinSelectScreen {
 	private SkinSelectScreen() {
 		this.leftHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
 		this.rightHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
+
+		this.campfireLeftHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
+		this.campfireRightHb = new Hitbox(70.0F * Settings.scale, 70.0F * Settings.scale);
 	}
 
 	public static Skin getSkin() {
 		return SKINS.get(inst.index);
 	}
 
-	public void loadAnimation(String atlasUrl, String skeletonUrl, float scale) {
-		this.atlas = new TextureAtlas(Gdx.files.internal(atlasUrl));
-		SkeletonJson json = new SkeletonJson(this.atlas);
-		json.setScale(Settings.renderScale / scale);
-		SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal(skeletonUrl));
-		this.skeleton = new Skeleton(skeletonData);
-		this.skeleton.setColor(Color.WHITE);
-		this.stateData = new AnimationStateData(skeletonData);
-		this.state = new AnimationState(this.stateData);
-		AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
-		e.setTimeScale(1.2F);
+	public static CampfireSkin getCampfireSkin() {
+		return CAMPFIRE_SKINS.get(inst.campfireIndex);
 	}
+
+//	public void loadAnimation(String atlasUrl, String skeletonUrl, float scale) {
+//		this.atlas = new TextureAtlas(Gdx.files.internal(atlasUrl));
+//		SkeletonJson json = new SkeletonJson(this.atlas);
+//		json.setScale(Settings.renderScale / scale);
+//		SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal(skeletonUrl));
+//		this.skeleton = new Skeleton(skeletonData);
+//		this.skeleton.setColor(Color.WHITE);
+//		this.stateData = new AnimationStateData(skeletonData);
+//		this.state = new AnimationState(this.stateData);
+//		AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
+//		e.setTimeScale(1.2F);
+//	}
 
 	public void refresh() {
 		Skin skin = SKINS.get(this.index);
 		this.curName = skin.name;
+
+		CampfireSkin campfireSkin = CAMPFIRE_SKINS.get(this.campfireIndex);
+		this.campfireCurName = campfireSkin.name;
+
+		if (CardCrawlGame.mainMenuScreen != null && CardCrawlGame.mainMenuScreen.charSelectScreen != null) {
+			ArrayList<CharacterOption> options = ReflectionHacks.getPrivate(
+					CardCrawlGame.mainMenuScreen.charSelectScreen,
+					CustomCharacterSelectScreen.class, "allOptions");
+			for (CharacterOption o : options)
+				if (o.c instanceof Cthugha) {
+					ReflectionHacks.setPrivate(o, CharacterOption.class, "buttonImg",
+							ImageMaster.loadImage(campfireSkin.button));
+
+					break;
+				}
+		}
+
 		// loadAnimation(skin.charPath + ".atlas", skin.charPath + ".json", 1.5F);
-		this.nextName = SKINS.get(nextIndex()).name;
+//		this.nextName = SKINS.get(nextIndex()).name;
 
 		shouldUpdateBackground = true;
 
@@ -131,12 +167,24 @@ public class SkinSelectScreen {
 		return (this.index + 1 > SKINS.size() - 1) ? 0 : (this.index + 1);
 	}
 
+	public int prevCampfireIndex() {
+		return (this.campfireIndex - 1 < 0) ? (CAMPFIRE_SKINS.size() - 1) : (this.campfireIndex - 1);
+	}
+
+	public int nextCampfireIndex() {
+		return (this.campfireIndex + 1 > CAMPFIRE_SKINS.size() - 1) ? 0 : (this.campfireIndex + 1);
+	}
+
 	public void update() {
 		float centerX = Settings.WIDTH * 0.86F;
-		float centerY = Settings.HEIGHT * 0.55F;
+		float centerY = Settings.HEIGHT * 0.5F;
 
 		this.leftHb.move(centerX - 200.0F * Settings.scale, centerY);
 		this.rightHb.move(centerX + 200.0F * Settings.scale, centerY);
+
+		this.campfireLeftHb.move(centerX - 200.0F * Settings.scale, centerY + 350.0F * Settings.scale);
+		this.campfireRightHb.move(centerX + 200.0F * Settings.scale, centerY + 350.0F * Settings.scale);
+
 		updateInput();
 	}
 
@@ -144,8 +192,11 @@ public class SkinSelectScreen {
 		if (CardCrawlGame.chosenCharacter == MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS) {
 			this.leftHb.update();
 			this.rightHb.update();
+			this.campfireLeftHb.update();
+			this.campfireRightHb.update();
 
 			int oldIndex = this.index;
+			int oldCampfireIndex = this.campfireIndex;
 
 			if (!Settings.isControllerMode) {
 				if (this.leftHb.clicked) {
@@ -158,6 +209,18 @@ public class SkinSelectScreen {
 					this.rightHb.clicked = false;
 					CardCrawlGame.sound.play("UI_CLICK_1");
 					this.index = nextIndex();
+				}
+
+				if (this.campfireLeftHb.clicked) {
+					this.campfireLeftHb.clicked = false;
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.campfireIndex = prevCampfireIndex();
+				}
+
+				if (this.campfireRightHb.clicked) {
+					this.campfireRightHb.clicked = false;
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.campfireIndex = nextCampfireIndex();
 				}
 			}
 			else {
@@ -173,11 +236,17 @@ public class SkinSelectScreen {
 					CardCrawlGame.sound.play("UI_CLICK_1");
 					this.index = nextIndex();
 				}
+				else if (CInputActionSet.peek.isJustPressed()) {
+					CInputActionSet.peek.unpress();
+					CardCrawlGame.sound.play("UI_CLICK_1");
+					this.campfireIndex = nextCampfireIndex();
+				}
 			}
 
-			if (this.index != oldIndex) {
+			if (this.index != oldIndex || this.campfireIndex != oldCampfireIndex) {
 				refresh();
 				ConfigHelper.setSkin(this.index);
+				ConfigHelper.setCampfireSkin(this.campfireIndex);
 				ConfigHelper.save();
 			}
 
@@ -186,6 +255,10 @@ public class SkinSelectScreen {
 					this.leftHb.clickStarted = true;
 				if (this.rightHb.hovered)
 					this.rightHb.clickStarted = true;
+				if (this.campfireLeftHb.hovered)
+					this.campfireLeftHb.clickStarted = true;
+				if (this.campfireRightHb.hovered)
+					this.campfireRightHb.clickStarted = true;
 			}
 		}
 	}
@@ -215,7 +288,7 @@ public class SkinSelectScreen {
 
 	public void render(SpriteBatch sb) {
 		float centerX = Settings.WIDTH * 0.86F;
-		float centerY = Settings.HEIGHT * 0.55F;
+		float centerY = Settings.HEIGHT * 0.5F;
 //		renderSkin(sb, centerX, centerY);
 		FontHelper.renderFontCentered(
 				sb,
@@ -227,13 +300,28 @@ public class SkinSelectScreen {
 				1.25F
 		);
 
+		FontHelper.renderFontCentered(
+				sb,
+				FontHelper.cardTitleFont,
+				TEXT[SKINS.size() + 1],
+				centerX,
+				centerY + 450.0F * Settings.scale,
+				Color.WHITE,
+				1.15F
+		);
+
 		Texture img = getSkin().char_IMG;
 		sb.draw(img, centerX - img.getWidth() / 2.0F, centerY - img.getHeight() / 2.0F);
+
+		Texture campfireImg = getCampfireSkin().preview;
+		sb.draw(campfireImg, centerX - campfireImg.getWidth() / 2.0F,
+				centerY + 350.0F * Settings.scale - campfireImg.getHeight() / 2.0F);
 
 		Color color = Settings.GOLD_COLOR.cpy();
 		color.a /= 2.0F;
 		// float dist = 100.0F * Settings.scale;
 		FontHelper.renderFontCentered(sb, FontHelper.cardTitleFont, this.curName, centerX, centerY - 230.0F, Settings.GOLD_COLOR, 1.1F);
+		FontHelper.renderFontCentered(sb, FontHelper.cardTitleFont, this.campfireCurName, centerX, centerY + 320.0F, Settings.GOLD_COLOR, 0.95F);
 		// FontHelper.renderFontCentered(sb, FontHelper.cardTitleFont, this.nextName,
 		// centerX + dist * 1.5F, centerY - dist, color);
 		if (this.leftHb.hovered) {
@@ -250,6 +338,22 @@ public class SkinSelectScreen {
 			sb.setColor(Color.WHITE);
 		}
 		sb.draw(ImageMaster.CF_RIGHT_ARROW, this.rightHb.cX - 24.0F, this.rightHb.cY - 24.0F, 24.0F, 24.0F, 48.0F, 48.0F,
+				Settings.scale, Settings.scale, 0.0F, 0, 0, 48, 48, false, false);
+
+		if (this.campfireLeftHb.hovered) {
+			sb.setColor(Color.LIGHT_GRAY);
+		} else {
+			sb.setColor(Color.WHITE);
+		}
+		sb.draw(ImageMaster.CF_LEFT_ARROW, this.campfireLeftHb.cX - 24.0F, this.campfireLeftHb.cY - 24.0F, 24.0F, 24.0F, 48.0F, 48.0F,
+				Settings.scale, Settings.scale, 0.0F, 0, 0, 48, 48, false, false);
+
+		if (this.campfireRightHb.hovered) {
+			sb.setColor(Color.LIGHT_GRAY);
+		} else {
+			sb.setColor(Color.WHITE);
+		}
+		sb.draw(ImageMaster.CF_RIGHT_ARROW, this.campfireRightHb.cX - 24.0F, this.campfireRightHb.cY - 24.0F, 24.0F, 24.0F, 48.0F, 48.0F,
 				Settings.scale, Settings.scale, 0.0F, 0, 0, 48, 48, false, false);
 
 		if (Settings.isControllerMode) {
@@ -277,25 +381,39 @@ public class SkinSelectScreen {
 					0, 0,
 					64, 64,
 					false, false);
+
+			sb.draw(CInputActionSet.peek.getKeyImg(),
+					this.campfireRightHb.cX - 32.0F,
+					this.campfireRightHb.cY - OFFSET - 32.0F,
+					32.0F, 32.0F,
+					64.0F, 64.0F,
+					Settings.scale, Settings.scale,
+					0.0F,
+					0, 0,
+					64, 64,
+					false, false);
 		}
 
 		this.rightHb.render(sb);
 		this.leftHb.render(sb);
+
+		this.campfireRightHb.render(sb);
+		this.campfireLeftHb.render(sb);
 	}
 
-	public void renderSkin(SpriteBatch sb, float x, float y) {
-		if (this.atlas == null)
-			return;
-		this.state.update(Gdx.graphics.getDeltaTime());
-		this.state.apply(this.skeleton);
-		this.skeleton.updateWorldTransform();
-		this.skeleton.setPosition(x, y);
-		sb.end();
-		CardCrawlGame.psb.begin();
-		AbstractCreature.sr.draw(CardCrawlGame.psb, this.skeleton);
-		CardCrawlGame.psb.end();
-		sb.begin();
-	}
+//	public void renderSkin(SpriteBatch sb, float x, float y) {
+//		if (this.atlas == null)
+//			return;
+//		this.state.update(Gdx.graphics.getDeltaTime());
+//		this.state.apply(this.skeleton);
+//		this.skeleton.updateWorldTransform();
+//		this.skeleton.setPosition(x, y);
+//		sb.end();
+//		CardCrawlGame.psb.begin();
+//		AbstractCreature.sr.draw(CardCrawlGame.psb, this.skeleton);
+//		CardCrawlGame.psb.end();
+//		sb.begin();
+//	}
 
 	public static class Skin {
 		public String charPath;
@@ -313,6 +431,22 @@ public class SkinSelectScreen {
 			// this.calcitePath = "KaltsitResources/img/char/calcite" + calcitePath;
 			// this.shoulder = "KaltsitResources/img/char/shoulder.png";
 			this.name = SkinSelectScreen.TEXT[index + 1];
+		}
+	}
+
+	public static class CampfireSkin {
+		public Texture preview;
+		public String shoulder1, shoulder2;
+		public String button;
+
+		public String name;
+
+		public CampfireSkin(int index, String preview, String shoulder1, String shoulder2, String button) {
+			this.preview = ImageMaster.loadImage("cthughaResources/img/char/campfire_" + preview + ".png");
+			this.shoulder1 = "cthughaResources/img/char/shoulder_" + shoulder1 + ".png";
+			this.shoulder2 = "cthughaResources/img/char/shoulder_" + shoulder2 + ".png";
+			this.button = "cthughaResources/img/char/button_" + button + ".png";
+			this.name = SkinSelectScreen.TEXT[index + SKINS.size() + 2];
 		}
 	}
 }

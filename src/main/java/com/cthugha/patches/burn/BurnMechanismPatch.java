@@ -3,6 +3,7 @@ package com.cthugha.patches.burn;
 import basemod.ReflectionHacks;
 import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
 import com.cthugha.blight.TheBurningOne;
+import com.cthugha.characters.Cthugha;
 import com.cthugha.orbs.FireVampire;
 import com.cthugha.power.WuYouBuZhuPower;
 import com.cthugha.relics.cthugha.EmeraldTabletVolumeVII;
@@ -48,7 +49,9 @@ public class BurnMechanismPatch {
 		CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(CthughaHelper.makeID("Burn"));
 
 		if (c.type == AbstractCard.CardType.ATTACK)
-			return cardStrings.DESCRIPTION;
+			return !CthughaHelper.isInBattle() || !AbstractDungeon.player.hasRelic(ShengLingLieYan.ID) ?
+					cardStrings.EXTENDED_DESCRIPTION[2] :
+					cardStrings.EXTENDED_DESCRIPTION[3];
 
 		if (CthughaHelper.isInBattle() && hasCthughaBlight())
 			return !AbstractDungeon.player.hasRelic(ShengLingLieYan.ID) ?
@@ -168,7 +171,7 @@ public class BurnMechanismPatch {
 //				item.autoplayCard = true;
 //				AbstractDungeon.actionManager.cardQueue.add(item);
 
-				logger.info("矢野我测你的码");
+				logger.debug("矢野我测你的码");
 
 //				return SpireReturn.Return();
 
@@ -256,9 +259,23 @@ public class BurnMechanismPatch {
 						AbstractDungeon.actionManager.addToBottom(
 								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(m));
 
-					AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
-							new DamageInfo(p, _inst.damage, DamageInfo.DamageType.NORMAL),
-							AbstractGameAction.AttackEffect.FIRE));
+					if (!p.hasRelic(ShengLingLieYan.ID))
+						AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
+								new DamageInfo(p, _inst.damage, DamageInfo.DamageType.NORMAL),
+								AbstractGameAction.AttackEffect.FIRE));
+					else {
+						AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
+								new DamageInfo(p, _inst.damage, DamageInfo.DamageType.HP_LOSS),
+								AbstractGameAction.AttackEffect.FIRE));
+
+						AbstractDungeon.actionManager.addToBottom(new DecreaseMonsterMaxHealthAction(m, _inst.damage));
+
+						if (p.hasPower(WuYouBuZhuPower.POWER_ID)) {
+							p.getPower(WuYouBuZhuPower.POWER_ID).flash();
+							AbstractDungeon.actionManager.addToBottom(
+									new DecreaseMonsterMaxHealthAction(m, _inst.damage));
+						}
+					}
 					return SpireReturn.Return();
 				}
 				else

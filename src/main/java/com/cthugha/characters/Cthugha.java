@@ -68,9 +68,9 @@ public class Cthugha extends CustomPlayer {
     private static final String ORB_VFX = "cthughaResources/img/UI/orb/vfx.png";
 
     // 火堆的人物立绘（行动前）
-    private static final String MY_CHARACTER_SHOULDER_1 = "cthughaResources/img/char/huodui.png";
+    private static final String MY_CHARACTER_SHOULDER_1 = "cthughaResources/img/char/campfire_default.png";
     // 火堆的人物立绘（行动后）
-    private static final String MY_CHARACTER_SHOULDER_2 = "cthughaResources/img/char/huodui.png";
+    private static final String MY_CHARACTER_SHOULDER_2 = "cthughaResources/img/char/campfire_default.png";
     // 人物死亡图像
     private static final String CORPSE_IMAGE = "cthughaResources/img/renwu2.png";
 
@@ -102,6 +102,10 @@ public class Cthugha extends CustomPlayer {
         SkinSelectScreen.Skin skin = SkinSelectScreen.getSkin();
         this.img = ImageMaster.loadImage(skin.charPath);
         this.corpseImg = ImageMaster.loadImage(skin.charPath);
+
+        SkinSelectScreen.CampfireSkin campfireSkin = SkinSelectScreen.getCampfireSkin();
+        this.shoulderImg = ImageMaster.loadImage(campfireSkin.shoulder1);
+        this.shoulder2Img = ImageMaster.loadImage(campfireSkin.shoulder2);
     }
 
     // 人物选择界面点击你的人物按钮时触发的方法，这里为屏幕轻微震动

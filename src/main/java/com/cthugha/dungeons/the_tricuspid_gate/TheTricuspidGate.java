@@ -5,6 +5,7 @@ import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.cthugha.dungeons.the_tricuspid_gate.confirm.ConfirmUseCardPopup;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.Areshkagal;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.BurialWatchdogScepter;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.BurialWatchdogSword;

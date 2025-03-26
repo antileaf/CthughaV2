@@ -188,5 +188,12 @@
     "DESCRIPTIONS": [
       "当你身上叠加相同的 #y色彩印记 时，阿雷什卡高 #r立即行动 。 NL 当你叠加 #b4 种不同 #y色彩印记 后，所有 #y色彩印记 层数减少 #b1 层。"
     ]
+  },
+
+  "Cthugha:InvisibleGainStrengthPower": {
+    "NAME": "获得力量",
+    "DESCRIPTIONS": [
+      "回合结束时，获得 #b%d 点 #y力量 。"
+    ]
   }
 }

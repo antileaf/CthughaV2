@@ -2,7 +2,7 @@ package com.cthugha.actions;
 
 import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.common.CthughaAddTempHPAction;
-import com.cthugha.patches.RevivePatch;
+import com.cthugha.patches.monster.RevivePatch;
 import com.cthugha.power.CounterOfLossMaxHpPower;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

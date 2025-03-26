@@ -1,6 +1,11 @@
 package com.cthugha.dungeons.the_tricuspid_gate.shop;
 
-import basemod.ReflectionHacks;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.cthugha.dungeons.the_tricuspid_gate.shop.item.BloodStorePotion;
 import com.cthugha.dungeons.the_tricuspid_gate.shop.item.BloodStoreRelic;
+import com.cthugha.utils.ConfigHelper;
 import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
@@ -16,21 +22,29 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.*;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.MathHelper;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.localization.TutorialStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.relics.Courier;
 import com.megacrit.cardcrawl.relics.Orrery;
 import com.megacrit.cardcrawl.relics.TinyHouse;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.shop.*;
+import com.megacrit.cardcrawl.shop.Merchant;
+import com.megacrit.cardcrawl.shop.OnSaleTag;
+import com.megacrit.cardcrawl.shop.ShopScreen;
+import com.megacrit.cardcrawl.shop.StorePotion;
+import com.megacrit.cardcrawl.shop.StoreRelic;
+import com.megacrit.cardcrawl.ui.FtueTip;
 import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import com.megacrit.cardcrawl.vfx.FloatyEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import basemod.ReflectionHacks;
 
 
 public class BloodShopScreen extends ShopScreen {
@@ -51,11 +65,11 @@ public class BloodShopScreen extends ShopScreen {
 	private static final UIStrings CANT_BUY_MSG = CardCrawlGame.languagePack
 			.getUIString(CthughaHelper.makeID("CantBuyMessage"));
 
-	private static final int PAGE_COUNT = 3;
+	public static final int PAGE_COUNT = 3;
 	private static final int MAX_PURGE_COUNT = 3;
 
-	private ArrayList<ArrayList<AbstractCard>> coloredCardsPages = new ArrayList<>();
-	private ArrayList<ArrayList<AbstractCard>> colorlessCardsPages = new ArrayList<>();
+	public ArrayList<ArrayList<AbstractCard>> coloredCardsPages = new ArrayList<>();
+	public ArrayList<ArrayList<AbstractCard>> colorlessCardsPages = new ArrayList<>();
 	private ArrayList<OnSaleTag> saleTagPages = new ArrayList<>();
 	private ArrayList<ArrayList<StoreRelic>> relicPages = new ArrayList<>();
 	private ArrayList<ArrayList<StorePotion>> potionPages = new ArrayList<>();
@@ -63,7 +77,7 @@ public class BloodShopScreen extends ShopScreen {
 	private static boolean justPurged = false;
 	private int purgeCount = 0;
 
-	private int currentPage = 0;
+	public int currentPage = 0;
 	private Hitbox prevHb, nextHb;
 
 	public BloodShopScreen() {
@@ -178,6 +192,28 @@ public class BloodShopScreen extends ShopScreen {
 		return list.get(MathUtils.random(list.size() - 1));
 	}
 
+	@Override
+	public void applyDiscount(float multiplier, boolean affectPurge) {
+		super.applyDiscount(multiplier, affectPurge);
+
+		if (this.relicPages != null && this.relicPages.size() == PAGE_COUNT) {
+			for (int page = 0; page < PAGE_COUNT; page++)
+				if (page != this.currentPage) {
+					for (StoreRelic r : this.relicPages.get(page))
+						r.price = Math.max(1, MathUtils.round((float) r.price * multiplier));
+
+					for (StorePotion p : this.potionPages.get(page))
+						p.price = Math.max(1, MathUtils.round((float) p.price * multiplier));
+
+					for (AbstractCard c : this.coloredCardsPages.get(page))
+						c.price = Math.max(1, MathUtils.round((float) c.price * multiplier));
+
+					for (AbstractCard c : this.colorlessCardsPages.get(page))
+						c.price = Math.max(1, MathUtils.round((float) c.price * multiplier));
+				}
+		}
+	}
+
 	@SpireOverride
 	protected void initRelics() {
 		SpireSuper.call(this);
@@ -207,6 +243,22 @@ public class BloodShopScreen extends ShopScreen {
 	}
 
 	@Override
+	public void open() {
+		super.open();
+
+		if (ConfigHelper.showShopTutorial()) {
+			TutorialStrings tutorialStrings = CardCrawlGame.languagePack.getTutorialString(
+					CthughaHelper.makeID("Shop"));
+
+			AbstractDungeon.ftue = new FtueTip(tutorialStrings.LABEL[0], tutorialStrings.TEXT[0],
+					Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, FtueTip.TipType.CARD_REWARD);
+
+			ConfigHelper.setShowShopTutorial(false);
+			ConfigHelper.save();
+		}
+	}
+
+	@Override
 	public void update() {
 		if (Settings.isTouchScreen) {
 			this.confirmButton.update();
@@ -230,7 +282,7 @@ public class BloodShopScreen extends ShopScreen {
 							AbstractCard.class).invoke(this, touchCard);
 				} else if (this.touchPotion != null) {
 					this.touchPotion.purchasePotion();
-				} else if (ReflectionHacks.getPrivate(this, ShopScreen.class, "touchPurge")) {
+				} else if ((boolean) ReflectionHacks.getPrivate(this, ShopScreen.class, "touchPurge")) {
 					ReflectionHacks.privateMethod(ShopScreen.class, "purchasePurge")
 							.invoke(this);
 				}

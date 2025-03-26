@@ -11,18 +11,22 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cthugha.blight.TheBurningOne;
 import com.cthugha.cardmodifier.ColorificStampModifier;
+import com.cthugha.cards.cthugha.ShiftingStar;
 import com.cthugha.cards.cthugha.StarSpear;
 import com.cthugha.dungeons.the_tricuspid_gate.TheTricuspidGate;
+import com.cthugha.dungeons.the_tricuspid_gate.confirm.ConfirmCheckbox;
+import com.cthugha.dungeons.the_tricuspid_gate.confirm.ConfirmUseCardScreen;
 import com.cthugha.dungeons.the_tricuspid_gate.monsters.Areshkagal;
+import com.cthugha.dungeons.the_tricuspid_gate.proceed.ConfirmProceedScreen;
 import com.cthugha.events.ReplacedVampires;
 import com.cthugha.glow.BaoYanGlowInfo;
 import com.cthugha.glow.ZhiLiaoGlowInfo;
 import com.cthugha.patches.misc.HPLostThisCombatPatch;
-import com.cthugha.patches.signature.SignaturePatch;
 import com.cthugha.potions.EvilSunrise;
 import com.cthugha.potions.RedLotusWater;
 import com.cthugha.power.StampPower;
 import com.cthugha.strings.CthughaCardModifierStrings;
+import com.cthugha.ui.SkinSelectScreen;
 import com.cthugha.utils.*;
 import com.cthugha.potions.BottledHell;
 import com.cthugha.power.HeiYanPower;
@@ -40,6 +44,7 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import me.antileaf.signature.card.AbstractSignatureCard;
 import me.antileaf.signature.utils.SignatureHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -77,7 +82,7 @@ public class Cthugha_Core implements
 	public static final Logger logger = LogManager.getLogger(Cthugha_Core.class.getName());
 
 	// 人物选择界面按钮的图片
-	private static final String MY_CHARACTER_BUTTON = "cthughaResources/img/renwu.png";
+	private static final String MY_CHARACTER_BUTTON = "cthughaResources/img/char/button_default.png";
 	// 人物选择界面的立绘
 	private static final String MY_CHARACTER_PORTRAIT = "cthughaResources/img/anime-fandoms-Black-Bullet-1620248_2.png";
 
@@ -240,6 +245,9 @@ public class Cthugha_Core implements
 
 	@Override
 	public void receivePostInitialize() {
+		BaseMod.addCustomScreen(new ConfirmUseCardScreen());
+		BaseMod.addCustomScreen(new ConfirmProceedScreen());
+
 		CardBorderGlowManager.addGlowInfo(new BaoYanGlowInfo());
 		CardBorderGlowManager.addGlowInfo(new ZhiLiaoGlowInfo());
 
@@ -266,12 +274,14 @@ public class Cthugha_Core implements
 		BaseMod.registerModBadge(
 				ImageMaster.loadImage("cthughaResources/img/badge.png"),
 				"cthugha",
-				"ee, antileaf",
+				"ee, pipige, antileaf",
 				"",
 				ConfigHelper.createConfigPanel()
 		);
 
-		if (CthughaHelper.isSignatureLibAvailable()) {
+		if (true || CthughaHelper.isSignatureLibAvailable()) {
+			SignatureHelper.noDebuggingPrefix("Cthugha:");
+
 			SignatureHelper.register(Burn.ID, new SignatureHelper.Info(
 					(card) -> {
 						if (card.type == AbstractCard.CardType.STATUS)
@@ -287,12 +297,20 @@ public class Cthugha_Core implements
 					}
 			));
 
+			new AutoAdd("CthughaV2")
+					.packageFilter("com.cthugha.cards.cthugha")
+					.any(AbstractSignatureCard.class, (info, card) -> {
+						if (card.hasSignature && !card.cardID.equals(ShiftingStar.ID))
+							SignatureHelper.unlock(card.cardID, true);
+					});
+
 			if (!ConfigHelper.hasCheckedHistory()) {
-				boolean res = CheckHistoryHelper.checkHistories();
+				boolean res = HistoryHelper.checkHistories();
 
 				if (res) {
 					SignatureHelper.unlock(Burn.ID, true);
-					logger.info("Has defeated Areshkagal before, Signature of Burn unlocked!");
+					SignatureHelper.unlock(ShiftingStar.ID, true);
+					logger.info("Has defeated Areshkagal before, Signature of Burn and Shifting Star unlocked!");
 				}
 				else
 					logger.info("Signature not unlocked.");
@@ -300,6 +318,10 @@ public class Cthugha_Core implements
 				ConfigHelper.setHasCheckedHistory(true);
 			}
 		}
+
+		ConfirmCheckbox.inst = new ConfirmCheckbox();
+
+		SkinSelectScreen.inst.refresh();
 	}
 
 	@Override
@@ -327,6 +349,9 @@ public class Cthugha_Core implements
 		for (AbstractCard c : AbstractDungeon.player.masterDeck.group)
 			if (c instanceof StarSpear)
 				((StarSpear) c).onStartAct();
+
+		if (CardCrawlGame.dungeon instanceof TheTricuspidGate)
+			CardCrawlGame.stopClock = false;
 	}
 
 	@Override
@@ -351,13 +376,15 @@ public class Cthugha_Core implements
 	public void receiveRender(SpriteBatch sb) {
 //		if (CardCrawlGame.dungeon instanceof TheTricuspidGate &&
 //				CthughaHelper.isInBattle())
-//			StampPower.render(sb);
+//			ConfirmCheckbox.inst.render(sb);
 	}
 
 	@Override
 	public void receivePostUpdate() {
 		if (CardCrawlGame.dungeon instanceof TheTricuspidGate &&
-				CthughaHelper.isInBattle())
+				CthughaHelper.isInBattle()) {
 			StampPower.update();
+			ConfirmCheckbox.inst.update();
+		}
 	}
 }

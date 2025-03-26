@@ -5,7 +5,6 @@ import com.cthugha.Cthugha_Core;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.cards.cthugha.CastleOfTheSun;
 import com.cthugha.cards.cthugha.FuZhuoShangHuan;
-import com.cthugha.cards.cthugha.ZhaoZhuoShangTianQue;
 import com.cthugha.utils.LanguageHelper;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -109,7 +108,10 @@ public class FlareAction extends AbstractGameAction {
 		for (AbstractCard c : this.selected)
 			if (c instanceof AbstractCthughaCard) {
 				AbstractCthughaCard ac = (AbstractCthughaCard) c;
-				if (ac.onFlareSelectedBy(this.card)) {
+
+				ac.onFlareSelectedBy(this.card);
+
+				if (ac.cancelFlare()) {
 					AbstractDungeon.player.hand.group.addAll(this.selected);
 					this.selected.clear();
 					return;
@@ -134,7 +136,8 @@ public class FlareAction extends AbstractGameAction {
 				.filter(CthughaHelper::isBurnCard)
 				.filter(c -> !(c instanceof AbstractCthughaCard) ||
 						(((AbstractCthughaCard) c).modifyFlareLevel() == -1) &&
-								!((AbstractCthughaCard) c).onFlareSelectedBy(this.card)).sorted((a, b) -> {
+								!((AbstractCthughaCard) c).cancelFlare())
+				.sorted((a, b) -> {
 					if (a instanceof Burn && b instanceof Burn)
 						return ((Burn) b).baseMagicNumber - ((Burn) a).baseMagicNumber;
 					if (a instanceof Burn)
@@ -153,7 +156,7 @@ public class FlareAction extends AbstractGameAction {
 				.filter(CthughaHelper::isBurnCard)
 				.filter(c -> !(c instanceof AbstractCthughaCard) ||
 						(((AbstractCthughaCard) c).modifyFlareLevel() == -1) &&
-								!((AbstractCthughaCard) c).onFlareSelectedBy(this.card))
+								!((AbstractCthughaCard) c).cancelFlare())
 				.count();
 
 		if (burnCardCount >= count)

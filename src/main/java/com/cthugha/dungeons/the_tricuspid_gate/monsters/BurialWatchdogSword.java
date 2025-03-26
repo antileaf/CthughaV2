@@ -7,7 +7,8 @@ import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cardmodifier.ColorificStampModifier;
 import com.cthugha.cards.colorless.Erosion;
-import com.cthugha.patches.RevivePatch;
+import com.cthugha.patches.monster.RevivePatch;
+import com.cthugha.power.InvisibleGainStrengthPower;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -146,7 +147,8 @@ public class BurialWatchdogSword extends CustomMonster {
 		}
 		else if (this.nextMove == PIERCER) {
 			for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
-				this.addToBot(new ApplyPowerAction(m, this, new StrengthPower(m, 2)));
+				this.addToBot(new ApplyPowerAction(m, this,
+						new InvisibleGainStrengthPower(m, 2)));
 		}
 		else if (this.nextMove == SKEWER) {
 			for (int i = 0; i < this.skewerCount; i++)

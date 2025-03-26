@@ -29,7 +29,7 @@ public class LieXingSuiXuanPower extends AbstractPower {
     }
 
     public void updateDescription() {
-        if (this.amount <= 1 || powerStrings.DESCRIPTIONS.length == 1)
+        if (this.amount == 1 || powerStrings.DESCRIPTIONS.length == 1)
             this.description = String.format(powerStrings.DESCRIPTIONS[0], this.amount);
         else
             this.description = String.format(powerStrings.DESCRIPTIONS[1], this.amount);

@@ -8,7 +8,7 @@ import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.cardmodifier.ColorificStampModifier;
 import com.cthugha.cards.colorless.Erosion;
-import com.cthugha.patches.RevivePatch;
+import com.cthugha.patches.monster.RevivePatch;
 import com.cthugha.power.ChaosIncarnatePower;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.cthugha.utils.CthughaHelper;

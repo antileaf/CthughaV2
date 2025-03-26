@@ -81,15 +81,15 @@ public class FifthActCompatibilityPatch {
 		}
 	}
 
-	@SpirePatch(clz = CorruptHeart.class, method = "die", paramtypez = {})
-	public static class CorruptHeartPatch {
-		@SpirePostfixPatch
-		public static void Postfix(CorruptHeart _inst) {
-			if (AbstractDungeon.player instanceof Cthugha) {
-				CardCrawlGame.stopClock = false;
-			}
-		}
-	}
+//	@SpirePatch(clz = CorruptHeart.class, method = "die", paramtypez = {})
+//	public static class CorruptHeartPatch {
+//		@SpirePostfixPatch
+//		public static void Postfix(CorruptHeart _inst) {
+//			if (AbstractDungeon.player instanceof Cthugha) {
+//				CardCrawlGame.stopClock = false;
+//			}
+//		}
+//	}
 
 //	@SpirePatch(clz = TheEnding.class, method = "generateSpecialMap", paramtypez = {})
 //	public static class TheEndingPatch {

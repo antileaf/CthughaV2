@@ -4,7 +4,7 @@ import basemod.abstracts.CustomMonster;
 import com.badlogic.gdx.math.MathUtils;
 import com.cthugha.Cthugha_Core;
 import com.cthugha.actions.utils.AnonymousAction;
-import com.cthugha.patches.RevivePatch;
+import com.cthugha.patches.monster.RevivePatch;
 import com.cthugha.power.ShengMingFanHuanPower;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;

@@ -35,6 +35,8 @@ public class XianYi extends AbstractCthughaCard {
 
         this.magicNumber = this.baseMagicNumber = 1;
         this.exhaust = true;
+
+        this.canZhiLiao = true;
     }
 
     @Override

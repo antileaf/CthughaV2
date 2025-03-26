@@ -119,8 +119,8 @@ public class FireVampire extends AbstractOrb {
 			AbstractDungeon.player.hand.moveToDiscardPile(card);
 		else if (AbstractDungeon.player.drawPile.contains(card))
 			AbstractDungeon.player.drawPile.moveToDiscardPile(card);
-		else if (AbstractDungeon.player.discardPile.contains(card))
-			AbstractDungeon.player.discardPile.moveToDiscardPile(card);
+//		else if (AbstractDungeon.player.discardPile.contains(card))
+//			AbstractDungeon.player.discardPile.moveToDiscardPile(card);
 
 		this.applyFocus();
 		int damage = this.passiveAmount + card.baseMagicNumber;

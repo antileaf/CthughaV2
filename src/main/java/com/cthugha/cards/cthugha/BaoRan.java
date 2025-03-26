@@ -30,6 +30,21 @@ public class BaoRan extends AbstractCthughaCard {
     }
 
     @Override
+    public void updateBgImg() {
+        super.updateBgImg();
+
+        String backup = this.textureImg;
+
+        if (this.triggeredShunRanThisTurn)
+            this.textureImg = "cthughaResources/img/card/111_bw.png";
+        else
+            this.textureImg = "cthughaResources/img/card/111.png";
+
+        if (!this.textureImg.equals(backup))
+            this.loadCardImage(this.textureImg);
+    }
+
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.shining())
             this.addToBot(new GainEnergyAction(1));

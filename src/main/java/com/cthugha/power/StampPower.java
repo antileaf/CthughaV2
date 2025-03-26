@@ -32,7 +32,7 @@ public class StampPower extends AbstractPower implements OnReceivePowerPower, In
 	public static final String POWER_ID = CthughaHelper.makeID(StampPower.class.getSimpleName());
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-	private ColorificStampModifier.ColorEnum color;
+	public ColorificStampModifier.ColorEnum color;
 
 	public StampPower(ColorificStampModifier.ColorEnum color, int amount) {
 		this.color = color;

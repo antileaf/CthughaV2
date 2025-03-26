@@ -140,7 +140,7 @@
   "Cthugha:LieXingSuiXuanPower": {
     "NAME": "Stars in Orbit",
     "DESCRIPTIONS": [
-      "Whenever you channel #yFireVampire in NL the first slot: Draw #b%d cards; NL the last slot: Gain [E] . ",
+      "Whenever you channel #yFireVampire in NL the first slot: Draw #b%d card; NL the last slot: Gain [E] . ",
       "Whenever you channel #yFireVampire in NL the first slot: Draw #b%d cards; NL the last slot: Gain [E] . "
     ]
   },
@@ -175,6 +175,12 @@
     "DESCRIPTIONS": [
       "When you stack the same #yColorific #yMark, Areshkagal takes an action immediately. NL When you stake #b4 different #yColorific #yMark, reduce all #yColorific #yMark by #b1."
     ]
+  },
+
+  "Cthugha:InvisibleGainStrengthPower": {
+    "NAME": "Gain Strength",
+    "DESCRIPTIONS": [
+      "At the end of this round, gain #b%d #yStrength."
+    ]
   }
-  
 }

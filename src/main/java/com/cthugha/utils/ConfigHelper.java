@@ -11,26 +11,33 @@ import java.util.Properties;
 
 public class ConfigHelper {
 	public static final String SKIN = "skin";
+	public static final String CAMPFIRE_SKIN = "campfire_skin";
 	public static final String SHOW_TUTORIAL = "show_tutorial";
 	public static final String SHOW_CONTROLLER_TUTORIAL = "show_controller_tutorial";
+	public static final String SHOW_SHOP_TUTORIAL = "show_shop_tutorial";
 
 	@Deprecated
 	public static final String HAS_UNLOCKED_SIGNATURE = "has_unlocked_signature";
 	@Deprecated
 	public static final String USE_SIGNATURE = "use_signature";
 
-	public static final String HAS_CHECKED_HISTORY = "has_checked_history";
+	public static final String HAS_CHECKED_HISTORY = "has_checked_history_twice";
+
+	public static final String SECOND_CONFIRM = "second_confirm";
 
 	public static SpireConfig conf = null;
 
 	public static void load() {
 		Properties defaults = new Properties();
 		defaults.setProperty(SKIN, "0");
+		defaults.setProperty(CAMPFIRE_SKIN, "0");
 		defaults.setProperty(SHOW_TUTORIAL, "true");
 		defaults.setProperty(SHOW_CONTROLLER_TUTORIAL, "true");
+		defaults.setProperty(SHOW_SHOP_TUTORIAL, "true");
 //		defaults.setProperty(HAS_UNLOCKED_SIGNATURE, "false");
 //		defaults.setProperty(USE_SIGNATURE, "false");
 		defaults.setProperty(HAS_CHECKED_HISTORY, "false");
+		defaults.setProperty(SECOND_CONFIRM, "true");
 
 		try {
 			conf = new SpireConfig("Cthugha", "config", defaults);
@@ -47,6 +54,14 @@ public class ConfigHelper {
 		conf.setInt(SKIN, skin);
 	}
 
+	public static int getCampfireSkin() {
+		return conf.getInt(CAMPFIRE_SKIN);
+	}
+
+	public static void setCampfireSkin(int skin) {
+		conf.setInt(CAMPFIRE_SKIN, skin);
+	}
+
 	public static boolean showTutorial() {
 		return conf.getBool(SHOW_TUTORIAL);
 	}
@@ -61,6 +76,22 @@ public class ConfigHelper {
 
 	public static void setShowControllerTutorial(boolean show) {
 		conf.setBool(SHOW_CONTROLLER_TUTORIAL, show);
+	}
+
+	public static boolean showShopTutorial() {
+		return conf.getBool(SHOW_SHOP_TUTORIAL);
+	}
+
+	public static void setShowShopTutorial(boolean show) {
+		conf.setBool(SHOW_SHOP_TUTORIAL, show);
+	}
+
+	public static boolean secondConfirm() {
+		return conf.getBool(SECOND_CONFIRM);
+	}
+
+	public static void setSecondConfirm(boolean confirm) {
+		conf.setBool(SECOND_CONFIRM, confirm);
 	}
 
 //	public static boolean hasUnlockedSignature() {
@@ -103,6 +134,7 @@ public class ConfigHelper {
 		panel.addUIElement(new ModLabeledButton(ui.TEXT[0], 350.0F, 700.0F, panel, (me) -> {
 			setShowTutorial(true);
 			setShowControllerTutorial(true);
+			setShowShopTutorial(true);
 			save();
 		}));
 

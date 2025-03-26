@@ -5,5 +5,12 @@
       "The #yFlare effect of a card can be triggered by #bright-clicking it.",
       "When using a controller, press #bRS (right stick) to trigger the #yFlare effect."
     ]
+  },
+
+  "Cthugha:Shop": {
+    "LABEL": ["SPECIAL Shop"],
+    "TEXT": [
+      "The items in this shop require #rMax #rHP as a cost. NL Additionally, this shop has 3 pages, and can remove cards up to 3 times."
+    ]
   }
 }
