@@ -1,9 +1,11 @@
 package com.cthugha.cards.cthugha;
 
+import com.badlogic.gdx.graphics.Color;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.enums.CustomTags;
 import com.cthugha.utils.CthughaHelper;
+import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -34,6 +36,9 @@ public class FuZhuoShangHuan extends AbstractCthughaCard {
         this.magicNumber = this.baseMagicNumber = 6;
 //        this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 2;
         this.tags.add(CustomTags.Burn_Card);
+
+        FlavorText.AbstractCardFlavorFields.textColor.set(this, FLAVOR_BOX_COLOR);
+        FlavorText.AbstractCardFlavorFields.boxColor.set(this, Color.WHITE);
     }
 
     @Override

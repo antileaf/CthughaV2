@@ -25,6 +25,7 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -65,7 +66,7 @@ public class FireVampire extends AbstractOrb {
 //		this.img = ImageMaster.loadImage(IMG_PATH);
 		this.name = STRINGS.NAME;
 		this.baseEvokeAmount = -1;
-		this.basePassiveAmount = BONUS;
+		this.basePassiveAmount = BONUS + 2;
 		updateDescription();
 
 		this.color = Color.SCARLET;
@@ -334,7 +335,6 @@ public class FireVampire extends AbstractOrb {
 	@Override
 	public void updateDescription() {
 		this.applyFocus();
-		this.description = String.format(STRINGS.DESCRIPTION[0], this.passiveAmount);
+		this.description = String.format(STRINGS.DESCRIPTION[0], this.passiveAmount, this.passiveAmount + 2);
 	}
-
 }

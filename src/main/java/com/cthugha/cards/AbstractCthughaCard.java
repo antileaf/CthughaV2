@@ -21,9 +21,9 @@ import java.util.ArrayList;
 public abstract class AbstractCthughaCard extends AbstractSignatureCard implements RightClickableCard {
 	private static final Logger logger = LogManager.getLogger(AbstractCthughaCard.class.getName());
 
-	private static final Color FLAVOR_TEXT_COLOR = new Color(
+	protected static final Color FLAVOR_TEXT_COLOR = new Color(
 			255 / 255.0F, 231 / 255.0F, 150 / 255.0F, 1.0F);
-	private static final Color FLAVOR_BOX_COLOR = new Color(
+	protected static final Color FLAVOR_BOX_COLOR = new Color(
 			38 / 255.0F, 8 / 255.0F, 4 / 255.0F, 1.0F);
 
 	private static final float FADE_DURATION = 0.3F;

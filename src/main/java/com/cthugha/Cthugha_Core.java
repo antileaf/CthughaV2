@@ -279,7 +279,7 @@ public class Cthugha_Core implements
 				ConfigHelper.createConfigPanel()
 		);
 
-		if (true || CthughaHelper.isSignatureLibAvailable()) {
+		if (true) {
 			SignatureHelper.noDebuggingPrefix("Cthugha:");
 
 			SignatureHelper.register(Burn.ID, new SignatureHelper.Info(
@@ -296,6 +296,18 @@ public class Cthugha_Core implements
 							return "cthughaResources/img/signature/burn_attack_p.png";
 					}
 			));
+
+			String lang;
+			if (Settings.language == Settings.GameLanguage.ZHS ||
+					Settings.language == Settings.GameLanguage.ZHT ||
+					Settings.language == Settings.GameLanguage.JPN) {
+				lang = "ZHS";
+			} else {
+				lang = "ENG";
+			}
+
+			SignatureHelper.addUnlockConditions("cthughaResources/localization/" +
+					lang + "/signature.json");
 
 			new AutoAdd("CthughaV2")
 					.packageFilter("com.cthugha.cards.cthugha")

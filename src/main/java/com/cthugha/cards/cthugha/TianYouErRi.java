@@ -1,9 +1,11 @@
 package com.cthugha.cards.cthugha;
 
+import com.badlogic.gdx.graphics.Color;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.cthugha.power.TianYouErRiPower;
+import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -29,6 +31,9 @@ public class TianYouErRi extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.magicNumber = this.baseMagicNumber = 5;
+
+        FlavorText.AbstractCardFlavorFields.textColor.set(this, FLAVOR_BOX_COLOR);
+        FlavorText.AbstractCardFlavorFields.boxColor.set(this, Color.WHITE);
     }
 
     @Override

@@ -65,7 +65,7 @@
             <artifactId>SignatureLib</artifactId>
             <version>newest</version>
             <scope>system</scope>
-            <systemPath>${Steam.path}/workshop/content/646570/3433319964/SignatureLib.jar</systemPath>
+            <systemPath>${Steam.path}/common/SlayTheSpire/mods/SignatureLib.jar</systemPath>
         </dependency>
 
         <!-- Compatibility -->

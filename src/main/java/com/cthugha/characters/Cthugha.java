@@ -8,6 +8,7 @@ import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.cards.cthugha.Chixiao;
 import com.cthugha.cards.cthugha.ShiftingStar;
 import com.cthugha.cards.cthugha.StarSpear;
+import com.cthugha.effect.StatsScreenEffect;
 import com.cthugha.orbs.FireVampire;
 import com.cthugha.patches.fire_vampire.GameActionManagerPatch;
 import com.cthugha.utils.ConfigHelper;
@@ -46,6 +47,7 @@ import com.cthugha.power.XingYunPower;
 import com.cthugha.relics.cthugha.HuoTiHuoYan;
 import com.cthugha.ui.SkinSelectScreen;
 import com.megacrit.cardcrawl.ui.FtueTip;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 public class Cthugha extends CustomPlayer {
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(
@@ -132,13 +134,13 @@ public class Cthugha extends CustomPlayer {
     // 卡牌选择界面选择该牌的颜色
     @Override
     public Color getCardRenderColor() {
-        return Color.BLUE;
+        return Color.SCARLET;
     }
 
     // 卡牌轨迹颜色
     @Override
     public Color getCardTrailColor() {
-        return Color.BLUE;
+        return Color.SCARLET;
     }
 
     // 自定义模式选择你的人物时播放的音效
@@ -185,7 +187,7 @@ public class Cthugha extends CustomPlayer {
     // 打心脏的颜色，不是很明显
     @Override
     public Color getSlashAttackColor() {
-        return Color.BLUE;
+        return Color.SCARLET;
     }
 
     // 第三章面对心脏造成伤害时的特效
@@ -237,7 +239,7 @@ public class Cthugha extends CustomPlayer {
     // 初始遗物的ID，可以先写个原版遗物凑数
     @Override
     public ArrayList<String> getStartingRelics() {
-        ArrayList<String> arr = new ArrayList<String>();
+        ArrayList<String> arr = new ArrayList<>();
         arr.add(HuoTiHuoYan.ID);
         return arr;
     }
@@ -300,6 +302,12 @@ public class Cthugha extends CustomPlayer {
         panels.add(new CutscenePanel("cthughaResources/img/char/cg2.png"));
         panels.add(new CutscenePanel("cthughaResources/img/char/cg3.png"));
         return panels;
+    }
+
+    @Override
+    public void updateVictoryVfx(ArrayList<AbstractGameEffect> effects) {
+        if (effects.isEmpty())
+            effects.add(new StatsScreenEffect());
     }
 
 //    @Override

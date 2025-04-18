@@ -112,6 +112,7 @@ public abstract class CthughaHelper {
 				0, 0, 32, 32);
 	}
 
+	@Deprecated
 	public static boolean isSignatureLibAvailable() {
 		return Loader.isModLoaded("SignatureLib");
 	}
