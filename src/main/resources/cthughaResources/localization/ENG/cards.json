@@ -114,7 +114,8 @@
     },
     "Cthugha:YingHuoLiHuo": {
         "NAME": "Wandering Flame",
-        "DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Apply !M! Weak to ALL enemies. NL cthugha:Blaze: Exhaust all *Burn, draw an equal amount of cards."
+        "DESCRIPTION": "cthugha:Channel 1 cthugha:Fire_Vampire. NL Apply !M! Weak to ALL enemies. NL cthugha:Blaze: Exhaust all *Burn, draw an equal amount of cards.",
+        "SIGNATURE_UNLOCK_CONDITION": "Complete Act 5 as Cthugha at Ascension 20."
     },
     "Cthugha:HuoZangBi": {
         "NAME": "Cremation Wall",
@@ -196,11 +197,13 @@
         "NAME": "Eye of Horus",
         "DESCRIPTION": "Scry !M!. NL Place the discarded card into your hand, and put 1 *Burn in its original position.",
         "UPGRADE_DESCRIPTION": "Scry !M!. NL Place the discarded card into your hand, and put 1 *Burn in its original position.",
-        "FLAVOR": "\"What is within, without; what is without, within.\""
+        "FLAVOR": "\"What is within, without; what is without, within.\"",
+        "SIGNATURE_UNLOCK_CONDITION": "Complete Act 5 as Cthugha at Ascension 20."
     },
     "Cthugha:DaoHuoShiYan": {
         "NAME": "Oath of Firewalking",
-        "DESCRIPTION": "Upgrade all *Burn this combat. NL Whenever a *Burn is created during combat, Upgrade it. NL Draw !M! cards. Exhaust."
+        "DESCRIPTION": "Upgrade all *Burn this combat. NL Whenever a *Burn is created during combat, Upgrade it. NL Draw !M! cards. Exhaust.",
+        "SIGNATURE_UNLOCK_CONDITION": "Complete Act 5 as Cthugha at Ascension 20."
     },
     "Cthugha:MieShiZhiYanLaiWaTing": {
         "NAME": "Lævateinn",
@@ -343,7 +346,8 @@
     "Cthugha:ChiYanHuaZhan": {
         "NAME": "Twilight and Silver",
         "DESCRIPTION": "Deal !D! damage. NL Gain Strength until you have !M! Strength. NL Add !cthughaM2! *Burn+ whose type is Attack.",
-        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Gain Strength until you have !M! Strength. NL Add !cthughaM2! *Burn+ whose type is Attack."
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Gain Strength until you have !M! Strength. NL Add !cthughaM2! *Burn+ whose type is Attack.",
+        "SIGNATURE_UNLOCK_CONDITION": "Complete Act 5 as any original character at Ascension 20."
     },
 
     "Cthugha:ShiftingStar": {

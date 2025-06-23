@@ -124,7 +124,7 @@ public class FireVampire extends AbstractOrb {
 //			AbstractDungeon.player.discardPile.moveToDiscardPile(card);
 
 		this.applyFocus();
-		int damage = this.passiveAmount + card.baseMagicNumber;
+		int damage = this.passiveAmount + (card.upgraded ? 2 : 0);
 
 		AbstractDungeon.actionManager.addToBottom(new AnonymousAction(() -> {
 			AbstractMonster randomMonster = AbstractDungeon.getMonsters().getRandomMonster(null, true,

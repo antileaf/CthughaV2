@@ -55,10 +55,10 @@ public class EvilSunrise extends CustomPotion {
 		return POTENCY;
 	}
 
-	@Override
-	public int getPotency() {
-		return POTENCY;
-	}
+//	@Override
+//	public int getPotency() {
+//		return POTENCY;
+//	}
 
 	@Override
 	public AbstractPotion makeCopy() {

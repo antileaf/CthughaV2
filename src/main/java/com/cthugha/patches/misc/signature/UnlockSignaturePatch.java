@@ -1,14 +1,16 @@
-package com.cthugha.patches.misc;
+package com.cthugha.patches.misc.signature;
 
+import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomUnlock;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.cthugha.cards.cthugha.ShiftingStar;
+import com.cthugha.cards.cthugha.*;
 import com.cthugha.characters.Cthugha;
 import com.cthugha.dungeons.the_tricuspid_gate.TheTricuspidGate;
 import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.status.Burn;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -24,9 +26,10 @@ import javassist.expr.MethodCall;
 import me.antileaf.signature.utils.SignatureHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressWarnings("unused")
-public class UnlockBurnSignaturePatch {
+public class UnlockSignaturePatch {
 	private static ArrayList<?> patched = null;
 
 	@SpirePatch(clz = GameOverScreen.class, method = "calculateUnlockProgress", paramtypez = {})
@@ -54,10 +57,44 @@ public class UnlockBurnSignaturePatch {
 					unlocks.add(unlock);
 				}
 
-				ReflectionHacks.setPrivate(_inst, GameOverScreen.class, "unlockBundle",
-						unlocks);
+				patched = unlocks;
+			}
+			else if (AbstractDungeon.player instanceof Cthugha && _inst instanceof VictoryScreen &&
+					CardCrawlGame.dungeon instanceof TheTricuspidGate && AbstractDungeon.ascensionLevel >= 20 &&
+					(!SignatureHelper.isUnlocked(DaoHuoShiYan.ID) || !SignatureHelper.isUnlocked(HeLuSiZhiYan.ID) ||
+							!SignatureHelper.isUnlocked(YingHuoLiHuo.ID))) {
+				SignatureHelper.unlock(DaoHuoShiYan.ID, true);
+				SignatureHelper.enable(DaoHuoShiYan.ID, true);
+
+				SignatureHelper.unlock(HeLuSiZhiYan.ID, true);
+				SignatureHelper.enable(HeLuSiZhiYan.ID, true);
+
+				SignatureHelper.unlock(YingHuoLiHuo.ID, true);
+				SignatureHelper.enable(YingHuoLiHuo.ID, true);
+
+				ArrayList<AbstractUnlock> unlocks = new ArrayList<>();
+				for (String id : new String[] {DaoHuoShiYan.ID, HeLuSiZhiYan.ID, YingHuoLiHuo.ID}) {
+					AbstractUnlock unlock = new CustomUnlock(id);
+					unlock.card = unlock.card.makeCopy();
+					unlocks.add(unlock);
+				}
 
 				patched = unlocks;
+			}
+			else
+				patched = null;
+
+			if (Arrays.stream(AbstractPlayer.PlayerClass.values())
+					.anyMatch(c -> AbstractDungeon.player.chosenClass == c) &&
+					_inst instanceof VictoryScreen && CardCrawlGame.dungeon instanceof TheTricuspidGate &&
+					AbstractDungeon.ascensionLevel >= 20 && !SignatureHelper.isUnlocked(ChiYanHuaZhan.ID)) {
+				SignatureHelper.unlock(ChiYanHuaZhan.ID, true);
+				BaseMod.logger.info("Unlocking ChiYanHuaZhan");
+			}
+
+			if (patched != null) {
+				ReflectionHacks.setPrivate(_inst, GameOverScreen.class, "unlockBundle",
+						patched);
 			}
 		}
 	}
@@ -87,7 +124,7 @@ public class UnlockBurnSignaturePatch {
 				@Override
 				public void edit(MethodCall m) throws CannotCompileException {
 					if (m.getMethodName().equals("appearInstantly"))
-						m.replace(" { if (" + UnlockBurnSignaturePatch.class.getName() +
+						m.replace(" { if (" + UnlockSignaturePatch.class.getName() +
 								".handle(this)) { } else { $_ = $proceed($$); } }");
 				}
 			};

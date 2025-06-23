@@ -1,6 +1,7 @@
 package com.cthugha;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 
 import basemod.eventUtil.AddEventParams;
@@ -11,8 +12,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cthugha.blight.TheBurningOne;
 import com.cthugha.cardmodifier.ColorificStampModifier;
-import com.cthugha.cards.cthugha.ShiftingStar;
-import com.cthugha.cards.cthugha.StarSpear;
+import com.cthugha.cards.cthugha.*;
 import com.cthugha.dungeons.the_tricuspid_gate.TheTricuspidGate;
 import com.cthugha.dungeons.the_tricuspid_gate.confirm.ConfirmCheckbox;
 import com.cthugha.dungeons.the_tricuspid_gate.confirm.ConfirmUseCardScreen;
@@ -309,25 +309,29 @@ public class Cthugha_Core implements
 			SignatureHelper.addUnlockConditions("cthughaResources/localization/" +
 					lang + "/signature.json");
 
+			ArrayList<String> A20 = new ArrayList<String>() {{
+				add(DaoHuoShiYan.ID);
+				add(HeLuSiZhiYan.ID);
+				add(YingHuoLiHuo.ID);
+			}};
+
+			ArrayList<String> OriginalCharA20 = new ArrayList<String>() {{
+				add(ChiYanHuaZhan.ID);
+			}};
+
 			new AutoAdd("CthughaV2")
 					.packageFilter("com.cthugha.cards.cthugha")
 					.any(AbstractSignatureCard.class, (info, card) -> {
-						if (card.hasSignature && !card.cardID.equals(ShiftingStar.ID))
+						if (card.hasSignature && !card.cardID.equals(ShiftingStar.ID) &&
+								!A20.contains(card.cardID) && !OriginalCharA20.contains(card.cardID))
 							SignatureHelper.unlock(card.cardID, true);
 					});
 
 			if (!ConfigHelper.hasCheckedHistory()) {
-				boolean res = HistoryHelper.checkHistories();
-
-				if (res) {
-					SignatureHelper.unlock(Burn.ID, true);
-					SignatureHelper.unlock(ShiftingStar.ID, true);
-					logger.info("Has defeated Areshkagal before, Signature of Burn and Shifting Star unlocked!");
-				}
-				else
-					logger.info("Signature not unlocked.");
+				HistoryHelper.runCheck();
 
 				ConfigHelper.setHasCheckedHistory(true);
+				ConfigHelper.save();
 			}
 		}
 

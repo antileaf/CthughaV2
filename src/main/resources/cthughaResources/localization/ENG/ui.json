@@ -74,7 +74,9 @@
 
   "Cthugha:ResetTutorial": {
     "TEXT": [
-      "Re-show tutorials"
+      "Re-show tutorials",
+      "Re-check run histories",
+      "Re-check done!"
     ]
   },
 

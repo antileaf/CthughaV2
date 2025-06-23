@@ -77,7 +77,7 @@
     "NAME": "Emerald Tablet - Volume VII",
     "FLAVOR": "To gain true knowledge, one must slow down and not hurry.",
     "DESCRIPTIONS": [
-      "At the start of your turn, gain #b%d Vigor. NL Vigor also affects #yBurn, but each #yBurn can deal a maximum of twice its original damage."
+      "At the start of your turn, gain #b%d #yVigor . NL #yVigor also affects #yBurn , but each #yBurn can deal a maximum of twice its original damage."
     ]
   },
 

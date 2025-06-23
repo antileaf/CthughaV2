@@ -128,7 +128,7 @@ public class ColorificStampModifier extends AbstractCardModifier {
 				.noneMatch(c -> ((ColorificStampModifier) CardModifierManager.getModifiers(c, ID)
 						.get(0)).color == this.color)) {
 			cards = cards.stream()
-					.filter(c -> !c.exhaust)
+					.filter(c -> !c.exhaust && c.type != AbstractCard.CardType.POWER)
 					.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 		}
 

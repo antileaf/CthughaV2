@@ -21,7 +21,7 @@ public class ConfigHelper {
 	@Deprecated
 	public static final String USE_SIGNATURE = "use_signature";
 
-	public static final String HAS_CHECKED_HISTORY = "has_checked_history_twice";
+	public static final String HAS_CHECKED_HISTORY = "has_checked_history_long_sword_zheng_xia_tou";
 
 	public static final String SECOND_CONFIRM = "second_confirm";
 
@@ -131,12 +131,19 @@ public class ConfigHelper {
 		ModPanel panel = new ModPanel();
 
 		UIStrings ui = CardCrawlGame.languagePack.getUIString(CthughaHelper.makeID("ResetTutorial"));
-		panel.addUIElement(new ModLabeledButton(ui.TEXT[0], 350.0F, 700.0F, panel, (me) -> {
+		panel.addUIElement(new ModLabeledButton(ui.TEXT[0], 350.0F, 700.0F, panel,
+				(me) -> {
 			setShowTutorial(true);
 			setShowControllerTutorial(true);
 			setShowShopTutorial(true);
 			save();
 		}));
+
+//		panel.addUIElement(new ModLabeledButton(ui.TEXT[1], 350.0F, 600.0F, panel,
+//				(me) -> {
+//			HistoryHelper.runCheck();
+//			me.label = ui.TEXT[2];
+//		}));
 
 		return panel;
 	}

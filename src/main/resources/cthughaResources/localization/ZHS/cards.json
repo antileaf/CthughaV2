@@ -158,7 +158,8 @@
     },
     "Cthugha:YingHuoLiHuo": {
         "NAME": "荧惑离火",
-        "DESCRIPTION": "cthugha:生成 1 个 cthugha:炎之精 。给予所有敌人 !M! 层 虚弱 。 NL cthugha:爆炎 ： 消耗 所有 灼伤 ，抽等量牌。"
+        "DESCRIPTION": "cthugha:生成 1 个 cthugha:炎之精 。给予所有敌人 !M! 层 虚弱 。 NL cthugha:爆炎 ： 消耗 所有 灼伤 ，抽等量牌。",
+        "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚在进阶 20 难度下完成第五幕。"
     },
     "Cthugha:HuoZangBi": {
         "NAME": "火葬壁",
@@ -245,11 +246,13 @@
         "NAME": "荷鲁斯之眼",
         "DESCRIPTION": "预见 !M! 。将丢弃的牌放入手牌，在其原本的位置放入1张 灼伤 。",
         "UPGRADE_DESCRIPTION": "预见 !M! 。将丢弃的牌放入手牌，在其原本的位置放入1张 灼伤 。",
-        "FLAVOR": "“内外相易，表里互替。”"
+        "FLAVOR": "“内外相易，表里互替。”",
+        "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚在进阶 20 难度下完成第五幕。"
     },
     "Cthugha:DaoHuoShiYan": {
         "NAME": "蹈火誓言",
-        "DESCRIPTION": "在本场战斗中 升级 你的所有 灼伤 以及战斗中临时增加的 灼伤 。 NL 抽 !M! 张牌。 消耗 。"
+        "DESCRIPTION": "在本场战斗中 升级 你的所有 灼伤 以及战斗中临时增加的 灼伤 。 NL 抽 !M! 张牌。 消耗 。",
+        "SIGNATURE_UNLOCK_CONDITION": "使用克图格亚在进阶 20 难度下完成第五幕。"
     },
     "Cthugha:MieShiZhiYanLaiWaTing": {
         "NAME": "灭世之焰莱瓦汀",
@@ -392,7 +395,8 @@
     "Cthugha:ChiYanHuaZhan": {
         "NAME": "黄昏与白银",
         "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。",
-        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。"
+        "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 NL 获得 力量 直到不少于 !M! 点。获得 !cthughaM2! 张变化为攻击牌的 *灼伤+ 。",
+        "SIGNATURE_UNLOCK_CONDITION": "使用任意原版角色在进阶 20 难度下完成第五幕。"
     },
 
     "Cthugha:ShiftingStar": {

@@ -3,7 +3,7 @@
   "name": "Cthugha（克图格亚）V2",
   "author_list": ["橘子皮皮哥", "谔谔", "antileaf"],
   "description": "由炎之精侍奉的被称为火焰之主的旧日支配者。",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
   "dependencies": [

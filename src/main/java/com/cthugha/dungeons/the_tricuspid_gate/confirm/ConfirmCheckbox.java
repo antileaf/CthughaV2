@@ -54,6 +54,7 @@ public class ConfirmCheckbox {
 
 			if (hb.clicked) {
 				ConfigHelper.setSecondConfirm(!ConfigHelper.secondConfirm());
+				ConfigHelper.save();
 				hb.clicked = false;
 			}
 		}

@@ -134,13 +134,13 @@ public class Cthugha extends CustomPlayer {
     // 卡牌选择界面选择该牌的颜色
     @Override
     public Color getCardRenderColor() {
-        return Color.SCARLET;
+        return Color.SCARLET.cpy();
     }
 
     // 卡牌轨迹颜色
     @Override
     public Color getCardTrailColor() {
-        return Color.SCARLET;
+        return Color.SCARLET.cpy();
     }
 
     // 自定义模式选择你的人物时播放的音效
@@ -187,7 +187,7 @@ public class Cthugha extends CustomPlayer {
     // 打心脏的颜色，不是很明显
     @Override
     public Color getSlashAttackColor() {
-        return Color.SCARLET;
+        return Color.SCARLET.cpy();
     }
 
     // 第三章面对心脏造成伤害时的特效
@@ -306,7 +306,8 @@ public class Cthugha extends CustomPlayer {
 
     @Override
     public void updateVictoryVfx(ArrayList<AbstractGameEffect> effects) {
-        if (effects.isEmpty())
+        if (effects.isEmpty() || effects.stream().noneMatch(e ->
+                e instanceof StatsScreenEffect && e.duration > 1.0F))
             effects.add(new StatsScreenEffect());
     }
 

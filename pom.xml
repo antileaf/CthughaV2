@@ -58,8 +58,6 @@
             <systemPath>${Steam.path}/workshop/content/646570/1934902042/actlikeit.jar</systemPath>
         </dependency>
 
-        <!-- Optional -->
-
         <dependency>
             <groupId>me.antileaf</groupId>
             <artifactId>SignatureLib</artifactId>
