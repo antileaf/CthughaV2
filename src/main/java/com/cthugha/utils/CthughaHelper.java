@@ -76,7 +76,7 @@ public abstract class CthughaHelper {
 			c.jokePortrait = c.portrait = BurnAttackRegion;
 			c.baseDamage = c.baseMagicNumber;
 
-			c.dontTriggerOnUseCard = false;
+//			c.dontTriggerOnUseCard = false;
 
 			c.initializeDescription();
 			if (isInBattle())

@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.TheEnding;
 import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
+import com.megacrit.cardcrawl.relics.BlackStar;
 import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.ui.buttons.ProceedButton;
@@ -56,6 +57,17 @@ public class FifthActCompatibilityPatch {
 				return TheTricuspidGate.ID;
 
 			return ret;
+		}
+	}
+
+	@SpirePatch(clz = TreasureRoomBoss.class, method = "onPlayerEntry", paramtypez = {})
+	public static class NoBlackStarPatch {
+		@SpirePrefixPatch
+		public static void Prefix(TreasureRoomBoss _inst) {
+			if (CardCrawlGame.dungeon instanceof TheTricuspidGate) {
+				AbstractDungeon.bossRelicPool.remove(BlackStar.ID);
+				logger.info("Removed Black Star from boss relic pool.");
+			}
 		}
 	}
 

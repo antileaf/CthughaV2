@@ -92,6 +92,9 @@ public class HistoryHelper {
 					continue;
 				}
 
+				if (data == null)
+					continue;
+
 				boolean isA20 = data.is_ascension_mode && data.ascension_level >= 20;
 				boolean isCthugha = data.character_chosen.equals(MyPlayerClassEnum.CTHUGHA_PLAYER_CLASS.name());
 				boolean isOriginalChar = Arrays.stream(AbstractPlayer.PlayerClass.values())

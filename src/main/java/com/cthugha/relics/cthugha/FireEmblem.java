@@ -36,8 +36,16 @@ public class FireEmblem extends CustomRelic {
 	}
 
 	@Override
+	public void setCounter(int newCounter) {
+		if (newCounter == -2) {
+			this.usedUp();
+			this.counter = -2;
+		}
+	}
+
+	@Override
 	public void justEnteredRoom(AbstractRoom room) {
-		if (AbstractDungeon.actNum == 3 && room instanceof MonsterRoomBoss) {
+		if (AbstractDungeon.actNum == 3 && room instanceof MonsterRoomBoss && !this.usedUp) {
 			this.flash();
 
 			int key = 0;
@@ -56,6 +64,8 @@ public class FireEmblem extends CustomRelic {
 				AbstractDungeon.effectsQueue.add(new ObtainKeyEffect(ObtainKeyEffect.KeyColor.GREEN));
 			if (!Settings.hasSapphireKey)
 				AbstractDungeon.effectsQueue.add(new ObtainKeyEffect(ObtainKeyEffect.KeyColor.BLUE));
+
+			this.setCounter(-2);
 		}
 	}
 

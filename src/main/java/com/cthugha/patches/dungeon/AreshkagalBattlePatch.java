@@ -38,16 +38,7 @@ public class AreshkagalBattlePatch {
 			if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss &&
 					AbstractDungeon.lastCombatMetricKey.equals(Areshkagal.ID)) {
 				ArrayList<AbstractCard> choices = _inst.drawPile.group.stream()
-						.filter(c -> {
-							if (c.type == AbstractCard.CardType.STATUS && c.costForTurn < -1 &&
-									!_inst.hasRelic(MedicalKit.ID))
-								return false;
-							else if (c.type == AbstractCard.CardType.CURSE && c.costForTurn < -1 &&
-									!_inst.hasRelic(BlueCandle.ID))
-								return false;
-							else
-								return true;
-						})
+						.filter(ColorificStampModifier::canUse)
 						.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
 				for (int i = 0; i < 8; i++) {
