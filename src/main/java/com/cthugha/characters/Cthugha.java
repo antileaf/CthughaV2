@@ -260,13 +260,14 @@ public class Cthugha extends CustomPlayer {
         HeiYanPower.percentage = HeiYanPower.BASE_PERCENTAGE;
     }
 
-    public void useCard(AbstractCard c, AbstractMonster monster, int energyOnUse) {
-        AbstractSpirit spirit = SpiritField.spirit.get(c);
-        if (spirit != null) {
-            spirit.onUse();
-        }
-        super.useCard(c, monster, energyOnUse);
-    }
+    // Moved to patch
+//    public void useCard(AbstractCard c, AbstractMonster monster, int energyOnUse) {
+//        AbstractSpirit spirit = SpiritField.spirit.get(c);
+//        if (spirit != null) {
+//            spirit.onUse();
+//        }
+//        super.useCard(c, monster, energyOnUse);
+//    }
 
     @Override
     public void channelOrb(AbstractOrb orbToSet) {

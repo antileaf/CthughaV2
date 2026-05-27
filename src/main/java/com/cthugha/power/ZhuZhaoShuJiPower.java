@@ -30,7 +30,7 @@ public class ZhuZhaoShuJiPower extends AbstractPower {
         this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
     }
 
-    public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+    public void onUseCard(AbstractCard card, UseCardAction action) {
         for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters)
             if (!monster.isDeadOrEscaped())
                 this.addToBot(new DecreaseMonsterMaxHealthAction(monster, this.amount));
