@@ -33,6 +33,8 @@ public class XingYouGuangNi extends AbstractCthughaCard {
         this.block = this.baseBlock = 4;
         this.magicNumber = this.baseMagicNumber = 24;
 
+        this.retain = this.selfRetain = true;
+
 //        this.tags.add(CustomTags.BaoYan);
         this.canBaoYan = true;
     }

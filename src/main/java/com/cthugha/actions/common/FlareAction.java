@@ -123,6 +123,10 @@ public class FlareAction extends AbstractGameAction {
 
 		Cthugha_Core.logger.info("ShunRan level: {}", level);
 		this.card.onFlare(level);
+
+		if ((this.card.shunRan > -1 && level >= this.card.shunRan) ||
+				(this.card.secondaryShunRan > -1 && level >= this.card.secondaryShunRan))
+			this.card.hasTriggeredShunRanThisTurn = true;
 	}
 
 	private void returnCards() {

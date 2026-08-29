@@ -32,7 +32,7 @@ public class JingZhuangZhuoShangJi extends AbstractCthughaCard {
         this.magicNumber = this.baseMagicNumber = 2;
         this.tags.add(CustomTags.Burn_Card);
         this.exhaust = true;
-        this.cardsToPreview = (AbstractCard)new ZhuoShangDaJi();
+        this.cardsToPreview = new ZhuoShangDaJi();
     }
 
     @Override

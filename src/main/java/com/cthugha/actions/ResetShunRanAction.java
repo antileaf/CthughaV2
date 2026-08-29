@@ -17,7 +17,7 @@ public class ResetShunRanAction extends AbstractGameAction {
 //        }
 //        else
         if (c instanceof AbstractCthughaCard) {
-            ((AbstractCthughaCard) c).triggeredShunRanThisTurn = false;
+            ((AbstractCthughaCard) c).triggeredShunRan = false;
             ((AbstractCthughaCard) c).updateBgImg();
         }
     }

@@ -32,7 +32,29 @@ public class HuoXingJia extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.damage = this.baseDamage = 8;
-        this.magicNumber = this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber = -999;
+    }
+
+    @Override
+    public void applyPowers() {
+        boolean hasNotUpdatedDesc = this.magicNumber == -999;
+        this.magicNumber = this.baseMagicNumber = (int) AbstractDungeon.player.hand.group.stream()
+                .filter(CthughaHelper::isBurnCard)
+                .count() + (this.upgraded ? 1 : 0);
+
+        super.applyPowers();
+        if (hasNotUpdatedDesc && this.magicNumber != -999)
+            this.initializeDescription();
+    }
+
+    @Override
+    public void initializeDescription() {
+        this.rawDescription = String.format(this.upgraded ?
+                        cardStrings.UPGRADE_DESCRIPTION : cardStrings.DESCRIPTION,
+                CthughaHelper.isInBattle() && this.magicNumber != -999 ?
+                        cardStrings.EXTENDED_DESCRIPTION[0] : "");
+
+        super.initializeDescription();
     }
 
     @Override
@@ -43,7 +65,6 @@ public class HuoXingJia extends AbstractCthughaCard {
             this.initializeDescription();
 
             this.upgradeDamage(2);
-            this.upgradeMagicNumber(1);
         }
     }
 
@@ -61,16 +82,20 @@ public class HuoXingJia extends AbstractCthughaCard {
         //     }
         // }
 
+        int count = (int) AbstractDungeon.player.hand.group.stream()
+                .filter(CthughaHelper::isBurnCard)
+                .count() + (this.upgraded ? 1 : 0);
+
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        this.addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false)));
+        this.addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, count, false)));
 
         // if (isLowestHealth) {
             AbstractMonster otherM = AbstractDungeon.getMonsters().getRandomMonster(m, true);
             if (otherM != null && otherM != m) {
                 this.addToBot(new DamageAction(otherM, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                         AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-                this.addToBot(new ApplyPowerAction(otherM, p, new VulnerablePower(otherM, this.magicNumber, false)));
+                this.addToBot(new ApplyPowerAction(otherM, p, new VulnerablePower(otherM, count, false)));
             }
         // }
     }

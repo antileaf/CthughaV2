@@ -36,13 +36,17 @@ public class RiShiPower extends AbstractPower {
 		this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
 	}
 
-	// Called in patch.
-	public AbstractGameAction getAction(AbstractMonster target) {
-		return new AnonymousAction(() -> {
-			if (target != null && !target.isDeadOrEscaped()) {
-				this.flash();
-				this.addToTop(new GainBlockAction(this.owner, this.amount));
-			}
-		});
+	public void trigger() {
+		this.flash();
+		this.addToTop(new GainBlockAction(this.owner, this.amount));
 	}
+
+//	public AbstractGameAction getAction(AbstractMonster target) {
+//		return new AnonymousAction(() -> {
+//			if (target != null && !target.isDeadOrEscaped()) {
+//				this.flash();
+//				this.addToTop(new GainBlockAction(this.owner, this.amount));
+//			}
+//		});
+//	}
 }

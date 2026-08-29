@@ -2,6 +2,7 @@ package com.cthugha.cards.cthugha;
 
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
+import com.cthugha.enums.CustomTags;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -28,6 +29,8 @@ public class DuanZaoHuoYan extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.exhaust = true;
+
+        this.tags.add(CustomTags.Burn_Card);
     }
 
     @Override

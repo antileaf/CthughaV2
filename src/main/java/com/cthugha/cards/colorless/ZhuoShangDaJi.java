@@ -3,6 +3,7 @@ package com.cthugha.cards.colorless;
 import com.cthugha.actions.common.DrawSpecificCardAction;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.CustomTags;
+import com.cthugha.patches.cards.unique.RiShiPatch;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -51,7 +52,8 @@ public class ZhuoShangDaJi extends AbstractCthughaCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 0; i < this.magicNumber; i++) {
-            this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+            this.addToBot(new DamageAction(m,
+                    new RiShiPatch.BurnCardDamageInfo(p, this.damage, this.damageTypeForTurn),
                     AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         }
 

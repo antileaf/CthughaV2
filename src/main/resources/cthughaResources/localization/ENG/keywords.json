@@ -96,7 +96,7 @@
             "Shining",
             "shining"
         ],
-        "DESCRIPTION": "Additional effect triggered when playing this card with unused #yFlare."
+        "DESCRIPTION": "Additional effect triggered when playing this card if the #yFlare effect has been triggered this turn."
     },
     {
         "NAMES": [

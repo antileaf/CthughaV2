@@ -2,7 +2,7 @@
   "Cthugha:RiShiPower": {
     "NAME": "Eclipse",
     "DESCRIPTIONS": [
-      "In the remaining time of this turn, whenever your #yBurn or #yFireVampire deals damage, gain #b%d block."
+      "In the remaining time of this turn, whenever your #yBurn #yCards or #yFireVampire deals damage, gain #b%d block."
     ]
   },
   "Cthugha:HeiYanPower": {

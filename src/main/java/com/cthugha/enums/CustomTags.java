@@ -16,6 +16,5 @@ public class CustomTags {
 	@Deprecated
 	@SpireEnum public static AbstractCard.CardTags Shun_Ran_Triggered;
 
-
 	@SpireEnum public static AbstractCard.CardTags Burn_Card;
 }

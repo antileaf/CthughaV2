@@ -10,6 +10,7 @@ import com.cthugha.actions.utils.AnonymousAction;
 import com.cthugha.characters.Cthugha;
 import com.cthugha.orbs.effect.FireEffect;
 import com.cthugha.orbs.effect.WeakFireEffect;
+import com.cthugha.patches.cards.unique.RiShiPatch;
 import com.cthugha.power.RiShiPower;
 import com.cthugha.relics.cthugha.EmeraldTabletVolumeVII;
 import com.cthugha.ui.SkinSelectScreen;
@@ -130,18 +131,18 @@ public class FireVampire extends AbstractOrb {
 			AbstractMonster randomMonster = AbstractDungeon.getMonsters().getRandomMonster(null, true,
 					AbstractDungeon.cardRandomRng);
 			if (randomMonster != null) {
-				if (AbstractDungeon.player.hasPower(RiShiPower.POWER_ID)) {
-					AbstractPower power = AbstractDungeon.player.getPower(RiShiPower.POWER_ID);
-					if (power != null)
-						CthughaHelper.addToBuffer(((RiShiPower) power).getAction(randomMonster));
-				}
+//				if (AbstractDungeon.player.hasPower(RiShiPower.POWER_ID)) {
+//					AbstractPower power = AbstractDungeon.player.getPower(RiShiPower.POWER_ID);
+//					if (power != null)
+//						CthughaHelper.addToBuffer(((RiShiPower) power).getAction(randomMonster));
+//				}
 
 				if (AbstractDungeon.player.hasPower(WuYouBuZhuPower.POWER_ID)) {
 					AbstractPower power = AbstractDungeon.player.getPower(WuYouBuZhuPower.POWER_ID);
 					if (power != null) {
 						power.flash();
 						CthughaHelper.addToBuffer(new DamageCallbackAction(randomMonster,
-								new DamageInfo(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS),
+								new RiShiPatch.BurnCardDamageInfo(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS),
 								AbstractGameAction.AttackEffect.FIRE,
 								(amount) -> {
 									if (amount > 0) {
@@ -159,7 +160,7 @@ public class FireVampire extends AbstractOrb {
 //								new DamageInfo(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS)));
 				else
 					CthughaHelper.addToBuffer(new DamageAction(randomMonster,
-							new DamageInfo(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS),
+							new RiShiPatch.BurnCardDamageInfo(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS),
 							AbstractGameAction.AttackEffect.FIRE));
 			}
 

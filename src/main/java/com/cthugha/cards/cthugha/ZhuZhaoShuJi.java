@@ -28,17 +28,19 @@ public class ZhuZhaoShuJi extends AbstractCthughaCard {
     public ZhuZhaoShuJi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
-        this.magicNumber = this.baseMagicNumber = 3;
-        this.isEthereal = true;
+        this.magicNumber = this.baseMagicNumber = 8;
+//        this.isEthereal = true;
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.isEthereal = false;
-            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.isEthereal = false;
+//            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+
+            this.upgradeMagicNumber(3);
         }
     }
 

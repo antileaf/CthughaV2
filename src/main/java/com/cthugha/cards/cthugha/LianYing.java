@@ -2,6 +2,8 @@ package com.cthugha.cards.cthugha;
 
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
+import com.cthugha.enums.CustomTags;
+import com.cthugha.patches.cards.unique.RiShiPatch;
 import com.cthugha.utils.CthughaHelper;
 import com.cthugha.power.LianYingPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -34,6 +36,8 @@ public class LianYing extends AbstractCthughaCard {
         this.magicNumber = this.baseMagicNumber = 4;
         this.shunRan = this.baseShunRan = 2;
 
+        this.tags.add(CustomTags.Burn_Card);
+
         if (!doNotSetPreview)
             this.cardsToPreview = new LianYing(true);
     }
@@ -44,7 +48,7 @@ public class LianYing extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage)));
+        this.addToBot(new DamageAction(m, new RiShiPatch.BurnCardDamageInfo(p, this.damage)));
         this.addToBot(new ApplyPowerAction(p, p, new LianYingPower(this.magicNumber), this.magicNumber));
     }
 
@@ -57,6 +61,15 @@ public class LianYing extends AbstractCthughaCard {
 
             this.addToBot(new MakeTempCardInHandAction(card));
         }
+    }
+
+    @Override
+    public void triggerOnManualDiscard() {
+        LianYing card = new LianYing();
+        if (this.upgraded)
+            card.upgrade();
+
+        this.addToBot(new MakeTempCardInHandAction(card));
     }
 
     @Override

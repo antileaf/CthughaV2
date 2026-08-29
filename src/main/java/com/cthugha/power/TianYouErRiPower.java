@@ -1,6 +1,5 @@
 package com.cthugha.power;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -34,7 +33,7 @@ public class TianYouErRiPower extends AbstractPower {
 //            card.tags.remove(CustomTags.Shun_Ran_Triggered);
 //        }
         if (card instanceof AbstractCthughaCard) {
-            ((AbstractCthughaCard) card).triggeredShunRanThisTurn = false;
+            ((AbstractCthughaCard) card).triggeredShunRan = false;
             ((AbstractCthughaCard) card).updateBgImg();
         }
     }

@@ -22,7 +22,7 @@
     },
     "Cthugha:RiShi": {
         "NAME": "Eclipse",
-        "DESCRIPTION": "Deal !D! damage. NL In the remaining time of this turn, gain !M! Block when Burn or cthugha:Fire_Vampire deals damage."
+        "DESCRIPTION": "Deal !D! damage. NL In the remaining time of this turn, gain !M! Block when cthugha:Burn_Cards or cthugha:Fire_Vampire deals damage."
     },
     "Cthugha:TengYanFeiMang": {
         "NAME": "Soaring Light",
@@ -59,7 +59,7 @@
         "UPGRADE_DESCRIPTION": "Deal !D! damage. NL cthugha:Channel !M! cthugha:Fire_Vampire. NL cthugha:Blaze: deal additional !cthughaM2! times."
     },
     "Cthugha:DuanZaoHuoYan": {
-        "NAME": "Forging Fire",
+        "NAME": "Forging Burn",
         "DESCRIPTION": "Gain 1 Fire Potion. NL Exhaust.",
         "UPGRADE_DESCRIPTION": "Gain 1 Fire Potion. NL Exhaust."
     },
@@ -89,8 +89,7 @@
     },
     "Cthugha:ZhuZhaoShuJi": {
         "NAME": "Illuminating World",
-        "DESCRIPTION": "Ethereal. NL Whenever you play a card, all enemies lose !M! max HP.",
-        "UPGRADE_DESCRIPTION": "Whenever you play a card, all enemies lose !M! max HP.",
+        "DESCRIPTION": "Whenever you play 3 cards, all enemies lose !M! max HP.",
         "FLAVOR": "Light dews the skin and suffuses the air."
     },
     "Cthugha:TunYunFuHai": {
@@ -109,8 +108,8 @@
     },
     "Cthugha:QinLueRuHuo": {
         "NAME": "Raiding Like Fire",
-        "DESCRIPTION": "Deal !D! damage. Deals !M! additional damage for ALL your cthugha:Burn_Card.",
-        "UPGRADE_DESCRIPTION": "Deal !D! damage. Deals !M! additional damage for ALL your cthugha:Burn_Card."
+        "DESCRIPTION": "Deal !D! damage. NL Deals !M! additional damage for each of your cthugha:Burn_Card (wherever it is).",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Deals !M! additional damage for each of your cthugha:Burn_Card (wherever it is)."
     },
     "Cthugha:YingHuoLiHuo": {
         "NAME": "Wandering Flame",
@@ -211,7 +210,7 @@
     },
     "Cthugha:YangYan": {
         "NAME": "Dazzling Sunlight",
-        "DESCRIPTION": "Deal !D! damage. NL cthugha:Flare !shunRan! : Deal !cthughaD2! damage to ALL enemies."
+        "DESCRIPTION": "Deal !D! damage. NL cthugha:Flare !shunRan! : Deal !cthughaD2! damage to ALL enemies. NL cthugha:Flare !shunRan2! : Retain all cthugha:Flare cards this turn."
     },
     "Cthugha:HuoYanHuXi": {
         "NAME": "Fire Breath",
@@ -272,11 +271,11 @@
     },
     "Cthugha:ChongRanLieHuo": {
         "NAME": "Reignite Fire",
-        "DESCRIPTION": "cthugha:Flare !shunRan! : Deal !D! damage to a random enemy. NL cthugha:Flare !shunRan2! : Reset all cthugha:Flare, this card's damage + !M! this combat."
+        "DESCRIPTION": "cthugha:Flare !shunRan! : Deal !D! damage to the enemy with lowest HP. NL cthugha:Flare !shunRan2! : Hit 1 additional time, reset all cthugha:Flare, increase this card's damage by !M! this combat."
     },
     "Cthugha:XingYouGuangNi": {
         "NAME": "Starlit Shadows",
-        "DESCRIPTION": "cthugha:Blaze: Gain !M! stslib:Temporary_HP. NL ------------- NL Remove all cthugha:Fire_Vampire, gain !B! Block for each cthugha:Fire_Vampire removed."
+        "DESCRIPTION": "Retain. NL cthugha:Blaze: Gain !M! stslib:Temporary_HP. NL ------------- NL Remove all cthugha:Fire_Vampire, gain !B! Block for each cthugha:Fire_Vampire removed."
     },
     "Cthugha:XianYi": {
         "NAME": "Splendid Attire",
@@ -334,9 +333,9 @@
         "UPGRADE_DESCRIPTION": "Gain !B! Block."
     },
     "Cthugha:LianYing": {
-        "NAME": "Linked Camps",
-        "DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps by !M! this turn. NL cthugha:Flare !shunRan! : Add 1 *Linked *Camps into your hand.",
-        "UPGRADE_DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps by !M! this turn. NL cthugha:Flare !shunRan! : Add 1 *Linked *Camps+ into your hand.。"
+        "NAME": "Linked Burn",
+        "DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps by !M! this turn. NL cthugha:Flare !shunRan! or when discarded : Add 1 *Linked *Camps into your hand.",
+        "UPGRADE_DESCRIPTION": "Deal !D! damage. Increase the damage of ALL *Linked *Camps by !M! this turn. NL cthugha:Flare !shunRan! or when discarded : Add 1 *Linked *Camps+ into your hand.。"
     },
     "Cthugha:ZhaoZhuoShangTianQue": {
         "NAME": "Burn Heaven's Gate",

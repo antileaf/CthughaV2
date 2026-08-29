@@ -3,6 +3,7 @@ package com.cthugha.power;
 import com.badlogic.gdx.graphics.Texture;
 import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
 import com.cthugha.utils.CthughaHelper;
+import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -12,7 +13,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class ZhuZhaoShuJiPower extends AbstractPower {
+public class ZhuZhaoShuJiPower extends TwoAmountPower {
     public static final String POWER_ID = CthughaHelper.makeID(ZhuZhaoShuJiPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
@@ -21,6 +22,7 @@ public class ZhuZhaoShuJiPower extends AbstractPower {
         this.name = powerStrings.NAME;
         this.owner = owner;
         this.amount = amount;
+        this.amount2 = 3;
         this.updateDescription();
         CthughaHelper.loadPowerRegion(this, "昭世");
 //        this.img = new Texture("cthughaResources/img/power/211_32.png");
@@ -31,8 +33,15 @@ public class ZhuZhaoShuJiPower extends AbstractPower {
     }
 
     public void onUseCard(AbstractCard card, UseCardAction action) {
-        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters)
-            if (!monster.isDeadOrEscaped())
-                this.addToBot(new DecreaseMonsterMaxHealthAction(monster, this.amount));
+        this.amount2--;
+
+        if (this.amount2 == 0) {
+            for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters)
+                if (!monster.isDeadOrEscaped())
+                    this.addToBot(new DecreaseMonsterMaxHealthAction(monster, this.amount));
+
+            this.flash();
+            this.amount2 = 3;
+        }
     }
 }

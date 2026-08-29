@@ -31,6 +31,8 @@ public class ChunHuo extends AbstractCthughaCard {
         this.shunRan = this.baseShunRan = 2;
         this.magicNumber = this.baseMagicNumber = 2;
         this.secondaryMagicNumber = this.baseSecondaryMagicNumber = 1;
+
+        this.canShining = true;
     }
 
     @Override

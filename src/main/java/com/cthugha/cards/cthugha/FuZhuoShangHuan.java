@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.enums.CustomTags;
+import com.cthugha.patches.cards.unique.RiShiPatch;
 import com.cthugha.utils.CthughaHelper;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -53,7 +54,7 @@ public class FuZhuoShangHuan extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage)));
+        this.addToBot(new DamageAction(m, new RiShiPatch.BurnCardDamageInfo(p, this.damage)));
     }
 
     // 硬编码就硬编码吧，无所谓了

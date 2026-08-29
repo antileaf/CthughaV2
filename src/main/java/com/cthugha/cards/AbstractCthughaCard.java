@@ -1,8 +1,6 @@
 package com.cthugha.cards;
 
-import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.cthugha.flare.FlareCardQueueItem;
 import com.cthugha.flare.FlareHelper;
 import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
@@ -32,6 +30,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 	public boolean canBaoYan = false;
 	public boolean triggeredBaoYanLastTime = false;
 	public boolean canZhiLiao = false;
+	public boolean canShining = false;
 
 	public int baseShunRan = -1;
 	public int shunRan = -1;
@@ -43,7 +42,8 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 	public boolean upgradedSecondaryShunRan = false;
 	public boolean isSecondaryShunRanModified = false;
 
-	public boolean triggeredShunRanThisTurn = false;
+	public boolean triggeredShunRan = false;
+	public boolean hasTriggeredShunRanThisTurn = false;
 
 	public int secondaryMagicNumber = -1;
 	public int baseSecondaryMagicNumber = -1;
@@ -83,7 +83,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 	public String getSignatureImgPath() {
 		String img = super.getSignatureImgPath();
 
-		if (this.triggeredShunRanThisTurn)
+		if (this.triggeredShunRan)
 			img = img.replace(".png", "_bw.png");
 
 		return img;
@@ -94,16 +94,21 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 	}
 
 	public void updateBgImg() {
-		if (this.triggeredShunRanThisTurn)
+		if (this.triggeredShunRan)
 			this.textureBackgroundSmallImg = "cthughaResources/img/512/card_bw.png";
 		else
 			this.textureBackgroundSmallImg = null;
 	}
 
-//	@Override
-//	public void triggerOnGlowCheck() {
+	@Override
+	public void triggerOnGlowCheck() {
 //		super.triggerOnGlowCheck();
-//	}
+
+		this.glowColor = BLUE_BORDER_GLOW_COLOR;
+
+		if (this.canShining && this.shining())
+			this.glowColor = GREEN_BORDER_GLOW_COLOR;
+	}
 
 //	@Override
 //	public Texture getBackgroundSmallTexture() {
@@ -119,7 +124,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 
 	// 衔烛
 	public boolean shining() {
-		return this.shunRan != -1 && !this.triggeredShunRanThisTurn;
+		return this.shunRan != -1 && this.hasTriggeredShunRanThisTurn;
 	}
 
 	@Override
@@ -286,7 +291,8 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 	}
 
 	public void clearShunRanAtStartOfTurn() {
-		this.triggeredShunRanThisTurn = false;
+		this.triggeredShunRan = false;
+		this.hasTriggeredShunRanThisTurn = false;
 		this.updateBgImg();
 	}
 
@@ -306,7 +312,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 		card.secondaryShunRan = this.secondaryShunRan;
 		card.baseSecondaryShunRan = this.baseSecondaryShunRan;
 
-		card.triggeredShunRanThisTurn = this.triggeredShunRanThisTurn;
+		card.triggeredShunRan = this.triggeredShunRan;
 		card.updateBgImg();
 
 		card.secondaryMagicNumber = this.secondaryMagicNumber;
@@ -334,7 +340,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 			return;
 		}
 
-		if (this.triggeredShunRanThisTurn) {
+		if (this.triggeredShunRan) {
 			AbstractDungeon.effectList.add(new ThoughtBubble(
 					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY,
 					3.0F, LanguageHelper.shunRanUIStrings.TEXT[1], true));
@@ -343,7 +349,7 @@ public abstract class AbstractCthughaCard extends AbstractSignatureCard implemen
 
 		AbstractDungeon.actionManager.cardQueue.add(new FlareCardQueueItem(this));
 
-		this.triggeredShunRanThisTurn = true;
+		this.triggeredShunRan = true;
 		this.updateBgImg();
 	}
 

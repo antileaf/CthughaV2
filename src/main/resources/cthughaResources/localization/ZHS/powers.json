@@ -2,7 +2,7 @@
   "Cthugha:RiShiPower": {
     "NAME": "日蚀",
     "DESCRIPTIONS": [
-      "本回合剩余时间内每当 #y灼伤 或 #y炎之精 造成伤害时，获得 #b%d 点 #y格挡 。"
+      "本回合剩余时间内每当 #y灼伤牌 或 #y炎之精 造成伤害时，获得 #b%d 点 #y格挡 。"
     ]
   },
   "Cthugha:HeiYanPower": {
@@ -194,6 +194,14 @@
     "NAME": "获得力量",
     "DESCRIPTIONS": [
       "回合结束时，获得 #b%d 点 #y力量 。"
+    ]
+  },
+
+  "Cthugha:YangYanPower": {
+    "NAME": "阳炎",
+    "DESCRIPTIONS": [
+      "本回合结束时， #y保留 手牌中的 #y瞬燃 牌。",
+      "#b%d 回合内， #y保留 手牌中的 #y瞬燃 牌。"
     ]
   }
 }

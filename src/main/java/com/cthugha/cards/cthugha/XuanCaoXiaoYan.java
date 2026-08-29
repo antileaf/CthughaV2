@@ -19,6 +19,7 @@ public class XuanCaoXiaoYan extends AbstractCthughaCard {
     private static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     private static final String IMG_PATH = "cthughaResources/img/card/喧嘈嚣焰.png";
     private static final int COST = 2;
+    private static final int UPGRADED_COST = 1;
     private static final CardType TYPE = CardType.POWER;
     private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
@@ -37,7 +38,8 @@ public class XuanCaoXiaoYan extends AbstractCthughaCard {
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
 
-            this.upgradeMagicNumber(1);
+            this.upgradeBaseCost(UPGRADED_COST);
+//            this.upgradeMagicNumber(1);
         }
     }
 

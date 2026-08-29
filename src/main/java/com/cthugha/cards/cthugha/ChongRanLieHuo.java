@@ -6,6 +6,7 @@ import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -33,9 +34,9 @@ public class ChongRanLieHuo extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.shunRan = this.baseShunRan = 0;
-        this.damage = this.baseDamage = 8;
+        this.damage = this.baseDamage = 4;
         this.secondaryShunRan = this.baseSecondaryShunRan = 3;
-        this.magicNumber = this.baseMagicNumber = 4;
+        this.magicNumber = this.baseMagicNumber = 2;
     }
 
     // public boolean canUse(AbstractPlayer p, AbstractMonster m) {
@@ -50,10 +51,32 @@ public class ChongRanLieHuo extends AbstractCthughaCard {
         if (level >= this.shunRan) {
             this.addToBot(new AnonymousAction(() -> {
                 this.applyPowers();
-                this.addToTop(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.damage),
-                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+
+                int minHp = AbstractDungeon.getMonsters().monsters.stream()
+                        .filter(m -> !m.isDeadOrEscaped())
+                        .mapToInt(m -> m.currentHealth)
+                        .min()
+                        .orElse(0);
+
+                AbstractMonster[] monsters = AbstractDungeon.getMonsters().monsters.stream()
+                        .filter(m -> !m.isDeadOrEscaped())
+                        .filter(m -> m.currentHealth == minHp)
+                        .toArray(AbstractMonster[]::new);
+
+                if (monsters.length > 0) {
+                    AbstractMonster m = monsters.length > 1 ?
+                            monsters[AbstractDungeon.cardRandomRng.random(monsters.length - 1)] :
+                            monsters[0];
+
+                    int count = 2 + (level >= this.secondaryShunRan ? 1 : 0);
+                    for (int i = 0; i < count; i++)
+                        this.addToTop(new DamageAction(m,
+                                new DamageInfo(AbstractDungeon.player, this.damage),
+                                AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                }
             }));
         }
+
         if (level >= this.secondaryShunRan) {
             this.addToBot(new ResetShunRanAction());
             this.addToBot(new ModifyDamageAction(this.uuid, this.magicNumber));
@@ -65,7 +88,7 @@ public class ChongRanLieHuo extends AbstractCthughaCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(2);
+            this.upgradeDamage(1);
             this.upgradeMagicNumber(1);
             this.initializeDescription();
         }

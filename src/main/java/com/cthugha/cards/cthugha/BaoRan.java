@@ -27,6 +27,8 @@ public class BaoRan extends AbstractCthughaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
 
         this.shunRan = this.baseShunRan = 1;
+
+        this.canShining = true;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class BaoRan extends AbstractCthughaCard {
 
         String backup = this.textureImg;
 
-        if (this.triggeredShunRanThisTurn)
+        if (this.triggeredShunRan)
             this.textureImg = "cthughaResources/img/card/111_bw.png";
         else
             this.textureImg = "cthughaResources/img/card/111.png";

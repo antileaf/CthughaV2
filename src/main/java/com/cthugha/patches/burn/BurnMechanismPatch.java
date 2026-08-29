@@ -5,6 +5,7 @@ import com.cthugha.actions.DecreaseMonsterMaxHealthAction;
 import com.cthugha.blight.TheBurningOne;
 import com.cthugha.characters.Cthugha;
 import com.cthugha.orbs.FireVampire;
+import com.cthugha.patches.cards.unique.RiShiPatch;
 import com.cthugha.power.WuYouBuZhuPower;
 import com.cthugha.relics.cthugha.EmeraldTabletVolumeVII;
 import com.cthugha.utils.CthughaHelper;
@@ -255,17 +256,17 @@ public class BurnMechanismPatch {
 
 			if (!_inst.dontTriggerOnUseCard) {
 				if (_inst.type == AbstractCard.CardType.ATTACK) {
-					if (p.hasPower(RiShiPower.POWER_ID))
-						AbstractDungeon.actionManager.addToBottom(
-								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(m));
+//					if (p.hasPower(RiShiPower.POWER_ID))
+//						AbstractDungeon.actionManager.addToBottom(
+//								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(m));
 
 					if (!p.hasRelic(ShengLingLieYan.ID))
 						AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
-								new DamageInfo(p, _inst.damage, DamageInfo.DamageType.NORMAL),
+								new RiShiPatch.BurnCardDamageInfo(p, _inst.damage, DamageInfo.DamageType.NORMAL),
 								AbstractGameAction.AttackEffect.FIRE));
 					else {
 						AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
-								new DamageInfo(p, _inst.damage, DamageInfo.DamageType.HP_LOSS),
+								new RiShiPatch.BurnCardDamageInfo(p, _inst.damage, DamageInfo.DamageType.HP_LOSS),
 								AbstractGameAction.AttackEffect.FIRE));
 
 						AbstractDungeon.actionManager.addToBottom(new DecreaseMonsterMaxHealthAction(m, _inst.damage));
@@ -285,9 +286,9 @@ public class BurnMechanismPatch {
 				AbstractMonster monster = AbstractDungeon.getMonsters().getRandomMonster(
 						null, true, AbstractDungeon.cardRandomRng);
 				if (monster != null) {
-					if (p.hasPower(RiShiPower.POWER_ID))
-						AbstractDungeon.actionManager.addToBottom(
-								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(monster));
+//					if (p.hasPower(RiShiPower.POWER_ID))
+//						AbstractDungeon.actionManager.addToBottom(
+//								((RiShiPower) p.getPower(RiShiPower.POWER_ID)).getAction(monster));
 
 					int damage = _inst.magicNumber;
 					FireVampire vampire = vampireMap.get(_inst);
@@ -298,7 +299,7 @@ public class BurnMechanismPatch {
 					}
 
 					AbstractDungeon.actionManager.addToBottom(new DamageAction(monster,
-							new DamageInfo(p, damage, DamageInfo.DamageType.THORNS),
+							new RiShiPatch.BurnCardDamageInfo(p, damage, DamageInfo.DamageType.THORNS),
 							AbstractGameAction.AttackEffect.FIRE));
 
 					if ((vampire == null && AbstractDungeon.player.hasRelic(ShengLingLieYan.ID)) ||

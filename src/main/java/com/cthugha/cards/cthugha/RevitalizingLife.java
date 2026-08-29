@@ -57,6 +57,8 @@ public class RevitalizingLife extends AbstractCthughaCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        this.applyPowers();
+
         for (int i = 0; i < this.magicNumber; i++)
             this.addToBot(new ChannelAction(new FireVampire()));
 

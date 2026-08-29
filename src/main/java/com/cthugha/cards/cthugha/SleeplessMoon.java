@@ -53,7 +53,7 @@ public class SleeplessMoon extends AbstractCthughaCard {
 
 	@Override
 	public void onRightClick() {
-		if (this.triggeredShunRanThisTurn) {
+		if (this.triggeredShunRan) {
 			AbstractDungeon.effectList.add(new ThoughtBubble(
 					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY,
 					3.0F, LanguageHelper.shunRanUIStrings.TEXT[1], true));
@@ -95,7 +95,7 @@ public class SleeplessMoon extends AbstractCthughaCard {
 						AbstractDungeon.player.exhaustPile.moveToDiscardPile(this);
 				}
 
-				this.triggeredShunRanThisTurn = false;
+				this.triggeredShunRan = false;
 				this.updateBgImg();
 
 				this.flash();

@@ -124,7 +124,7 @@ public class RightClickableCardPatch {
 
 			if (state.rightClick) {
 				if (_inst instanceof AbstractCthughaCard && _inst != clickable) {
-					((AbstractCthughaCard) _inst).triggeredShunRanThisTurn = true;
+					((AbstractCthughaCard) _inst).triggeredShunRan = true;
 					((AbstractCthughaCard) _inst).updateBgImg();
 				}
 

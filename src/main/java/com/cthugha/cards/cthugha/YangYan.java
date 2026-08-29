@@ -2,8 +2,10 @@ package com.cthugha.cards.cthugha;
 
 import com.cthugha.cards.AbstractCthughaCard;
 import com.cthugha.enums.AbstractCardEnum;
+import com.cthugha.power.YangYanPower;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
@@ -25,7 +27,7 @@ public class YangYan extends AbstractCthughaCard {
     private static final int COST = 1;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
     public YangYan() {
@@ -35,6 +37,7 @@ public class YangYan extends AbstractCthughaCard {
         this.secondaryDamage = this.baseSecondaryDamage = 5;
         this.isMultiSecondaryDamage = true;
         this.shunRan = this.baseShunRan = 0;
+        this.secondaryShunRan = this.baseSecondaryShunRan = 2;
     }
 
     @Override
@@ -59,6 +62,11 @@ public class YangYan extends AbstractCthughaCard {
 
             this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiSecondaryDamage,
                     DamageType.NORMAL, AttackEffect.FIRE));
+        }
+
+        if (level >= this.secondaryShunRan) {
+            this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
+                    new YangYanPower(AbstractDungeon.player, 1)));
         }
     }
 }

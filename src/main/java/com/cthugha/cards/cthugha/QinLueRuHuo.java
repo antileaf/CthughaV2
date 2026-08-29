@@ -5,6 +5,7 @@ import com.cthugha.enums.AbstractCardEnum;
 import com.cthugha.utils.CthughaHelper;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,7 +24,7 @@ public class QinLueRuHuo extends AbstractCthughaCard {
     private static final int COST = 1;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = AbstractCardEnum.CTHUGHA_CARD_COLOR;;
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
     public QinLueRuHuo() {
@@ -49,21 +50,16 @@ public class QinLueRuHuo extends AbstractCthughaCard {
         int realBaseDamage = this.baseDamage;
 
         int count = 0;
-        for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
-        for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
-        for (AbstractCard card : AbstractDungeon.player.discardPile.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
+        for (CardGroup group : new CardGroup[] {
+                AbstractDungeon.player.hand,
+                AbstractDungeon.player.drawPile,
+                AbstractDungeon.player.discardPile,
+                AbstractDungeon.player.exhaustPile
+        })
+            count += (int) group.group.stream()
+                    .filter(CthughaHelper::isBurnCard)
+                    .count();
+
         this.baseDamage = this.baseDamage + this.magicNumber * count;
 
         super.calculateCardDamage(mo);
@@ -75,21 +71,16 @@ public class QinLueRuHuo extends AbstractCthughaCard {
         int realBaseDamage = this.baseDamage;
 
         int count = 0;
-        for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
-        for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
-        for (AbstractCard card : AbstractDungeon.player.discardPile.group) {
-            if (CthughaHelper.isBurnCard(card)) {
-                count++;
-            }
-        }
+        for (CardGroup group : new CardGroup[] {
+                AbstractDungeon.player.hand,
+                AbstractDungeon.player.drawPile,
+                AbstractDungeon.player.discardPile,
+                AbstractDungeon.player.exhaustPile
+        })
+            count += (int) group.group.stream()
+                    .filter(CthughaHelper::isBurnCard)
+                    .count();
+
         this.baseDamage = this.baseDamage + this.magicNumber * count;
 
         super.applyPowers();
