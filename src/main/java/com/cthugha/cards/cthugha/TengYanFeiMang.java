@@ -32,26 +32,27 @@ public class TengYanFeiMang extends AbstractCthughaCard {
 
         this.damage = this.baseDamage = 1;
         this.magicNumber = this.baseMagicNumber = -999; // Specially handled, cause -1 is also valid
+        
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, "");
+        this.initializeDescription();
     }
 
     @Override
     public void applyPowers() {
-        boolean hasNotUpdatedDesc = this.magicNumber == -999;
         this.magicNumber = this.baseMagicNumber = Math.max((int) AbstractDungeon.player.drawPile.group.stream()
                 .filter(CthughaHelper::isBurnCard)
                 .count() - 1, 0);
-
+        
         super.applyPowers();
-        if (hasNotUpdatedDesc && this.magicNumber != -999)
-            this.initializeDescription();
+        
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, cardStrings.EXTENDED_DESCRIPTION[0]);
+        this.initializeDescription();
     }
-
+    
     @Override
-    public void initializeDescription() {
-        this.rawDescription = String.format(cardStrings.DESCRIPTION,
-                CthughaHelper.isInBattle() && this.magicNumber != -999 ? cardStrings.EXTENDED_DESCRIPTION[0] : "");
-
-        super.initializeDescription();
+    public void onMoveToDiscard() {
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, "");
+        this.initializeDescription();
     }
 
     @Override

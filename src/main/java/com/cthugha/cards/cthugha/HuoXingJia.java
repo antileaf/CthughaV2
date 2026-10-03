@@ -33,35 +33,39 @@ public class HuoXingJia extends AbstractCthughaCard {
 
         this.damage = this.baseDamage = 8;
         this.magicNumber = this.baseMagicNumber = -999;
+        
+        this.rawDescription = String.format(cardStrings.DESCRIPTION, "");
+        this.initializeDescription();
     }
 
     @Override
     public void applyPowers() {
-        boolean hasNotUpdatedDesc = this.magicNumber == -999;
         this.magicNumber = this.baseMagicNumber = (int) AbstractDungeon.player.hand.group.stream()
                 .filter(CthughaHelper::isBurnCard)
                 .count() + (this.upgraded ? 1 : 0);
-
+        
         super.applyPowers();
-        if (hasNotUpdatedDesc && this.magicNumber != -999)
-            this.initializeDescription();
+        
+        this.rawDescription = String.format(this.upgraded ?
+                        cardStrings.UPGRADE_DESCRIPTION : cardStrings.DESCRIPTION,
+                cardStrings.EXTENDED_DESCRIPTION[0]);
+        
+        this.initializeDescription();
     }
 
     @Override
-    public void initializeDescription() {
+    public void onMoveToDiscard() {
         this.rawDescription = String.format(this.upgraded ?
-                        cardStrings.UPGRADE_DESCRIPTION : cardStrings.DESCRIPTION,
-                CthughaHelper.isInBattle() && this.magicNumber != -999 ?
-                        cardStrings.EXTENDED_DESCRIPTION[0] : "");
-
-        super.initializeDescription();
+                        cardStrings.UPGRADE_DESCRIPTION : cardStrings.DESCRIPTION, "");
+        
+        this.initializeDescription();
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.rawDescription = String.format(cardStrings.UPGRADE_DESCRIPTION, "");
             this.initializeDescription();
 
             this.upgradeDamage(2);
